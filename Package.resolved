@@ -21,11 +21,20 @@
       },
       {
         "package": "SwiftShell",
-        "repositoryURL": "https://github.com/kareman/SwiftShell.git",
+        "repositoryURL": "https://github.com/kareman/SwiftShell",
         "state": {
           "branch": null,
           "revision": "02c8ae6a5d829d28aaa9683129fc71f899beca3a",
           "version": "4.1.1"
+        }
+      },
+      {
+        "package": "xcodeproj",
+        "repositoryURL": "https://github.com/tuist/xcodeproj",
+        "state": {
+          "branch": null,
+          "revision": "929fa456244d6c44d702ba711571c4b2972cf674",
+          "version": "5.2.0"
         }
       }
     ]
