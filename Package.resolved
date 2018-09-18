@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Files",
+        "repositoryURL": "https://github.com/JohnSundell/Files",
+        "state": {
+          "branch": null,
+          "revision": "06f95bd1bf4f8d5f50bc6bb30b808c253acd4c88",
+          "version": "2.2.1"
+        }
+      },
+      {
         "package": "SwiftPM",
         "repositoryURL": "https://github.com/apple/swift-package-manager.git",
         "state": {
@@ -12,7 +21,7 @@
       },
       {
         "package": "SwiftShell",
-        "repositoryURL": "https://github.com/kareman/SwiftShell",
+        "repositoryURL": "https://github.com/kareman/SwiftShell.git",
         "state": {
           "branch": null,
           "revision": "02c8ae6a5d829d28aaa9683129fc71f899beca3a",
