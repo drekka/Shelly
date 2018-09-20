@@ -4,6 +4,7 @@
 import Utility
 
 protocol CommandArgument {
+    static var argumentSyntax: String? { get }
     init(argumentParser: ArgumentParser)
     func activate(arguments: ArgumentParser.Result, toolbox: Toolbox) throws
 }

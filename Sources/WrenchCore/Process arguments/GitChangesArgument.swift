@@ -5,13 +5,15 @@ import Utility
 import Files
 
 struct GitChangesArgument: CommandArgument {
-
+    
+    static let argumentSyntax: String? = "<--scan-git-changes>"
+    
     private let scanGitChanges: OptionArgument<Bool>
     
     init(argumentParser: ArgumentParser) {
         scanGitChanges = argumentParser.add(option: "--scan-git-changes",
                                             kind: Bool.self,
-                                            usage: "Scans Git changed but not staged files for project files.")
+                                            usage: "Scans Git changed area for files to process.")
     }
     
     func activate(arguments: ArgumentParser.Result, toolbox: Toolbox) throws {

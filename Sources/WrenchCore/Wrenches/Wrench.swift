@@ -6,5 +6,5 @@ import Files
 
 public protocol Wrench {
     func canProcess(file: SelectedFile) -> Bool
-    func execute(_ files: Set<SelectedFile>)
+    func execute(_ files: Set<SelectedFile>) throws
 }

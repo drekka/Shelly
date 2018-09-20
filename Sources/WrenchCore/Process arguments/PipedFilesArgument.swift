@@ -6,6 +6,8 @@ import Files
 
 struct PipedFilesArgument: CommandArgument {
     
+    static let argumentSyntax: String? = nil
+    
     init(argumentParser: ArgumentParser) {}
     
     func activate(arguments: ArgumentParser.Result, toolbox: Toolbox) throws {

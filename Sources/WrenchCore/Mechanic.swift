@@ -23,17 +23,25 @@ public class Mechanic: Toolbox {
     
     public init() {
         
-        argumentParser = ArgumentParser(commandName: "wrench",
-                                        usage: "<options> <project-dir>, ...",
-                                        overview: "A useful set of tools for managing an Xcode project.")
-        arguments = [
-            SortXcodeArgument(argumentParser: argumentParser),
-            RootDirectoryArgument(argumentParser: argumentParser),
-            GitStagingArgument(argumentParser: argumentParser),
-            GitChangesArgument(argumentParser: argumentParser),
-            DirectoryArgument(argumentParser: argumentParser), // Must be second to last.
-            PipedFilesArgument(argumentParser: argumentParser), // Must be last.
+        let argumentClasses: [CommandArgument.Type] = [
+            SortXcodeArgument.self,
+            RootDirectoryArgument.self,
+            GitStagingArgument.self,
+            GitChangesArgument.self,
+            DirectoryArgument.self, // Must be second to last.
+            PipedFilesArgument.self, // Must be last.
         ]
+        let usage = argumentClasses.compactMap { $0.argumentSyntax }.joined(separator: " ")
+        
+        let parser = ArgumentParser(commandName: "wrench <--help>",
+                                    usage: usage,
+                                    overview: "A useful set of tools for managing an Xcode project. " +
+                                        "Wrench can perform a variety of project related functions. " +
+            "It can source files to process from a variety of sources, " +
+            "or piped from another command.")
+        
+        arguments = argumentClasses.map { $0.init(argumentParser: parser) }
+        argumentParser = parser
     }
     
     // MARK:- Toolbox protocol
@@ -59,13 +67,11 @@ public class Mechanic: Toolbox {
             try arguments.forEach { try $0.activate(arguments: parsedArguments, toolbox: self) }
             try processFiles()
         }
-        catch let error as ArgumentParserError {
-            print("Error \(error.description)")
-        }
         catch let error {
-            print("Error \(error.localizedDescription)")
+            print("Error !!!!!!!!!")
+            print(error)
+            exit(1)
         }
-        
     }
     
     // MARK: - Execution
@@ -98,8 +104,8 @@ public class Mechanic: Toolbox {
             files = files.union(try fileSource.getFiles().filter(fileFilter))
         }
         
-        wrenches.forEach { wrench in
-            wrench.execute(files)
+        try wrenches.forEach { wrench in
+            try wrench.execute(files)
         }
     }
 }
