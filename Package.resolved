@@ -14,36 +14,36 @@
         "package": "Files",
         "repositoryURL": "https://github.com/JohnSundell/Files",
         "state": {
-          "branch": null,
+          "branch": "master",
           "revision": "06f95bd1bf4f8d5f50bc6bb30b808c253acd4c88",
-          "version": "2.2.1"
+          "version": null
         }
       },
       {
         "package": "SwiftPM",
-        "repositoryURL": "https://github.com/apple/swift-package-manager.git",
+        "repositoryURL": "https://github.com/apple/swift-package-manager",
         "state": {
-          "branch": null,
-          "revision": "6983434787dec4e543e9d398a0a9acf63ccd4da1",
-          "version": "0.2.1"
+          "branch": "master",
+          "revision": "106115d356f750223dbd4419c3f39f8fc2da66f7",
+          "version": null
         }
       },
       {
         "package": "SwiftShell",
         "repositoryURL": "https://github.com/kareman/SwiftShell",
         "state": {
-          "branch": null,
+          "branch": "master",
           "revision": "02c8ae6a5d829d28aaa9683129fc71f899beca3a",
-          "version": "4.1.1"
+          "version": null
         }
       },
       {
         "package": "xcodeproj",
-        "repositoryURL": "https://github.com/tuist/xcodeproj",
+        "repositoryURL": "https://github.com/drekka/xcodeproj",
         "state": {
-          "branch": null,
-          "revision": "b645d432f79303a805c65cf712b9d185dff6f25c",
-          "version": "6.0.0"
+          "branch": "feature/project-sorting",
+          "revision": "d90f691b8aa4dbf9b3c4afe9b7332716e90b4c19",
+          "version": null
         }
       }
     ]
