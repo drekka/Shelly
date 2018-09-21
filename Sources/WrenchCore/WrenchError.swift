@@ -4,20 +4,22 @@
 import Foundation
 
 enum WrenchError: Error, CustomStringConvertible {
-    
     case folderNotFound(String)
-    
-    case unknownArgument(String)
-    
-    var description: String {
-        
-        switch self {
 
-        case .folderNotFound(let filePath):
+    case unknownArgument(String)
+
+    case illegalArgument(String, String)
+
+    var description: String {
+        switch self {
+        case let .folderNotFound(filePath):
             return "Folder not found: \(filePath)"
-            
-        case .unknownArgument(let arg):
+
+        case let .unknownArgument(arg):
             return "Unknown argument: \(arg)"
+
+        case let .illegalArgument(arg, unless):
+            return "Illegal argument: \(arg) is not allowed unless \(unless)"
         }
     }
 }

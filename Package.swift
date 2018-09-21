@@ -6,13 +6,13 @@ import PackageDescription
 let package = Package(
     name: "Wrench",
     products: [
-    .executable(name: "wrench", targets:["Wrench"]),
-               ],
+        .executable(name: "wrench", targets: ["Wrench"]),
+    ],
     dependencies: [
-                .package(url: "https://github.com/kareman/SwiftShell", from: "4.0.0"),
-                .package(url: "https://github.com/JohnSundell/Files", from: "2.2.0"),
-                .package(url: "https://github.com/tuist/xcodeproj", from: "6.0.0"),
-//        .package(url: "https://github.com/kareman/FileSmith", from: "0.2.0"),
+        .package(url: "https://github.com/kareman/SwiftShell", from: "4.0.0"),
+        .package(url: "https://github.com/JohnSundell/Files", from: "2.2.0"),
+        .package(url: "https://github.com/tuist/xcodeproj", from: "6.0.0"),
+        //        .package(url: "https://github.com/kareman/FileSmith", from: "0.2.0"),
         .package(url: "https://github.com/apple/swift-package-manager", from: "0.1.0"),
     ],
     targets: [

@@ -1,12 +1,11 @@
 
 //  Created by Derek Clarkson on 17/9/18.
 
-import Foundation
 import Files
+import Foundation
 import SwiftShell
 
 struct PipeFileSource: FileSource {
-
     func getFiles() throws -> Set<SelectedFile> {
         print("Reading files from piped input ...")
         let pipedFiles = main.stdin
