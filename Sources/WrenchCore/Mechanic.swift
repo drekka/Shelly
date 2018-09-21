@@ -13,11 +13,11 @@ protocol Toolbox {
 }
 
 public class Mechanic: Toolbox {
+
     private let argumentParser: ArgumentParser
 
     private var fileSources: [FileSource] = []
     private var wrenches: [Wrench] = []
-
     private let arguments: [CommandArgument]
 
     public init() {
