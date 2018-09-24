@@ -41,7 +41,7 @@ struct SortXcodeArgument: CommandArgument {
                 }
             }
 
-            toolbox.addWrench(XcodeProjectSortWrench(navigatorSortOrder: navigatorSortOrder, sortFiles: sortFiles))
+            toolbox.add(wrench: XcodeProjectSortWrench(navigatorSortOrder: navigatorSortOrder, sortFiles: sortFiles))
         }
     }
 }

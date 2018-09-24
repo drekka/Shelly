@@ -6,10 +6,20 @@ import Foundation
 import SwiftShell
 import Utility
 
+func wrenchLog(_ message: String) {
+    main.stdout.print(message)
+}
+
+func wrenchLogError(_ message: String) {
+    main.stderror.print("Error !!!!!!!!!")
+    main.stderror.print(message)
+    main.stderror.print("")
+}
+
 protocol Toolbox {
     var fileSourcesEmpty: Bool { get }
-    func addFileSource(_ fileSource: FileSource)
-    func addWrench(_ wrench: Wrench)
+    func add(fileSource: FileSource)
+    func add(wrench: Wrench)
 }
 
 public class Mechanic: Toolbox {
@@ -21,6 +31,7 @@ public class Mechanic: Toolbox {
     private let arguments: [CommandArgument]
 
     public init() {
+
         let argumentClasses: [CommandArgument.Type] = [
             GitStagingArgument.self,
             GitChangesArgument.self,
@@ -49,11 +60,11 @@ public class Mechanic: Toolbox {
         return fileSources.isEmpty
     }
 
-    func addFileSource(_ fileSource: FileSource) {
+    func add(fileSource: FileSource) {
         fileSources.append(fileSource)
     }
 
-    func addWrench(_ wrench: Wrench) {
+    func add(wrench: Wrench) {
         wrenches.append(wrench)
     }
 
@@ -65,8 +76,7 @@ public class Mechanic: Toolbox {
             try arguments.forEach { try $0.activate(arguments: parsedArguments, toolbox: self) }
             try processFiles()
         } catch let error {
-            print("Error !!!!!!!!!")
-            print(error)
+            wrenchLogError(String(describing: error))
             exit(1)
         }
     }
@@ -74,43 +84,60 @@ public class Mechanic: Toolbox {
     // MARK: - Execution
 
     private func processFiles() throws {
+        
         if wrenches.isEmpty {
-            print("Error: No active wrenches. Did you forget to add some arguments?")
+            wrenchLogError("No active wrenches. Did you forget to add some arguments?")
             exit(1)
         }
 
-        // Build the file filter from the list of wrenches.
-        let processableFileFilter: ((SelectedFile) -> Bool)? = wrenches.reduce(nil) { (result, wrench) -> (SelectedFile) -> Bool in
-            if let result = result {
-                return { file in
-                    result(file) || wrench.canProcess(file: file)
-                }
-            }
-            return wrench.canProcess
-        }
+        // This will also dep.
+        let wrenchFileLists = self.wrenches.map { (HashableWrench(wrench: $0), Set<SelectedFile>()) }
+        var wrenchFiles = Dictionary<HashableWrench, Set<SelectedFile>>(uniqueKeysWithValues: wrenchFileLists)
 
-        guard let fileFilter = processableFileFilter else {
-            print("No files found for currently active wrenches. Perhaps you're not doing enough coding.")
-            exit(0)
-        }
-
-        print("Reading file sources")
-        var files = Set<SelectedFile>()
+        wrenchLog("Reading file sources ...")
         try fileSources.forEach { fileSource in
-            files = files.union(try fileSource.getFiles().filter(fileFilter))
+            let files = try fileSource.getFiles()
+            wrenchFiles.forEach { key, value in
+                wrenchFiles[key] = value.union(files.filter(key.fileFilter))
+            }
         }
 
         var success = true
-        try wrenches.forEach { wrench in
-            if try !wrench.execute(files) {
+        try wrenchFiles.forEach { key, value in
+            if try !key.execute(value) {
                 success = false
             }
         }
 
-        print("")
-
         if !success {
             exit(1)
         }
+    }
+}
+
+/// Used purely so we can use wrenchs as dictionary keys without having to force implementations of Hashable.
+class HashableWrench: Wrench, Hashable {
+
+    private var wrench: Wrench
+    private let uuid = UUID()
+
+    var fileFilter: (SelectedFile) -> Bool {
+        return wrench.fileFilter
+    }
+
+    public var hashValue: Int {
+        return uuid.hashValue
+    }
+
+    func execute(_ files: Set<SelectedFile>) throws -> Bool {
+        return try wrench.execute(files)
+    }
+
+    init(wrench: Wrench) {
+        self.wrench = wrench
+    }
+
+    public static func ==(lhs: HashableWrench, rhs: HashableWrench) -> Bool {
+        return lhs.uuid == rhs.uuid
     }
 }

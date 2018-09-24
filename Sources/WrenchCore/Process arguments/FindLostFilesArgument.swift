@@ -23,11 +23,9 @@ struct FindLostFilesArgument: CommandArgument {
 
     func activate(arguments: ArgumentParser.Result, toolbox: Toolbox) throws {
         if let excludes = arguments.get(findLostFilesExcluding) {
-            print("Looking for lost files excluding \(excludes) ...")
-            toolbox.addWrench(try XcodeProjectFileCheckWrench(excluding: excludes))
+            toolbox.add(wrench: try XcodeProjectFileCheckWrench(excluding: excludes))
         } else if arguments.get(findLostFiles) ?? false {
-            print("Looking for lost files ...")
-            toolbox.addWrench(try XcodeProjectFileCheckWrench(excluding: nil))
+            toolbox.add(wrench: try XcodeProjectFileCheckWrench(excluding: nil))
         }
     }
 }

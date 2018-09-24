@@ -5,6 +5,6 @@ import Files
 import Foundation
 
 public protocol Wrench {
-    func canProcess(file: SelectedFile) -> Bool
+    var fileFilter: (SelectedFile) -> Bool { get }
     func execute(_ files: Set<SelectedFile>) throws -> Bool
 }

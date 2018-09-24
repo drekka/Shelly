@@ -13,7 +13,7 @@ struct DirectoryFileSource: FileSource {
     }
 
     func getFiles() throws -> Set<SelectedFile> {
-        print("Adding files from \(directory)")
+        wrenchLog("Adding files from \(directory)")
         let files = directory.makeFileSequence(recursive: true, includeHidden: false).map { SelectedFile(file: $0) }
         return Set(files)
     }

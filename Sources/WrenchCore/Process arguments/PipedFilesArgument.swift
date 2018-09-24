@@ -11,7 +11,7 @@ struct PipedFilesArgument: CommandArgument {
 
     func activate(arguments _: ArgumentParser.Result, toolbox: Toolbox) throws {
         if toolbox.fileSourcesEmpty {
-            toolbox.addFileSource(PipeFileSource())
+            toolbox.add(fileSource: PipeFileSource())
         }
     }
 }

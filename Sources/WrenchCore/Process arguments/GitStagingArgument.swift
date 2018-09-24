@@ -17,7 +17,7 @@ struct GitStagingArgument: CommandArgument {
 
     func activate(arguments: ArgumentParser.Result, toolbox: Toolbox) throws {
         if arguments.get(scanGitStaging) ?? false {
-            toolbox.addFileSource(GitStagingFileSource())
+            toolbox.add(fileSource: GitStagingFileSource())
         }
     }
 }

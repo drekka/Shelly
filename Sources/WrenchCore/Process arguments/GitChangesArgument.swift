@@ -17,7 +17,7 @@ struct GitChangesArgument: CommandArgument {
 
     func activate(arguments: ArgumentParser.Result, toolbox _: Toolbox) throws {
         if arguments.get(scanGitChanges) ?? false {
-            print("Scanning Git changes")
+            wrenchLog("Scanning Git changes")
         }
     }
 }

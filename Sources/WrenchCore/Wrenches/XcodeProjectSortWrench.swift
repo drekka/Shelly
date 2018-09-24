@@ -10,19 +10,19 @@ class XcodeProjectSortWrench: Wrench {
     private var navigatorSortOrder: PBXNavigatorFileOrder
     private var sortFiles: Bool
 
+    var fileFilter: (SelectedFile) -> Bool = { file in
+        return file.file.extension == "pbxproj"
+    }
+
     init(navigatorSortOrder: PBXNavigatorFileOrder, sortFiles: Bool = false) {
         self.sortFiles = sortFiles
         self.navigatorSortOrder = navigatorSortOrder
     }
 
-    func canProcess(file: SelectedFile) -> Bool {
-        return file.file.extension == "pbxproj"
-    }
-
     func execute(_ files: Set<SelectedFile>) throws -> Bool {
-        print("tightening with the xcode project wrench...")
+        wrenchLog("tightening with the xcode project wrench...")
 
-        try files.filter(canProcess).forEach { projectFile in
+        try files.forEach { projectFile in
 
             if let projDir = projectFile.file.parent?.path {
                 let projPath = AbsolutePath(projDir)

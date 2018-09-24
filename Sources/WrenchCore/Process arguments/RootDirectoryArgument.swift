@@ -19,10 +19,10 @@ struct RootDirectoryArgument: CommandArgument {
     func activate(arguments: ArgumentParser.Result, toolbox _: Toolbox) throws {
         if let rootDir = arguments.get(rootDir) {
             guard Files.changeCurrentDirectoryPath(rootDir) else {
-                print("Changing directory to \(rootDir) failed, does the directory exist?")
+                wrenchLogError("Changing directory to \(rootDir) failed, does the directory exist?")
                 exit(1)
             }
-            print("Switched to directory \(rootDir)")
+            wrenchLog("Switched to directory \(rootDir)")
         }
     }
 }

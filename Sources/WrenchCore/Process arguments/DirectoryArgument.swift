@@ -22,7 +22,7 @@ struct DirectoryArgument: CommandArgument {
         if let dirs = arguments.get(projectDirs) {
             try dirs.forEach { folderPath in
                 if let folder = try? Folder(path: folderPath) {
-                    toolbox.addFileSource(DirectoryFileSource(directory: folder))
+                    toolbox.add(fileSource: DirectoryFileSource(directory: folder))
                 } else {
                     throw WrenchError.folderNotFound(folderPath)
                 }

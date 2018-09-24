@@ -10,6 +10,10 @@ import xcodeproj
 class XcodeProjectFileCheckWrench: Wrench {
     private var excludes: RegEx?
 
+    var fileFilter: (SelectedFile) -> Bool = { file in
+        return file.file.extension == "pbxproj"
+    }
+
     init(excluding: String? = nil) throws {
         if let excluding = excluding {
             let regexPattern = "^" + excluding.replacingOccurrences(of: "*", with: ".*") + "$"
@@ -17,16 +21,17 @@ class XcodeProjectFileCheckWrench: Wrench {
         }
     }
 
-    func canProcess(file: SelectedFile) -> Bool {
-        return file.file.extension == "pbxproj"
-    }
-
     func execute(_ files: Set<SelectedFile>) throws -> Bool {
-        print("Hunting for lost source files ...")
 
         var result = true
 
-        try files.filter(canProcess).forEach { projectFile in
+        try files.forEach { projectFile in
+
+            if let excludes = excludes {
+                wrenchLog("Looking for lost files excluding \(excludes) ...")
+            } else {
+                wrenchLog("Looking for lost files ...")
+            }
 
             if let projectFileDir = projectFile.file.parent?.path {
                 // Source the file lists.
@@ -42,17 +47,17 @@ class XcodeProjectFileCheckWrench: Wrench {
                     FileManager.default.fileExists(atPath: file) ? nil : file
                 }
                 if !missingFiles.isEmpty {
-                    print("\nMissing files (files in project but not on file system):")
-                    missingFiles.forEach { print("\t\($0)") }
-                    print("")
+                    wrenchLog("\nMissing files (files in project but not on file system):")
+                    missingFiles.forEach { wrenchLog("\t\($0)") }
+                    wrenchLog("")
                     result = false
                 }
 
                 let lostFiles = filesInGit.subtracting(buildFiles)
                 if !lostFiles.isEmpty {
-                    print("\nLost files (files in file system that are not in the project):")
-                    lostFiles.forEach { print("\t\($0)") }
-                    print("")
+                    wrenchLog("\nLost files (files in file system that are not in the project):")
+                    lostFiles.forEach { wrenchLog("\t\($0)") }
+                    wrenchLog("")
                     result = false
                 }
             }
