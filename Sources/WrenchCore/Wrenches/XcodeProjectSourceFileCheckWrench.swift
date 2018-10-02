@@ -3,67 +3,91 @@
 
 import Basic
 import Files
-import Foundation
+import Utility
 import SwiftShell
 import xcodeproj
+import Foundation
 
 class XcodeProjectFileCheckWrench: Wrench {
-    private var excludes: RegEx?
 
-    var fileFilter: (SelectedFile) -> Bool = { file in
-        return file.file.extension == "pbxproj"
+    let subcommand = "lostfiles"
+    let overview = "Finds 'lost' files resulting from a merge or other event."
+    let argumentClasses: [CommandArgument.Type] = [
+        FindLostFilesArgument.self,
+    ]
+
+    var commandArguments: [String: CommandArgument] = [:]
+
+    required init() {}
+
+    func execute(_ arguments: ArgumentParser.Result) throws -> Bool {
+        return false
     }
 
-    init(excluding: String? = nil) throws {
-        if let excluding = excluding {
-            let regexPattern = "^" + excluding.replacingOccurrences(of: "*", with: ".*") + "$"
-            excludes = try RegEx(pattern: regexPattern)
-        }
-    }
+    private var sourceDirectories: [String]!
+    private var excludes: [RegEx]?
+    private var excludePattern = ""
 
-    func execute(_ files: Set<SelectedFile>) throws -> Bool {
+    var fileFilter: (SelectedFile) -> Bool = { $0.file.extension == "pbxproj" }
 
-        var result = true
+//    init(sourceDirectories: [String], excludeMasks: [String]?) throws {
+//        self.sourceDirectories = sourceDirectories
+//        if let excludeMasks = excludeMasks {
+//            excludePattern = excludeMasks.joined(separator: ",")
+//
+//            // break up the passed command delimited cxcludes and build a regex for each.
+//            let filters = excludeMasks.map { "^" + $0.replacingOccurrences(of: "*", with: ".*") + "$" }
+//            excludes = try filters.map { try RegEx(pattern: $0) }
+//        }
+//    }
 
-        try files.forEach { projectFile in
+    func execute(onFiles files: Set<SelectedFile>) throws {
 
-            if let excludes = excludes {
-                wrenchLog("Looking for lost files excluding \(excludes) ...")
-            } else {
-                wrenchLog("Looking for lost files ...")
-            }
 
-            if let projectFileDir = projectFile.file.parent?.path {
-                // Source the file lists.
-                var filesInGit = try gitFiles()
-                var buildFiles = try projectFiles(fromProjectIn: projectFileDir)
+//        try files.forEach { projectFile in
+//
+//            if excludes != nil {
+//                wrenchLog("Looking for lost files excluding \(excludePattern) ...")
+//            } else {
+//                wrenchLog("Looking for lost files ...")
+//            }
+//
+//            if let projectFileDir = projectFile.file.parent?.path {
+//                // Source the file lists.
+//                var filesInGit = try gitFiles()
+//                let buildFiles = try projectFiles(fromProjectIn: projectFileDir)
+//
+//                // Loop through the exclude patterns and remove any matching files from the list of files to check.
+//                if let excludes = excludes {
+//                    excludes.forEach { filter in
+//                        filesInGit = filesInGit.filter { !filter.matchGroups(in: $0).isEmpty }
+//                    }
+//                }
+//
+//                // Check the list of files from the project to ensure they're on disk.
+//                let missingFiles = buildFiles.compactMap { file in
+//                    FileManager.default.fileExists(atPath: file) ? nil : file
+//                }
+//
+//                // And report.
+//                if !missingFiles.isEmpty {
+//                    wrenchLog("\nMissing files (files in project but not on file system):")
+//                    missingFiles.forEach { wrenchLog("\t\($0)") }
+//                    wrenchLog("")
+//                    result = false
+//                }
+//
+//                // Check for files on disk that are not in the project.
+//                let lostFiles = filesInGit.subtracting(buildFiles)
+//                if !lostFiles.isEmpty {
+//                    wrenchLog("\nLost files (files in file system that are not in the project):")
+//                    lostFiles.forEach { wrenchLog("\t\($0)") }
+//                    wrenchLog("")
+//                    result = false
+//                }
+//            }
+//        }
 
-                if let excludes = excludes {
-                    filesInGit = filesInGit.filter { !excludes.matchGroups(in: $0).isEmpty }
-                    buildFiles = buildFiles.filter { !excludes.matchGroups(in: $0).isEmpty }
-                }
-
-                let missingFiles = buildFiles.compactMap { file in
-                    FileManager.default.fileExists(atPath: file) ? nil : file
-                }
-                if !missingFiles.isEmpty {
-                    wrenchLog("\nMissing files (files in project but not on file system):")
-                    missingFiles.forEach { wrenchLog("\t\($0)") }
-                    wrenchLog("")
-                    result = false
-                }
-
-                let lostFiles = filesInGit.subtracting(buildFiles)
-                if !lostFiles.isEmpty {
-                    wrenchLog("\nLost files (files in file system that are not in the project):")
-                    lostFiles.forEach { wrenchLog("\t\($0)") }
-                    wrenchLog("")
-                    result = false
-                }
-            }
-        }
-
-        return result
     }
 
     private func gitFiles() throws -> Set<String> {

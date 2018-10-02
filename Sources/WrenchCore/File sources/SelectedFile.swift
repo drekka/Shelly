@@ -5,16 +5,17 @@ import Files
 import Foundation
 
 /// Wrapper for files selected for processing.
-open class SelectedFile: CustomStringConvertible, Equatable, Hashable {
+public struct SelectedFile: CustomStringConvertible, Equatable, Hashable {
+
     public static func == (lhs: SelectedFile, rhs: SelectedFile) -> Bool {
         return lhs.file == rhs.file
     }
 
-    open var hashValue: Int {
+    public var hashValue: Int {
         return file.path.hashValue
     }
 
-    let file: File
+    public let file: File
 
     init(file: String) throws {
         self.file = try File(path: file)
@@ -24,7 +25,7 @@ open class SelectedFile: CustomStringConvertible, Equatable, Hashable {
         self.file = file
     }
 
-    open var description: String {
+    public var description: String {
         return file.path
     }
 }

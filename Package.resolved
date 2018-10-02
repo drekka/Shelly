@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "AEXML",
-        "repositoryURL": "https://github.com/tadija/AEXML.git",
+        "repositoryURL": "https://github.com/tadija/AEXML",
         "state": {
           "branch": null,
-          "revision": "6eea665515d079c338690147082a8084a36484b0",
-          "version": "4.3.0"
+          "revision": "54bb8ea6fb693dd3f92a89e5fcc19e199fdeedd0",
+          "version": "4.3.3"
         }
       },
       {
@@ -23,9 +23,9 @@
         "package": "SwiftPM",
         "repositoryURL": "https://github.com/apple/swift-package-manager",
         "state": {
-          "branch": "master",
-          "revision": "106115d356f750223dbd4419c3f39f8fc2da66f7",
-          "version": null
+          "branch": null,
+          "revision": "235aacc514cb81a6881364b0fedcb3dd083228f3",
+          "version": "0.3.0"
         }
       },
       {
@@ -33,16 +33,16 @@
         "repositoryURL": "https://github.com/kareman/SwiftShell",
         "state": {
           "branch": "master",
-          "revision": "02c8ae6a5d829d28aaa9683129fc71f899beca3a",
+          "revision": "32e5d5a159d9242fa3af10228f793e0c196419a9",
           "version": null
         }
       },
       {
         "package": "xcodeproj",
-        "repositoryURL": "https://github.com/drekka/xcodeproj",
+        "repositoryURL": "https://github.com/tuist/xcodeproj",
         "state": {
-          "branch": "feature/project-sorting",
-          "revision": "d90f691b8aa4dbf9b3c4afe9b7332716e90b4c19",
+          "branch": "master",
+          "revision": "1e3de50ca7aa79b1d1a7c52ad65fc8943fe808b9",
           "version": null
         }
       }

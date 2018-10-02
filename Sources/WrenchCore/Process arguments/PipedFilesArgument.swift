@@ -4,14 +4,17 @@
 import Files
 import Utility
 
-struct PipedFilesArgument: CommandArgument {
+struct PipedFilesArgument: CommandArgument, FileSourceFactory {
+
     static let argumentSyntax: String? = nil
 
     init(argumentParser _: ArgumentParser) {}
 
-    func activate(arguments _: ArgumentParser.Result, toolbox: Toolbox) throws {
-        if toolbox.fileSourcesEmpty {
-            toolbox.add(fileSource: PipeFileSource())
-        }
+    var fileSources: [FileSource]? = nil
+
+    func read(arguments _: ArgumentParser.Result) throws {
+//        if toolbox.fileSourcesEmpty {
+////            toolbox.add(fileSource: PipeFileSource())
+//        }
     }
 }

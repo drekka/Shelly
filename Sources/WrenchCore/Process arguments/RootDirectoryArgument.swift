@@ -6,19 +6,20 @@ import SwiftShell
 import Utility
 
 struct RootDirectoryArgument: CommandArgument {
+
     static let argumentSyntax: String? = "[--project-dir <dir>]"
 
-    private let rootDir: OptionArgument<String>
+    private let rootDir: OptionArgument<PathArgument>
 
     init(argumentParser: ArgumentParser) {
         rootDir = argumentParser.add(option: "--project-dir",
-                                     kind: String.self,
+                                     kind: PathArgument.self,
                                      usage: "Base directory of the project. Defaults to the current directory.")
     }
 
-    func activate(arguments: ArgumentParser.Result, toolbox _: Toolbox) throws {
+    func read(arguments: ArgumentParser.Result) throws {
         if let rootDir = arguments.get(rootDir) {
-            guard Files.changeCurrentDirectoryPath(rootDir) else {
+            guard Files.changeCurrentDirectoryPath(rootDir.path.asString) else {
                 wrenchLogError("Changing directory to \(rootDir) failed, does the directory exist?")
                 exit(1)
             }

@@ -4,6 +4,9 @@
 import Foundation
 
 enum WrenchError: Error, CustomStringConvertible {
+
+    case noSubcommandPassed
+
     case folderNotFound(String)
 
     case unknownArgument(String)
@@ -12,6 +15,10 @@ enum WrenchError: Error, CustomStringConvertible {
 
     var description: String {
         switch self {
+
+        case .noSubcommandPassed:
+            return "No sub-command found. Please use 'wrench --help' to see a list of all valid subcommands."
+
         case let .folderNotFound(filePath):
             return "Folder not found: \(filePath)"
 

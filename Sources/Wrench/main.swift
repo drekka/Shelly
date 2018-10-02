@@ -1,3 +1,10 @@
+
+import Foundation
 import WrenchCore
 
-Mechanic().run()
+do {
+    try Mechanic().run()
+} catch let error {
+    wrenchLogError(String(describing: error))
+    exit(1)
+}

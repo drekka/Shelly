@@ -5,27 +5,29 @@ import Files
 import Utility
 
 struct FindLostFilesArgument: CommandArgument {
-    static let argumentSyntax: String? = "[--find-lost-files|--find-lost-files-excluding <mask>]"
 
-    private let findLostFiles: OptionArgument<Bool>
-    private let findLostFilesExcluding: OptionArgument<String>
+    static let argumentSyntax: String? = "[--find-lost-files dir dir ... [--find-lost-files-excluding mask mask ...]]"
+
+    private let sourceDirectories: OptionArgument<[String]>
+    private let findLostFilesExcluding: OptionArgument<[String]>
 
     init(argumentParser: ArgumentParser) {
-        findLostFiles = argumentParser.add(option: "--find-lost-files",
-                                           kind: Bool.self,
-                                           usage: "Cross references the source files listed in the project with " +
-                                               "those in the file system to locate any lost files resulting from a bad merge.")
-        findLostFilesExcluding = argumentParser.add(option: "--find-lost-files-excluding",
-                                                    kind: String.self,
+        let subParser = argumentParser.add(subparser: "lostfiles", overview: "Searches for files 'lost' as a result of a merge or other event.")
+        sourceDirectories = subParser.add(option: "--find-lost-files",
+                                           kind: [String].self,
+                                           usage: "Cross references the source files listed in the specified directories with " +
+                                               "those in the project to locate any lost files resulting from a bad merge.")
+        findLostFilesExcluding = subParser.add(option: "--find-lost-files-excluding",
+                                                    kind: [String].self,
                                                     usage: "Same as --find-lost-files but also excludes any files that match the supplied mask. " +
                                                         "The mask utilises asterisks to act as wildcards. So *.swift, Sources/*/*.swift, Sources/ABC*, etc all work.")
     }
 
-    func activate(arguments: ArgumentParser.Result, toolbox: Toolbox) throws {
-        if let excludes = arguments.get(findLostFilesExcluding) {
-            toolbox.add(wrench: try XcodeProjectFileCheckWrench(excluding: excludes))
-        } else if arguments.get(findLostFiles) ?? false {
-            toolbox.add(wrench: try XcodeProjectFileCheckWrench(excluding: nil))
+    func read(arguments: ArgumentParser.Result) throws {
+        let sourceDirs = arguments.get(sourceDirectories)
+        if let sourceDirs = sourceDirs {
+            let excludeMasks = arguments.get(findLostFilesExcluding)
+//            toolbox.add(wrench: try XcodeProjectFileCheckWrench(sourceDirectories: sourceDirs, excludeMasks: excludeMasks))
         }
     }
 }
