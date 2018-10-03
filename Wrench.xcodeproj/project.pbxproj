@@ -32,6 +32,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6C41B2F5216483F400D41213 /* ArgumentReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C41B2F3216483E400D41213 /* ArgumentReader.swift */; };
 		OBJ_281 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_239 /* Document.swift */; };
 		OBJ_282 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_240 /* Element.swift */; };
 		OBJ_283 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_241 /* Error.swift */; };
@@ -142,7 +143,6 @@
 		OBJ_462 /* clibc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftPM::clibc::Product" /* clibc.framework */; };
 		OBJ_463 /* SwiftShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftShell::SwiftShell::Product" /* SwiftShell.framework */; };
 		OBJ_464 /* Files.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Files::Files::Product" /* Files.framework */; };
-		OBJ_481 /* ArgumentReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ArgumentReader.swift */; };
 		OBJ_482 /* DirectoryFileSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* DirectoryFileSource.swift */; };
 		OBJ_483 /* File+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* File+Extensions.swift */; };
 		OBJ_484 /* FileSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* FileSource.swift */; };
@@ -618,6 +618,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C41B2F3216483E400D41213 /* ArgumentReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgumentReader.swift; sourceTree = "<group>"; };
 		"AEXML::AEXML::Product" /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AEXML.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Files::Files::Product" /* Files.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Files.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_100 /* XCBreakpointList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCBreakpointList.swift; sourceTree = "<group>"; };
@@ -812,7 +813,6 @@
 		OBJ_86 /* PBXProjEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBXProjEncoder.swift; sourceTree = "<group>"; };
 		OBJ_87 /* PBXProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBXProject.swift; sourceTree = "<group>"; };
 		OBJ_89 /* Equality.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equality.generated.swift; sourceTree = "<group>"; };
-		OBJ_9 /* ArgumentReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentReader.swift; sourceTree = "<group>"; };
 		OBJ_90 /* Sourcery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sourcery.swift; sourceTree = "<group>"; };
 		OBJ_92 /* PBXAggregateTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBXAggregateTarget.swift; sourceTree = "<group>"; };
 		OBJ_93 /* PBXLegacyTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBXLegacyTarget.swift; sourceTree = "<group>"; };
@@ -1613,7 +1613,7 @@
 				OBJ_10 /* File sources */,
 				OBJ_19 /* Process arguments */,
 				OBJ_30 /* Wrenches */,
-				OBJ_9 /* ArgumentReader.swift */,
+				6C41B2F3216483E400D41213 /* ArgumentReader.swift */,
 				OBJ_17 /* IO.swift */,
 				OBJ_18 /* Mechanic.swift */,
 				OBJ_29 /* WrenchError.swift */,
@@ -2218,10 +2218,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				OBJ_481 /* ArgumentReader.swift in Sources */,
 				OBJ_482 /* DirectoryFileSource.swift in Sources */,
 				OBJ_483 /* File+Extensions.swift in Sources */,
 				OBJ_484 /* FileSource.swift in Sources */,
+				6C41B2F5216483F400D41213 /* ArgumentReader.swift in Sources */,
 				OBJ_485 /* GitStagingFileSource.swift in Sources */,
 				OBJ_486 /* PipeFileSource.swift in Sources */,
 				OBJ_487 /* SelectedFile.swift in Sources */,

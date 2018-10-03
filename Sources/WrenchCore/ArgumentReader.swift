@@ -9,7 +9,6 @@ public protocol ArgumentReader: class {
     func setupArguments( inParser parser: ArgumentParser)
     func read(arguments: ArgumentParser.Result) throws
     func argumentHandler<T>() throws -> T where T: CommandArgument
-
 }
 
 public extension ArgumentReader {
