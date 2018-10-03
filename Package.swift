@@ -13,9 +13,8 @@ let package = Package(
         .package(url: "https://github.com/JohnSundell/Files", .branch("master")),
         .package(url: "https://github.com/tuist/xcodeproj", .branch("master")),
 //        .package(url: "https://github.com/drekka/xcodeproj", .branch("feature/project-sorting")),
-        //        .package(url: "https://github.com/kareman/FileSmith", from: "0.2.0"),
 //        .package(url: "https://github.com/apple/swift-package-manager", from: "0.3.0"),
-        .package(url: "https://github.com/drekka/swift-package-manager", .branch("drekka:feature/sub-command-help-usage")),
+        .package(url: "https://github.com/drekka/swift-package-manager", .branch("feature/sub-command-help-usage")),
     ],
     targets: [
         .target(

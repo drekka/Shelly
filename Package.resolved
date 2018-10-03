@@ -21,11 +21,11 @@
       },
       {
         "package": "SwiftPM",
-        "repositoryURL": "https://github.com/apple/swift-package-manager",
+        "repositoryURL": "https://github.com/drekka/swift-package-manager",
         "state": {
-          "branch": null,
-          "revision": "235aacc514cb81a6881364b0fedcb3dd083228f3",
-          "version": "0.3.0"
+          "branch": "feature/sub-command-help-usage",
+          "revision": "4dcf52656c1df5d47f9761e820a75d0007844341",
+          "version": null
         }
       },
       {

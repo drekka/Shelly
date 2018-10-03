@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Wrench::Wrench"
-               BuildableName = "Wrench"
-               BlueprintName = "Wrench"
+               BlueprintIdentifier = "Wrench::WrenchCore"
+               BuildableName = "WrenchCore.framework"
+               BlueprintName = "WrenchCore"
                ReferencedContainer = "container:Wrench.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Wrench::WrenchCore"
-               BuildableName = "WrenchCore.framework"
-               BlueprintName = "WrenchCore"
+               BlueprintIdentifier = "Wrench::Wrench"
+               BuildableName = "Wrench"
+               BlueprintName = "Wrench"
                ReferencedContainer = "container:Wrench.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -69,9 +69,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Wrench::Wrench"
-            BuildableName = "Wrench"
-            BlueprintName = "Wrench"
+            BlueprintIdentifier = "Wrench::WrenchCore"
+            BuildableName = "WrenchCore.framework"
+            BlueprintName = "WrenchCore"
             ReferencedContainer = "container:Wrench.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -89,7 +89,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      revealArchiveInOrganizer = "YES"
-      buildConfiguration = "Release">
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
