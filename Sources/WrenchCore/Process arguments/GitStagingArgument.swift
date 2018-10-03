@@ -4,7 +4,7 @@
 import Files
 import Utility
 
-struct GitStagingArgument: CommandArgument, FileSourceFactory {
+class GitStagingArgument: CommandArgument, FileSourceFactory {
 
     static let argumentSyntax: String? = "[--scan-git-staging]"
 
@@ -12,13 +12,13 @@ struct GitStagingArgument: CommandArgument, FileSourceFactory {
 
     var fileSources: [FileSource]? = nil
 
-    init(argumentParser: ArgumentParser) {
+    required init(argumentParser: ArgumentParser) {
         scanGitStaging = argumentParser.add(option: "--scan-git-staging",
                                             kind: Bool.self,
                                             usage: "Scans the Git staging area for files to process.")
     }
 
-    mutating func read(arguments: ArgumentParser.Result) throws {
+    func read(arguments: ArgumentParser.Result) throws {
         if arguments.get(scanGitStaging) ?? false {
             self.fileSources = [GitStagingFileSource()]
         }

@@ -4,31 +4,40 @@
 import Files
 import Utility
 
-struct XCodeProjectFilesArgument: CommandArgument, FileSourceFactory {
+class XCodeProjectFilesArgument: CommandArgument, FileSourceFactory {
 
-    static let argumentSyntax: String? = "<project-file>, ..."
+    static let argumentSyntax: String? = "<project.xcodeproj>, ..."
 
     let projectDirs: PositionalArgument<[String]>
 
-   var fileSources: [FileSource]? = nil
+    var fileSources: [FileSource]? = nil
 
-    init(argumentParser: ArgumentParser) {
+    required init(argumentParser: ArgumentParser) {
 
-                projectDirs = argumentParser.add(positional: "<project-dir>, ...",
-                                                 kind: [String].self,
-                                                 optional: true,
-                                                 strategy: .remaining,
-                                                 usage: "If you're not sourcing project files from Git, then you can specify them after the arguments to check them.")
+        projectDirs = argumentParser.add(positional: "<project.xcodeproj>, ...",
+                                         kind: [String].self,
+                                         optional: true,
+                                         strategy: .remaining,
+                                         usage: "Zero or more project files to proecess. If you're using the Git arguments to find changed project files " +
+            "then there is no need to specify projects here, otherwise list the project files you want to process.")
     }
 
     func read(arguments: ArgumentParser.Result) throws {
         if let dirs = arguments.get(projectDirs) {
-            try dirs.forEach { folderPath in
-                if let folder = try? Folder(path: folderPath) {
-                } else {
-                    throw WrenchError.folderNotFound(folderPath)
-                }
-            }
+            fileSources = try dirs.map { try fileSource(forFolder: $0) }
         }
+    }
+
+    private func fileSource(forFolder folderPath: String) throws -> FileSource {
+
+        guard let folder = try? Folder(path: folderPath) else {
+            throw WrenchError.folderNotFound(folderPath)
+        }
+
+        guard folder.extension == "xcodeproj" else {
+            throw WrenchError.incorrectFile("'\(folder.name)' should be an xcode project file (directory), for example MyProject.xcodeproj")
+        }
+
+        return DirectoryFileSource(directory: folder)
     }
 }

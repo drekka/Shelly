@@ -4,7 +4,7 @@
 import Files
 import Utility
 
-struct DirectoryArgument: CommandArgument, FileSourceFactory {
+class DirectoryArgument: CommandArgument, FileSourceFactory {
 
     static let argumentSyntax: String? = "<project-dir>, ..."
 
@@ -12,7 +12,7 @@ struct DirectoryArgument: CommandArgument, FileSourceFactory {
 
     var fileSources: [FileSource]? = nil
 
-    init(argumentParser: ArgumentParser) {
+    required init(argumentParser: ArgumentParser) {
         projectDirs = argumentParser.add(option: "--blah",
                                     kind: [String].self,
                                     usage: "Cross references the source files listed in the specified directories with " +

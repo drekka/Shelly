@@ -16,13 +16,9 @@ class XcodeProjectFileCheckWrench: Wrench {
         FindLostFilesArgument.self,
     ]
 
-    var commandArguments: [String: CommandArgument] = [:]
+    var argumentHandlers: [String: CommandArgument] = [:]
 
     required init() {}
-
-    func execute(_ arguments: ArgumentParser.Result) throws -> Bool {
-        return false
-    }
 
     private var sourceDirectories: [String]!
     private var excludes: [RegEx]?
@@ -42,7 +38,6 @@ class XcodeProjectFileCheckWrench: Wrench {
 //    }
 
     func execute(onFiles files: Set<SelectedFile>) throws {
-
 
 //        try files.forEach { projectFile in
 //
@@ -87,7 +82,6 @@ class XcodeProjectFileCheckWrench: Wrench {
 //                }
 //            }
 //        }
-
     }
 
     private func gitFiles() throws -> Set<String> {

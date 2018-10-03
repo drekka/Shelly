@@ -33,6 +33,8 @@
 
 /* Begin PBXBuildFile section */
 		6C924A772163253D002DC4DB /* XcodeProjectFileArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C924A752163244D002DC4DB /* XcodeProjectFileArgument.swift */; };
+		6C924C3D216442BF002DC4DB /* IO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C924C3B216442B8002DC4DB /* IO.swift */; };
+		6C924C3F216444D4002DC4DB /* ArgumentReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C924C3E216444D4002DC4DB /* ArgumentReader.swift */; };
 		OBJ_279 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_237 /* Document.swift */; };
 		OBJ_280 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_238 /* Element.swift */; };
 		OBJ_281 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_239 /* Error.swift */; };
@@ -617,6 +619,8 @@
 
 /* Begin PBXFileReference section */
 		6C924A752163244D002DC4DB /* XcodeProjectFileArgument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeProjectFileArgument.swift; sourceTree = "<group>"; };
+		6C924C3B216442B8002DC4DB /* IO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IO.swift; sourceTree = "<group>"; };
+		6C924C3E216444D4002DC4DB /* ArgumentReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentReader.swift; sourceTree = "<group>"; };
 		"AEXML::AEXML::Product" /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AEXML.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"Files::Files::Product" /* Files.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Files.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* DirectoryFileSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryFileSource.swift; sourceTree = "<group>"; };
@@ -1024,28 +1028,28 @@
 		OBJ_138 /* SwiftPM */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_139 /* TestSupportExecutable */,
-				OBJ_140 /* Utility */,
-				OBJ_160 /* swift-package */,
 				OBJ_161 /* Basic */,
-				OBJ_200 /* PackageModel */,
-				OBJ_201 /* Commands */,
-				OBJ_202 /* swift-test */,
-				OBJ_203 /* swift-build */,
-				OBJ_204 /* TestSupport */,
-				OBJ_205 /* SPMLibc */,
-				OBJ_207 /* POSIX */,
-				OBJ_219 /* Workspace */,
-				OBJ_220 /* clibc */,
-				OBJ_225 /* PackageLoading */,
-				OBJ_226 /* SourceControl */,
-				OBJ_227 /* PackageDescription */,
 				OBJ_228 /* Build */,
-				OBJ_229 /* Xcodeproj */,
-				OBJ_230 /* swift-run */,
-				OBJ_231 /* swiftpm-xctest-helper */,
+				OBJ_201 /* Commands */,
+				OBJ_207 /* POSIX */,
+				OBJ_227 /* PackageDescription */,
 				OBJ_232 /* PackageDescription4 */,
 				OBJ_233 /* PackageGraph */,
+				OBJ_225 /* PackageLoading */,
+				OBJ_200 /* PackageModel */,
+				OBJ_205 /* SPMLibc */,
+				OBJ_226 /* SourceControl */,
+				OBJ_204 /* TestSupport */,
+				OBJ_139 /* TestSupportExecutable */,
+				OBJ_140 /* Utility */,
+				OBJ_219 /* Workspace */,
+				OBJ_229 /* Xcodeproj */,
+				OBJ_220 /* clibc */,
+				OBJ_203 /* swift-build */,
+				OBJ_160 /* swift-package */,
+				OBJ_230 /* swift-run */,
+				OBJ_202 /* swift-test */,
+				OBJ_231 /* swiftpm-xctest-helper */,
 				OBJ_234 /* Package.swift */,
 			);
 			name = SwiftPM;
@@ -1143,7 +1147,6 @@
 		OBJ_17 /* Process arguments */ = {
 			isa = PBXGroup;
 			children = (
-				6C924A752163244D002DC4DB /* XcodeProjectFileArgument.swift */,
 				OBJ_19 /* CommandArgument.swift */,
 				OBJ_20 /* DirectoryArgument.swift */,
 				OBJ_21 /* FindLostFilesArgument.swift */,
@@ -1152,6 +1155,7 @@
 				OBJ_24 /* PipedFilesArgument.swift */,
 				OBJ_25 /* RootDirectoryArgument.swift */,
 				OBJ_26 /* SortXcodeArgument.swift */,
+				6C924A752163244D002DC4DB /* XcodeProjectFileArgument.swift */,
 			);
 			path = "Process arguments";
 			sourceTree = "<group>";
@@ -1235,8 +1239,8 @@
 		OBJ_220 /* clibc */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_221 /* libc.c */,
 				OBJ_222 /* include */,
+				OBJ_221 /* libc.c */,
 			);
 			name = clibc;
 			path = "Packages/swift-package-manager/Sources/clibc";
@@ -1348,8 +1352,8 @@
 		OBJ_243 /* Files */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_244 /* Package.swift */,
 				OBJ_245 /* Files.swift */,
+				OBJ_244 /* Package.swift */,
 			);
 			name = Files;
 			path = ".build/checkouts/Files--422149092967035172/Sources";
@@ -1367,14 +1371,14 @@
 		OBJ_247 /* SwiftShell */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_253 /* General */,
+				OBJ_256 /* Stream */,
 				OBJ_248 /* Bash.swift */,
 				OBJ_249 /* Command.swift */,
 				OBJ_250 /* Context.swift */,
 				OBJ_251 /* FileHandle.swift */,
 				OBJ_252 /* Files.swift */,
-				OBJ_253 /* General */,
 				OBJ_255 /* Process.swift */,
-				OBJ_256 /* Stream */,
 				OBJ_259 /* String.swift */,
 			);
 			name = SwiftShell;
@@ -1401,18 +1405,18 @@
 		OBJ_261 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				"SwiftPM::Basic::Product" /* Basic.framework */,
 				"AEXML::AEXML::Product" /* AEXML.framework */,
-				"xcodeproj::xcodeproj::Product" /* xcodeproj.framework */,
-				"SwiftPM::clibc::Product" /* clibc.framework */,
-				"Wrench::WrenchCore::Product" /* WrenchCore.framework */,
-				"SwiftShell::SwiftShell::Product" /* SwiftShell.framework */,
-				"SwiftPM::SPMLibc::Product" /* SPMLibc.framework */,
+				"SwiftPM::Basic::Product" /* Basic.framework */,
 				"Files::Files::Product" /* Files.framework */,
-				"Wrench::Wrench::Product" /* Wrench */,
-				"SwiftPM::Utility::Product" /* Utility.framework */,
 				"SwiftPM::POSIX::Product" /* POSIX.framework */,
+				"SwiftPM::SPMLibc::Product" /* SPMLibc.framework */,
+				"SwiftShell::SwiftShell::Product" /* SwiftShell.framework */,
+				"SwiftPM::Utility::Product" /* Utility.framework */,
+				"Wrench::Wrench::Product" /* Wrench */,
+				"Wrench::WrenchCore::Product" /* WrenchCore.framework */,
 				"Wrench::WrenchTests::Product" /* WrenchTests.xctest */,
+				"SwiftPM::clibc::Product" /* clibc.framework */,
+				"xcodeproj::xcodeproj::Product" /* xcodeproj.framework */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -1457,11 +1461,11 @@
 		OBJ_38 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_39 /* xcodeproj */,
-				OBJ_138 /* SwiftPM */,
 				OBJ_235 /* AEXML 4.3.3 */,
 				OBJ_243 /* Files */,
+				OBJ_138 /* SwiftPM */,
 				OBJ_246 /* SwiftShell */,
+				OBJ_39 /* xcodeproj */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
@@ -1517,11 +1521,11 @@
 		OBJ_5 /*  */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_6 /* Package.swift */,
-				OBJ_7 /* Sources */,
-				OBJ_34 /* Tests */,
 				OBJ_38 /* Dependencies */,
 				OBJ_261 /* Products */,
+				OBJ_7 /* Sources */,
+				OBJ_34 /* Tests */,
+				OBJ_6 /* Package.swift */,
 			);
 			name = "";
 			sourceTree = "<group>";
@@ -1585,8 +1589,8 @@
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_8 /* WrenchCore */,
 				OBJ_32 /* Wrench */,
+				OBJ_8 /* WrenchCore */,
 			);
 			name = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -1609,10 +1613,12 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_9 /* File sources */,
-				OBJ_16 /* Mechanic.swift */,
 				OBJ_17 /* Process arguments */,
-				OBJ_27 /* WrenchError.swift */,
 				OBJ_28 /* Wrenches */,
+				6C924C3E216444D4002DC4DB /* ArgumentReader.swift */,
+				6C924C3B216442B8002DC4DB /* IO.swift */,
+				OBJ_16 /* Mechanic.swift */,
+				OBJ_27 /* WrenchError.swift */,
 			);
 			name = WrenchCore;
 			path = Sources/WrenchCore;
@@ -2216,8 +2222,10 @@
 				OBJ_479 /* DirectoryFileSource.swift in Sources */,
 				OBJ_480 /* File+Extensions.swift in Sources */,
 				OBJ_481 /* FileSource.swift in Sources */,
+				6C924C3F216444D4002DC4DB /* ArgumentReader.swift in Sources */,
 				OBJ_482 /* GitStagingFileSource.swift in Sources */,
 				6C924A772163253D002DC4DB /* XcodeProjectFileArgument.swift in Sources */,
+				6C924C3D216442BF002DC4DB /* IO.swift in Sources */,
 				OBJ_483 /* PipeFileSource.swift in Sources */,
 				OBJ_484 /* SelectedFile.swift in Sources */,
 				OBJ_485 /* Mechanic.swift in Sources */,

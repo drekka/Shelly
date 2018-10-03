@@ -4,7 +4,7 @@
 import Files
 import Utility
 
-struct GitChangesArgument: CommandArgument, FileSourceFactory {
+class GitChangesArgument: CommandArgument, FileSourceFactory {
 
     static let argumentSyntax: String? = "[--scan-git-changes]"
 
@@ -12,7 +12,7 @@ struct GitChangesArgument: CommandArgument, FileSourceFactory {
 
     var fileSources: [FileSource]? = nil
 
-    init(argumentParser: ArgumentParser) {
+    required init(argumentParser: ArgumentParser) {
         scanGitChanges = argumentParser.add(option: "--scan-git-changes",
                                             kind: Bool.self,
                                             usage: "Scans Git changed area for files to process.")

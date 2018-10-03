@@ -4,11 +4,11 @@
 import Files
 import Utility
 
-struct PipedFilesArgument: CommandArgument, FileSourceFactory {
+class PipedFilesArgument: CommandArgument, FileSourceFactory {
 
     static let argumentSyntax: String? = nil
 
-    init(argumentParser _: ArgumentParser) {}
+    required init(argumentParser _: ArgumentParser) {}
 
     var fileSources: [FileSource]? = nil
 

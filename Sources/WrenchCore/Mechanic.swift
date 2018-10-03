@@ -6,51 +6,50 @@ import Foundation
 import SwiftShell
 import Utility
 
-public func wrenchLog(_ message: String) {
-    main.stdout.print(message)
-}
+public class Mechanic: ArgumentReader {
 
-public func wrenchLogError(_ message: String) {
-    main.stderror.print("Error !")
-    main.stderror.print(message)
-    main.stderror.print("Use 'wrench --help' for command syntax help.")
-    main.stderror.print("")
-}
+    public var argumentClasses: [CommandArgument.Type] = [
+        RootDirectoryArgument.self,
+        ]
 
-public class Mechanic {
+    public var argumentHandlers: [String : CommandArgument] = [:]
 
     private let wrenchParser: ArgumentParser
     private var wrenches: [String: Wrench] = [:]
 
+    private let wrenchClasses: [Wrench.Type] = [
+        XcodeProjectSortWrench.self,
+        XcodeProjectFileCheckWrench.self,
+        ]
+
     public init() {
-
-        let globalArgumentClasses: [CommandArgument.Type] = [
-            RootDirectoryArgument.self,
-            ]
-
         wrenchParser = ArgumentParser(commandName: "wrench [--help]",
-                                      usage: globalArgumentClasses.syntax + " command <command-arguments> ...",
+                                      usage: argumentClasses.syntax + " command <command-arguments> ...",
                                       overview: "Useful tools for keeping your project in tip-top shape.")
+    }
 
-        let wrenchClasses: [Wrench.Type] = [
-            XcodeProjectSortWrench.self,
-            XcodeProjectFileCheckWrench.self,
-            ]
+    public func setup() {
 
-        let subcommandMap = wrenchClasses.map { wrenchDef -> (String, Wrench) in
-            var wrench = wrenchDef.init()
+        self.setupArguments(inParser: wrenchParser)
+
+        wrenchClasses.forEach { wrenchDef in
+            let wrench = wrenchDef.init()
             let subcommandParser = wrenchParser.add(subparser: wrench.subcommand,
                                                     overview: wrench.overview,
                                                     usage: wrench.argumentClasses.syntax)
-            wrench.setup(subcommandParser: subcommandParser)
-            return (wrench.subcommand, wrench)
+            wrench.setupArguments(inParser: subcommandParser)
+            wrenches[wrench.subcommand] = wrench
         }
-        wrenches = Dictionary(uniqueKeysWithValues: subcommandMap)
-
     }
 
     public func run() throws {
+
         let arguments = try wrenchParser.parse(Array(CommandLine.arguments.dropFirst()))
+
+        // Process the global arguments.
+        try self.read(arguments: arguments)
+
+        // Get the subcommand and pass it the arguments.
         guard let subcommand = arguments.subparser(wrenchParser),
             let wrench = wrenches[subcommand] else {
                 throw WrenchError.noSubcommandPassed
@@ -59,7 +58,7 @@ public class Mechanic {
 
         // Source the files to process.
         var sourceFiles = Set<SelectedFile>()
-        try wrench.commandArguments.values.forEach { argument in
+        try wrench.argumentHandlers.values.forEach { argument in
             if let fileSourceFactory = argument as? FileSourceFactory, let fileSources = fileSourceFactory.fileSources {
                 sourceFiles = sourceFiles.union(try fileSources.flatMap { try $0.getFiles() })
             }

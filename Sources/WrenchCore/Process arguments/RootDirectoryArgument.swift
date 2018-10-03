@@ -1,17 +1,18 @@
 
 //  Created by Derek Clarkson on 18/9/18.
 
-import Foundation
-import SwiftShell
 import Utility
+import Basic
+import SwiftShell
+import Foundation
 
-struct RootDirectoryArgument: CommandArgument {
+class RootDirectoryArgument: CommandArgument {
 
     static let argumentSyntax: String? = "[--project-dir <dir>]"
 
     private let rootDir: OptionArgument<PathArgument>
 
-    init(argumentParser: ArgumentParser) {
+    required init(argumentParser: ArgumentParser) {
         rootDir = argumentParser.add(option: "--project-dir",
                                      kind: PathArgument.self,
                                      usage: "Base directory of the project. Defaults to the current directory.")
@@ -19,11 +20,13 @@ struct RootDirectoryArgument: CommandArgument {
 
     func read(arguments: ArgumentParser.Result) throws {
         if let rootDir = arguments.get(rootDir) {
-            guard Files.changeCurrentDirectoryPath(rootDir.path.asString) else {
-                wrenchLogError("Changing directory to \(rootDir) failed, does the directory exist?")
+            let dir = rootDir.path.asString
+            guard Files.changeCurrentDirectoryPath(dir) else {
+                wrenchLogError("Changing directory to \(dir) failed, does the directory exist?")
                 exit(1)
             }
-            wrenchLog("Switched to directory \(rootDir)")
+            wrenchLog("Switched to directory \(dir)")
         }
+
     }
 }

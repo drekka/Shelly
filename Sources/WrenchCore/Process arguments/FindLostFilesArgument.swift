@@ -4,14 +4,14 @@
 import Files
 import Utility
 
-struct FindLostFilesArgument: CommandArgument {
+class FindLostFilesArgument: CommandArgument {
 
     static let argumentSyntax: String? = "[--find-lost-files dir dir ... [--find-lost-files-excluding mask mask ...]]"
 
     private let sourceDirectories: OptionArgument<[String]>
     private let findLostFilesExcluding: OptionArgument<[String]>
 
-    init(argumentParser: ArgumentParser) {
+    required init(argumentParser: ArgumentParser) {
         let subParser = argumentParser.add(subparser: "lostfiles", overview: "Searches for files 'lost' as a result of a merge or other event.")
         sourceDirectories = subParser.add(option: "--find-lost-files",
                                            kind: [String].self,

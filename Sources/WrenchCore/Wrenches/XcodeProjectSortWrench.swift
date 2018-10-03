@@ -17,26 +17,38 @@ class XcodeProjectSortWrench: Wrench {
         XCodeProjectFilesArgument.self,
         ]
 
-    var commandArguments: [String: CommandArgument] = [:]
+    var argumentHandlers: [String: CommandArgument] = [:]
 
     var fileFilter: (SelectedFile) -> Bool = { $0.file.extension == "pbxproj" }
 
     required init() {}
 
     func execute(onFiles files: Set<SelectedFile>) throws {
-        wrenchLog("tightening with the xcode project wrench...")
 
-//        try files.forEach { projectFile in
-//
-//            if let projDir = projectFile.file.parent?.path {
-//                let projPath = AbsolutePath(projDir)
-//                let proj = try XcodeProj(path: projPath)
-//                let outputSettings = PBXOutputSettings(projFileListOrder: sortArguments.sortFiles ? .byFilename : .byUUID,
-//                                                       projNavigatorFileOrder: sortArguments.navigatorSortOrder,
-//                                                       projBuildPhaseFileOrder: sortArguments.sortFiles ? .byFilename : .unsorted)
-//                try proj.write(path: projPath, override: true, outputSettings: outputSettings)
-//            }
-//        }
+        let sortArguments: SortXcodeArgument = try argumentHandler()
+        wrenchLog("🔧 Sorting file lists within project files...")
+        wrenchLog("\t► Project file lists: " + (sortArguments.sortFiles ? "In file name order" : "In uuid order"))
+        switch sortArguments.navigatorSortOrder {
+        case .byFilename:
+            wrenchLog("\t► Navigator groups: In file name order")
+        case .byFilenameGroupsFirst:
+            wrenchLog("\t► Navigator groups: In file name order with groups first")
+        default:
+            wrenchLog("\t► Navigator groups: Unsorted")
+        }
+        wrenchLog("\t► Build phase file lists: " + (sortArguments.sortFiles ? "In file name order" : "Unsorted"))
 
+        try files.forEach { projectFile in
+            wrenchLog("Sorting \(projectFile.file.path)")
+
+            if let projDir = projectFile.file.parent?.path {
+                let projPath = AbsolutePath(projDir)
+                let proj = try XcodeProj(path: projPath)
+                let outputSettings = PBXOutputSettings(projFileListOrder: sortArguments.sortFiles ? .byFilename : .byUUID,
+                                                       projNavigatorFileOrder: sortArguments.navigatorSortOrder,
+                                                       projBuildPhaseFileOrder: sortArguments.sortFiles ? .byFilename : .unsorted)
+                try proj.write(path: projPath, override: true, outputSettings: outputSettings)
+            }
+        }
     }
 }
