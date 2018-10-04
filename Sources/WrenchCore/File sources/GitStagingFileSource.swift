@@ -7,6 +7,7 @@ import SwiftShell
 
 struct GitStagingFileSource: FileSource {
     func getFiles() throws -> Set<SelectedFile> {
+        
         wrenchLog("Scanning Git staging area")
 
         let result = run(bash: "git diff --name-only --cached | grep -v Carthage/Checkouts")

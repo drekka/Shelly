@@ -47,7 +47,7 @@ class XcodeProjectSortWrench: Wrench {
                 let outputSettings = PBXOutputSettings(projFileListOrder: sortArguments.sortFiles ? .byFilename : .byUUID,
                                                        projNavigatorFileOrder: sortArguments.navigatorSortOrder,
                                                        projBuildPhaseFileOrder: sortArguments.sortFiles ? .byFilename : .unsorted)
-                try proj.write(path: projPath, override: true, outputSettings: outputSettings)
+                try proj.write(path: projPath, outputSettings: outputSettings)
             }
         }
     }

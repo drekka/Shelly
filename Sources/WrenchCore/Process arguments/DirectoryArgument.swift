@@ -8,32 +8,30 @@ class DirectoryArgument: CommandArgument, FileSourceFactory {
 
     static let argumentSyntax: String? = "<project-dir>, ..."
 
-    let projectDirs: OptionArgument<[String]>
+    let projectDirs: PositionalArgument<[PathArgument]>
 
     var fileSources: [FileSource]? = nil
 
     required init(argumentParser: ArgumentParser) {
-        projectDirs = argumentParser.add(option: "--blah",
-                                    kind: [String].self,
-                                    usage: "Cross references the source files listed in the specified directories with " +
-            "those in the project to locate any lost files resulting from a bad merge.")
-
-//        projectDirs = argumentParser.add(positional: "<project-dir>, ...",
-//                                         kind: [String].self,
-//                                         optional: true,
-//                                         strategy: .remaining,
-//                                         usage: "Read a list of files to process from one or more directories add at the end of the command. " +
-//                                             "Will override any files piped in from another command.")
+        projectDirs = argumentParser.add(positional: "<project-dir>, ...",
+                                         kind: [PathArgument].self,
+                                         optional: true,
+                                         strategy: .remaining,
+                                         usage: "Read a list of files to process from one or more directories add at the end of the command. " +
+            "Will override any files piped in from another command.")
     }
 
     func read(arguments: ArgumentParser.Result) throws {
-        if let dirs = arguments.get(projectDirs) {
-            try dirs.forEach { folderPath in
-                if let folder = try? Folder(path: folderPath) {
-//                    toolbox.add(fileSource: DirectoryFileSource(directory: folder))
-                } else {
-                    throw WrenchError.folderNotFound(folderPath)
-                }
+
+        guard let dirs = arguments.get(projectDirs) else {
+            return
+        }
+
+        fileSources = try dirs.map { folderPath in
+            if let folder = try? Folder(path: folderPath) {
+                return DirectoryFileSource(directory: folder)
+            } else {
+                throw WrenchError.folderNotFound(folderPath)
             }
         }
     }
