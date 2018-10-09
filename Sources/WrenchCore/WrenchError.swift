@@ -1,9 +1,13 @@
 
 //  Created by Derek Clarkson on 18/9/18.
 
-import Foundation
+import Basic
 
 enum WrenchError: Error, CustomStringConvertible {
+
+    case missingArgument(String)
+
+    case invalidCurrentDirectory
 
     case argumentHandlerNotFound
 
@@ -11,7 +15,9 @@ enum WrenchError: Error, CustomStringConvertible {
 
     case incorrectFile(String)
 
-    case folderNotFound(String)
+    case folderNotFound(AbsolutePath)
+
+    case notAFolder(AbsolutePath)
 
     case unknownArgument(String)
 
@@ -19,6 +25,12 @@ enum WrenchError: Error, CustomStringConvertible {
 
     var description: String {
         switch self {
+
+        case let .missingArgument(argument):
+            return "Missing argument. '\(argument)' is required."
+
+        case .invalidCurrentDirectory:
+            return "Unable to obtain the current working directory."
 
         case .argumentHandlerNotFound:
             return "Argument handler not found."
@@ -29,8 +41,11 @@ enum WrenchError: Error, CustomStringConvertible {
         case let .incorrectFile(message):
             return "Incorrect file passed: \(message)"
 
+        case let .notAFolder(filePath):
+            return "Specified path: \(filePath.prettyPath()) - is not a valid folder."
+
         case let .folderNotFound(filePath):
-            return "Folder not found: \(filePath)"
+            return "Folder not found: \(filePath.prettyPath())"
 
         case let .unknownArgument(arg):
             return "Unknown argument: \(arg)"

@@ -1,31 +1,32 @@
 
 //  Created by Derek Clarkson on 12/9/18.
 
-import Files
 import Foundation
 import SwiftShell
 import Utility
+import Basic
 
 public class Mechanic: ArgumentReader {
 
-    public var argumentClasses: [CommandArgument.Type] = [
+    var argumentClasses: [CommandArgument.Type] = [
+        VerboseArgument.self,
         RootDirectoryArgument.self,
         ]
 
-    public var argumentHandlers: [String : CommandArgument] = [:]
+    var arguments: [String : CommandArgument] = [:]
 
     private let wrenchParser: ArgumentParser
     private var wrenches: [String: Wrench] = [:]
 
     private let wrenchClasses: [Wrench.Type] = [
         XcodeProjectSortWrench.self,
-        XcodeProjectFileCheckWrench.self,
+        XcodeProjectLostFilesWrench.self,
         ]
 
     public init() {
         wrenchParser = ArgumentParser(commandName: "wrench [--help]",
-                                      usage: argumentClasses.syntax + " command <command-arguments> ...",
-                                      overview: "Useful tools for keeping your project in tip-top shape.")
+                                      usage: argumentClasses.syntax + " sub-command ...",
+                                      overview: "Useful tools for keeping your project in tip-top shape. Use 'wrench subcommand --help' for details on each subcommand.")
     }
 
     public func setup() {
@@ -56,14 +57,6 @@ public class Mechanic: ArgumentReader {
         }
         try wrench.read(arguments: arguments)
 
-        // Source the files to process.
-        var sourceFiles = Set<SelectedFile>()
-        try wrench.argumentHandlers.values.forEach { argument in
-            if let fileSourceFactory = argument as? FileSourceFactory, let fileSources = fileSourceFactory.fileSources {
-                sourceFiles = sourceFiles.union(try fileSources.flatMap { try $0.getFiles() })
-            }
-        }
-
-        try wrench.execute(onFiles: sourceFiles.filter(wrench.fileFilter))
+        try wrench.execute()
     }
 }

@@ -12,3 +12,11 @@ public func wrenchLogError(_ message: String, _ args: CVarArg...) {
     main.stderror.print("Use 'wrench --help' for command syntax help.")
     main.stderror.print("")
 }
+
+var verbose: Bool = false
+
+public func wrenchVerboseLog(_ message: String, _ args: CVarArg...) {
+    guard verbose else { return }
+    main.stdout.print("🔦 " + String(format: message, args))
+}
+

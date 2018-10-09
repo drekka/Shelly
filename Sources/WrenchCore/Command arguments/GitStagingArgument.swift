@@ -1,12 +1,11 @@
 
 //  Created by Derek Clarkson on 18/9/18.
 
-import Files
 import Utility
 
 class GitStagingArgument: CommandArgument, FileSourceFactory {
 
-    static let argumentSyntax: String? = "[--scan-git-staging]"
+    static let argumentSyntax = "[--scan-git-staging]"
 
     private let scanGitStaging: OptionArgument<Bool>
 

@@ -8,7 +8,7 @@ import Foundation
 
 class RootDirectoryArgument: CommandArgument {
 
-    static let argumentSyntax: String? = "[--project-dir <dir>]"
+    static let argumentSyntax = "[--project-dir <dir>]"
 
     private let rootDir: OptionArgument<PathArgument>
 

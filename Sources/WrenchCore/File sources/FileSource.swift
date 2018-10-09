@@ -1,9 +1,8 @@
 
 //  Created by Derek Clarkson on 13/9/18.
 
-import Files
-import Foundation
+import Basic
 
-public protocol FileSource {
-    func getFiles() throws -> Set<SelectedFile>
+protocol FileSource {
+    func getFiles() throws -> Set<RelativePath>
 }

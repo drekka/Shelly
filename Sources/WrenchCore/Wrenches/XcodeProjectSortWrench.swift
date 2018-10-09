@@ -2,11 +2,10 @@
 //  Created by Derek Clarkson on 18/9/18.
 
 import Basic
-import Files
 import Utility
 import xcodeproj
 
-class XcodeProjectSortWrench: Wrench {
+class XcodeProjectSortWrench: Wrench, FileProcessor {
 
     let subcommand = "sortprojects"
     let overview = "Sorts the Xcode project file to aleviate merge issues."
@@ -14,18 +13,19 @@ class XcodeProjectSortWrench: Wrench {
         GitStagingArgument.self,
         GitChangesArgument.self,
         SortXcodeArgument.self,
-        XCodeProjectFilesArgument.self,
+        TrailingXcodeProjectPackagesArgument.self,
         ]
 
-    var argumentHandlers: [String: CommandArgument] = [:]
+    var arguments: [String: CommandArgument] = [:]
 
-    var fileFilter: (SelectedFile) -> Bool = { $0.file.extension == "pbxproj" }
+    var fileFilter: ((RelativePath) -> Bool)? = { $0.extension == "pbxproj" }
 
     required init() {}
 
-    func execute(onFiles files: Set<SelectedFile>) throws {
+    func execute() throws {
 
-        let sortArguments: SortXcodeArgument = try argumentHandler()
+        let sortArguments: SortXcodeArgument = try retrieveArgument()
+
         wrenchLog("🔧 Sorting file lists within project files...")
         wrenchLog("\t► Project file lists: " + (sortArguments.sortFiles ? "In file name order" : "In uuid order"))
         switch sortArguments.navigatorSortOrder {
@@ -38,17 +38,15 @@ class XcodeProjectSortWrench: Wrench {
         }
         wrenchLog("\t► Build phase file lists: " + (sortArguments.sortFiles ? "In file name order" : "Unsorted"))
 
-        try files.forEach { projectFile in
-            wrenchLog("Sorting \(projectFile.file.path)")
+        try files().forEach { projectFile in
 
-            if let projDir = projectFile.file.parent?.path {
-                let projPath = AbsolutePath(projDir)
-                let proj = try XcodeProj(path: projPath)
-                let outputSettings = PBXOutputSettings(projFileListOrder: sortArguments.sortFiles ? .byFilename : .byUUID,
-                                                       projNavigatorFileOrder: sortArguments.navigatorSortOrder,
-                                                       projBuildPhaseFileOrder: sortArguments.sortFiles ? .byFilename : .unsorted)
-                try proj.write(path: projPath, outputSettings: outputSettings)
-            }
+            wrenchLog("🔧 Sorting \(projectFile.asString)")
+
+            let proj = try projectFile.loadProject()
+            let outputSettings = PBXOutputSettings(projFileListOrder: sortArguments.sortFiles ? .byFilename : .byUUID,
+                                                   projNavigatorFileOrder: sortArguments.navigatorSortOrder,
+                                                   projBuildPhaseFileOrder: sortArguments.sortFiles ? .byFilename : .unsorted)
+            try proj.write(path: projectFile.absolutePath, outputSettings: outputSettings)
         }
     }
 }

@@ -1,12 +1,11 @@
 
 //  Created by Derek Clarkson on 18/9/18.
 
-import Files
 import Utility
 
 class GitChangesArgument: CommandArgument, FileSourceFactory {
 
-    static let argumentSyntax: String? = "[--scan-git-changes]"
+    static let argumentSyntax = "[--scan-git-changes]"
 
     private let scanGitChanges: OptionArgument<Bool>
 

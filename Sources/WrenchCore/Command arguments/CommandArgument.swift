@@ -3,14 +3,10 @@
 
 import Utility
 
-public protocol CommandArgument: class {
-    static var argumentSyntax: String? { get }
+protocol CommandArgument: class {
+    static var argumentSyntax: String { get }
     init(argumentParser: ArgumentParser)
     func read(arguments: ArgumentParser.Result) throws
-}
-
-public protocol FileSourceFactory {
-    var fileSources: [FileSource]? { get }
 }
 
 extension CommandArgument {

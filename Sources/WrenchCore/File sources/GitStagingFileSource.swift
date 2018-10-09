@@ -1,12 +1,11 @@
 
 //  Created by Derek Clarkson on 13/9/18.
 
-import Files
-import Foundation
+import Basic
 import SwiftShell
 
 struct GitStagingFileSource: FileSource {
-    func getFiles() throws -> Set<SelectedFile> {
+    func getFiles() throws -> Set<RelativePath> {
         
         wrenchLog("Scanning Git staging area")
 
@@ -15,7 +14,7 @@ struct GitStagingFileSource: FileSource {
             throw error
         }
 
-        let files = result.stdout.lines().compactMap { try? SelectedFile(file: $0) } // Note: Deleted files will generate a nil.
+        let files = result.stdout.lines().compactMap { RelativePath($0) } // Note: Deleted files will generate a nil.
         return Set(files)
     }
 }

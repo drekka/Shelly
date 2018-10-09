@@ -1,14 +1,13 @@
 
 //  Created by Derek Clarkson on 17/9/18.
 
-import Files
-import Foundation
+import Basic
 import SwiftShell
 
 struct PipeFileSource: FileSource {
-    func getFiles() throws -> Set<SelectedFile> {
+    func getFiles() throws -> Set<RelativePath> {
         wrenchLog("Reading files from piped input ...")
         let pipedFiles = main.stdin
-        return try Set(pipedFiles.lines().map { try SelectedFile(file: $0) })
+        return Set(pipedFiles.lines().map { RelativePath(String($0.dropFirst())) })
     }
 }
