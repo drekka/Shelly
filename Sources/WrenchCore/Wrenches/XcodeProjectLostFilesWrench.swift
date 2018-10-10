@@ -37,6 +37,8 @@ class XcodeProjectLostFilesWrench: Wrench {
 
     func execute() throws {
 
+        wrenchLog("Looking for lost files ...")
+
         // Get a list of all swift source files from the directories and run the exclude masks.
         let sourceDirectoriesArgument: SourceDirectoriesArgument = try retrieveArgument()
         var sourceFiles: Set<RelativePath> = Set()
@@ -47,11 +49,9 @@ class XcodeProjectLostFilesWrench: Wrench {
         sourceFiles = sourceFiles.filter { !localFileSystem.isDirectory($0.absolutePath) }
         sourceFiles = sourceFiles.filter { !$0.basename.hasPrefix(".") }
 
-        wrenchLog("Looking for lost files ...")
-
         let excludeArgument: ExcludeArgument = try retrieveArgument()
         if let masks = excludeArgument.excludeMasks {
-            wrenchLog("Excluding files matching \(masks.joined(separator: " ")) ...")
+            wrenchVerboseLog("Excluding files matching \(masks.joined(separator: " ")) ...")
             let excludeExpressions = try excludeRegularExpressions(fromMasks: masks)
             sourceFiles.subtract(filesMatchingExpressions: excludeExpressions)
         }

@@ -16,7 +16,7 @@ struct DirectoryFileSource: FileSource {
     func getFiles() throws -> Set<RelativePath> {
 
         let directoryPath = directory.absolutePath
-        wrenchLog("Reading files from \(directoryPath.prettyPath())...")
+        wrenchVerboseLog("Reading files from \(directoryPath.prettyPath())...")
 
         guard localFileSystem.exists(directoryPath) else {
             throw WrenchError.folderNotFound(directoryPath)

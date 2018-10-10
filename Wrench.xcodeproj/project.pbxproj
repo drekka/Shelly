@@ -32,6 +32,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6C901D53216D7F5700D3A36D /* GitChangesFileSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C901D52216D7F5700D3A36D /* GitChangesFileSource.swift */; };
 		6CCE8445216C1C1F002CC017 /* RelativePath+XcodeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCE8444216C1C1F002CC017 /* RelativePath+XcodeProject.swift */; };
 		6CCE8449216C1EBE002CC017 /* RelativePath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCE8448216C1EBE002CC017 /* RelativePath+Extensions.swift */; };
 		OBJ_279 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_241 /* Document.swift */; };
@@ -595,6 +596,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C901D52216D7F5700D3A36D /* GitChangesFileSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitChangesFileSource.swift; sourceTree = "<group>"; };
 		6CCE8444216C1C1F002CC017 /* RelativePath+XcodeProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RelativePath+XcodeProject.swift"; sourceTree = "<group>"; };
 		6CCE8448216C1EBE002CC017 /* RelativePath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RelativePath+Extensions.swift"; sourceTree = "<group>"; };
 		"AEXML::AEXML::Product" /* AEXML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AEXML.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1357,6 +1359,7 @@
 				OBJ_27 /* FileSourceFactory.swift */,
 				OBJ_28 /* GitStagingFileSource.swift */,
 				OBJ_29 /* PipeFileSource.swift */,
+				6C901D52216D7F5700D3A36D /* GitChangesFileSource.swift */,
 			);
 			path = "File sources";
 			sourceTree = "<group>";
@@ -2142,6 +2145,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_464 /* ArgumentReader.swift in Sources */,
+				6C901D53216D7F5700D3A36D /* GitChangesFileSource.swift in Sources */,
 				OBJ_465 /* CommandArgument.swift in Sources */,
 				OBJ_466 /* ExcludeArgument.swift in Sources */,
 				OBJ_467 /* GitChangesArgument.swift in Sources */,

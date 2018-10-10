@@ -19,7 +19,7 @@ class GitChangesArgument: CommandArgument, FileSourceFactory {
 
     func read(arguments: ArgumentParser.Result) throws {
         if arguments.get(scanGitChanges) ?? false {
-            wrenchLog("Scanning Git changes")
+            self.fileSources = [GitChangesFileSource()]
         }
     }
 }

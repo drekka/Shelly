@@ -4,13 +4,13 @@
 import Basic
 import SwiftShell
 
-struct GitStagingFileSource: FileSource {
+struct GitChangesFileSource: FileSource {
 
     func getFiles() throws -> Set<RelativePath> {
-        
+
         wrenchLog("Scanning Git staging area")
 
-        let result = run(bash: "git diff --name-only --cached | grep -v Carthage/Checkouts")
+        let result = run(bash: "git diff --name-only | grep -v Carthage/Checkouts")
         if let error = result.error {
             throw error
         }
