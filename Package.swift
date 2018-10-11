@@ -19,11 +19,11 @@ let package = Package(
     targets: [
         .target(
             name: "Wrench",
-            dependencies: ["WrenchCore"]
+            dependencies: ["Shelly", "xcodeproj"]
         ),
         .target(
-            name: "WrenchCore",
-            dependencies: ["SwiftShell", "Utility", "xcodeproj"]
+            name: "Shelly",
+            dependencies: ["SwiftShell", "Utility"]
         ),
         .testTarget(
             name: "WrenchTests",
