@@ -3,7 +3,7 @@
 
 import Basic
 
-protocol Wrench: ArgumentReader {
+protocol Wrench: ProcessArgumentReader {
 
     var subcommand: String { get }
     var overview: String { get }

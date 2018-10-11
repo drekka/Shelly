@@ -18,7 +18,7 @@ class SourceDirectoriesArgument: CommandArgument, FileSourceFactory {
                                                optional: false)
     }
 
-    func read(arguments: ArgumentParser.Result) throws {
+    func parse(arguments: ArgumentParser.Result) throws {
         try set(fileSources: &fileSources, fromArgument: sourceDirectories, in: arguments)
     }
 }
@@ -39,7 +39,7 @@ class TrailingSourceDirectoriesArgument: CommandArgument, FileSourceFactory {
                                                usage: "Zero or more source directories.")
     }
 
-    func read(arguments: ArgumentParser.Result) throws {
+    func parse(arguments: ArgumentParser.Result) throws {
         try set(fileSources: &fileSources, fromArgument: sourceDirectories, in: arguments)
     }
 }

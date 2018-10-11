@@ -9,6 +9,7 @@ let package = Package(
         .executable(name: "wrench", targets: ["Wrench"]),
     ],
     dependencies: [
+    .package(url: "https://github.com/Quick/Nimble", from: "7.0.0"),
         .package(url: "https://github.com/kareman/SwiftShell", .branch("master")),
         .package(url: "https://github.com/tuist/xcodeproj", .branch("master")),
 //        .package(url: "https://github.com/drekka/xcodeproj", .branch("feature/project-sorting")),
@@ -26,7 +27,7 @@ let package = Package(
         ),
         .testTarget(
             name: "WrenchTests",
-            dependencies: ["Wrench"]
+            dependencies: ["Wrench", "Nimble"]
         ),
     ]
 )

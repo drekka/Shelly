@@ -3,10 +3,9 @@
 
 import Utility
 
-protocol CommandArgument: class {
+protocol CommandArgument: class, ProcessArgumentParser {
     static var argumentSyntax: String { get }
     init(argumentParser: ArgumentParser)
-    func read(arguments: ArgumentParser.Result) throws
 }
 
 extension CommandArgument {

@@ -16,6 +16,7 @@ final class WrenchTests: XCTestCase {
 
         let process = Process()
         process.executableURL = fooBinary
+        process.arguments = ["--help"]
 
         let pipe = Pipe()
         process.standardOutput = pipe
@@ -41,7 +42,4 @@ final class WrenchTests: XCTestCase {
         #endif
     }
 
-    static var allTests = [
-        ("testExample", testExample),
-    ]
 }

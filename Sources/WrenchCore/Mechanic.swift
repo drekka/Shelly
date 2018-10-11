@@ -6,7 +6,7 @@ import SwiftShell
 import Utility
 import Basic
 
-public class Mechanic: ArgumentReader {
+public class Mechanic: ProcessArgumentReader {
 
     var argumentClasses: [CommandArgument.Type] = [
         VerboseArgument.self,
@@ -31,31 +31,28 @@ public class Mechanic: ArgumentReader {
 
     public func setup() {
 
-        self.setupArguments(inParser: wrenchParser)
+        self.setup(wrenchParser)
 
         wrenchClasses.forEach { wrenchDef in
             let wrench = wrenchDef.init()
             let subcommandParser = wrenchParser.add(subparser: wrench.subcommand,
                                                     overview: wrench.overview,
                                                     usage: wrench.argumentClasses.syntax)
-            wrench.setupArguments(inParser: subcommandParser)
+            wrench.setup(subcommandParser)
             wrenches[wrench.subcommand] = wrench
         }
     }
 
     public func run() throws {
 
-        let arguments = try wrenchParser.parse(Array(CommandLine.arguments.dropFirst()))
-
-        // Process the global arguments.
-        try self.read(arguments: arguments)
+        let arguments = try readProcessArguments(withParser: wrenchParser)
 
         // Get the subcommand and pass it the arguments.
         guard let subcommand = arguments.subparser(wrenchParser),
             let wrench = wrenches[subcommand] else {
                 throw WrenchError.noSubcommandPassed
         }
-        try wrench.read(arguments: arguments)
+        try wrench.parse(arguments: arguments)
 
         try wrench.execute()
     }

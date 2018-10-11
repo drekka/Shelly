@@ -11,11 +11,20 @@
         }
       },
       {
+        "package": "Nimble",
+        "repositoryURL": "https://github.com/Quick/Nimble",
+        "state": {
+          "branch": null,
+          "revision": "cd6dfb86f496fcd96ce0bc6da962cd936bf41903",
+          "version": "7.3.1"
+        }
+      },
+      {
         "package": "SwiftPM",
         "repositoryURL": "https://github.com/drekka/swift-package-manager",
         "state": {
-          "branch": "feature/sub-command-help-usage",
-          "revision": "4dcf52656c1df5d47f9761e820a75d0007844341",
+          "branch": "feature/everything",
+          "revision": "d45ef6d324fc5eeb328838a1d25683d8ae30e14a",
           "version": null
         }
       },
@@ -33,7 +42,7 @@
         "repositoryURL": "https://github.com/tuist/xcodeproj",
         "state": {
           "branch": "master",
-          "revision": "1e3de50ca7aa79b1d1a7c52ad65fc8943fe808b9",
+          "revision": "df58e7c581f54512a09587fe519b95caeca57ae1",
           "version": null
         }
       }

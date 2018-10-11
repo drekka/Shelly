@@ -24,7 +24,7 @@ class XcodeProjectSortWrench: Wrench, FileProcessor {
 
     func execute() throws {
 
-        let sortArguments: SortXcodeArgument = try retrieveArgument()
+        let sortArguments: SortXcodeArgument = try getArgument()
 
         wrenchLog("🔧 Sorting file lists within project files...")
         wrenchLog("\t► Project file lists: " + (sortArguments.sortFiles ? "In file name order" : "In uuid order"))

@@ -18,7 +18,7 @@ class XcodeProjectFileArgument: CommandArgument {
                                         usage: "Project file (package).")
     }
 
-    func read(arguments: ArgumentParser.Result) throws {
+    func parse(arguments: ArgumentParser.Result) throws {
         if let projectPath = arguments.get(projectArg)?.path {
             project = try projectPath.loadProject()
         }
@@ -42,7 +42,7 @@ class TrailingXcodeProjectPackagesArgument: CommandArgument {
             "then there is no need to specify projects here, otherwise list the project files you want to process.")
     }
 
-    func read(arguments: ArgumentParser.Result) throws {
+    func parse(arguments: ArgumentParser.Result) throws {
         projects = try (arguments.get(projectDirs) ?? []).map { try $0.path.loadProject() }
     }
 }

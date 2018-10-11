@@ -18,7 +18,7 @@ class RootDirectoryArgument: CommandArgument {
                                      usage: "Base directory of the project. Defaults to the current directory.")
     }
 
-    func read(arguments: ArgumentParser.Result) throws {
+    func parse(arguments: ArgumentParser.Result) throws {
         if let rootDir = arguments.get(rootDir) {
             let dir = rootDir.path.asString
             guard Files.changeCurrentDirectoryPath(dir) else {

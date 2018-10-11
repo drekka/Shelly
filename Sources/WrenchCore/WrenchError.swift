@@ -9,7 +9,7 @@ enum WrenchError: Error, CustomStringConvertible {
 
     case invalidCurrentDirectory
 
-    case argumentHandlerNotFound
+    case argumentNotFound
 
     case noSubcommandPassed
 
@@ -32,7 +32,7 @@ enum WrenchError: Error, CustomStringConvertible {
         case .invalidCurrentDirectory:
             return "Unable to obtain the current working directory."
 
-        case .argumentHandlerNotFound:
+        case .argumentNotFound:
             return "Argument handler not found."
 
         case .noSubcommandPassed:

@@ -1,0 +1,7 @@
+
+echo "Buidling distribution pkg file ..."
+
+swift build --build-path build -Xswiftc -static-stdlib -c release
+packagesbuild Wrench.pkgproj
+
+echo "done."

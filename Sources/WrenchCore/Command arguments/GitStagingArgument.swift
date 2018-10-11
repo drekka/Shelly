@@ -17,7 +17,7 @@ class GitStagingArgument: CommandArgument, FileSourceFactory {
                                             usage: "Scans the Git staging area for files to process.")
     }
 
-    func read(arguments: ArgumentParser.Result) throws {
+    func parse(arguments: ArgumentParser.Result) throws {
         if arguments.get(scanGitStaging) ?? false {
             self.fileSources = [GitStagingFileSource()]
         }

@@ -27,7 +27,7 @@ class SortXcodeArgument: CommandArgument {
                                             usage: "Sorts file lists with the Xcode project file and build phases.")
     }
 
-    func read(arguments: ArgumentParser.Result) throws {
+    func parse(arguments: ArgumentParser.Result) throws {
 
         self.sortFiles = arguments.get(sortXcodeFiles) ?? false
 
