@@ -11,12 +11,21 @@
         }
       },
       {
-        "package": "SwiftPM",
-        "repositoryURL": "https://github.com/apple/swift-package-manager",
+        "package": "llbuild",
+        "repositoryURL": "https://github.com/apple/swift-llbuild.git",
         "state": {
-          "branch": null,
-          "revision": "235aacc514cb81a6881364b0fedcb3dd083228f3",
-          "version": "0.3.0"
+          "branch": "master",
+          "revision": "18c7764a8b1331fec709a824065c67b72c7b34f0",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftPM",
+        "repositoryURL": "https://github.com/drekka/swift-package-manager",
+        "state": {
+          "branch": "feature/everything",
+          "revision": "6189b73f99cd12a6feb94c610e84b7f3ae7cdb09",
+          "version": null
         }
       },
       {
