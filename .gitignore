@@ -1,8 +1,6 @@
 .DS_Store
-/.build
-build
-xcuserdata
 
-/Packages/llbuild
-/Wrench.pkg
-build_debug
+/.build
+/Packages
+
+xcuserdata
