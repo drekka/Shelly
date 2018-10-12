@@ -20,8 +20,8 @@ public class ExcludeArgument: CommandArgument {
                                                   usage: "Specifies a series of masks for excluding files. For example *.data will exclude data files.")
     }
 
-    public func parse(arguments: ArgumentParser.Result) throws {
-        if let excludeMasks = arguments.get(excludeMasksArgument) {
+    public func map(_ parseResults: ArgumentParser.Result) throws {
+        if let excludeMasks = parseResults.get(excludeMasksArgument) {
             self.excludeMasks = excludeMasks
         }
     }

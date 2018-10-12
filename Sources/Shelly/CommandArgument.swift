@@ -3,7 +3,7 @@
 
 import Utility
 
-public protocol CommandArgument: class, ProcessArgumentParser {
+public protocol CommandArgument: ParsedResultMapper {
     static var argumentSyntax: String { get }
     init(argumentParser: ArgumentParser)
 }

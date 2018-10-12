@@ -5,15 +5,15 @@ import Basic
 
 public protocol FileProcessor {
     var fileFilter: ((RelativePath) -> Bool)? { get }
-    func files() throws -> Set<RelativePath>
+    func files(fromArguments argumentMap: [String: CommandArgument]) throws -> Set<RelativePath>
 }
 
 public extension FileProcessor where Self: SubCommand {
 
-    func files() throws -> Set<RelativePath> {
+    func files(fromArguments argumentMap: [String: CommandArgument]) throws -> Set<RelativePath> {
 
         var sourceFiles = Set<RelativePath>()
-        try self.arguments.values.forEach { argument in
+        try argumentMap.values.forEach { argument in
             if let fileSourceFactory = argument as? FileSourceFactory, let fileSources = fileSourceFactory.fileSources {
                 sourceFiles = sourceFiles.union(try fileSources.flatMap { try $0.getFiles() })
             }

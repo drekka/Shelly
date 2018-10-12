@@ -6,11 +6,7 @@ import SwiftShell
 import Utility
 import Basic
 
-public class ShellCommand: ProcessArgumentReader {
-
-    public static var commandName = "shell-command"
-    public static var commandOverview = ""
-    public static var subCommandClasses: [SubCommand.Type] = []
+open class ShellCommand: CommandArgumentParserInitialiser, CommandArgumentMapper {
 
     static var verbose: Bool = false
 
@@ -21,7 +17,7 @@ public class ShellCommand: ProcessArgumentReader {
     public static func logError(_ message: String, _ args: CVarArg...) {
         main.stderror.print("Error !")
         main.stderror.print(String(format: message, args))
-        main.stderror.print("Use '\(ShellCommand.commandName) --help' for command syntax help.")
+        main.stderror.print("Use '--help' for command syntax help.")
         main.stderror.print("")
     }
 
@@ -30,50 +26,38 @@ public class ShellCommand: ProcessArgumentReader {
         main.stdout.print("🔦 " + String(format: message, args))
     }
 
-
-    public var argumentClasses: [CommandArgument.Type] = [
-        VerboseArgument.self,
-        RootDirectoryArgument.self,
-        ]
-
-    public var arguments: [String : CommandArgument] = [:]
-
-    private let rootParser: ArgumentParser
-    private var subCommands: [String: SubCommand] = [:]
-
-
-    public init() throws {
-        rootParser = ArgumentParser(commandName: ShellCommand.commandName + " [--help]",
+    public init(command: String,
+                overview: String,
+                subCommandClasses: [SubCommand.Type],
+                argumentClasses: [CommandArgument.Type]) throws {
+        let parser = ArgumentParser(commandName: command + " [--help]",
                                       usage: argumentClasses.syntax + " sub-command ...",
-                                      overview: ShellCommand.commandOverview)
-        setup()
-        try run()
+                                      overview: overview)
+
+        let arguments = self.configure(parser, withArgumentClasses: argumentClasses)
+        let subCommands = try configure(parser, subCommandClasses: subCommandClasses)
+        try run(usingParser: parser, subCommands: subCommands, arguments: arguments)
     }
 
-    func setup() {
-
-        self.setup(rootParser)
-
-        type(of: self).subCommandClasses.forEach { subCommandDef in
+    public func configure(_ parser: ArgumentParser, subCommandClasses: [SubCommand.Type]) throws -> [String: SubCommand] {
+        return Dictionary(uniqueKeysWithValues: try subCommandClasses.map { subCommandDef in
             let subCommand = subCommandDef.init()
-            let subcommandParser = rootParser.add(subparser: subCommand.subcommand,
-                                                    overview: subCommand.overview,
-                                                    usage: subCommand.argumentClasses.syntax)
-            subCommand.setup(subcommandParser)
-            subCommands[subCommand.subcommand] = subCommand
-        }
+            return (try subCommand.configure(parser), subCommand)
+        })
     }
 
-    func run() throws {
+    func run(usingParser parser: ArgumentParser, subCommands: [String: SubCommand], arguments: [String: CommandArgument]) throws {
 
-        let arguments = try readProcessArguments(withParser: rootParser)
+        let parseResults = try parser.parse(Array(CommandLine.arguments.dropFirst()))
 
-        // Get the subcommand and pass it the arguments.
-        guard let subCommandName = arguments.subparser(rootParser),
-            let subCommand = subCommands[subCommandName] else {
+        // Parse the arguments.
+        try map(parseResults, intoArguments: arguments)
+
+        // Get the subpublic command and pass it the arguments.
+        guard let subCommandName = parseResults.subparser(parser), let subCommand = subCommands[subCommandName] else {
                 throw ShellyError.noSubcommandPassed
         }
-        try subCommand.parse(arguments: arguments)
+        try subCommand.map(parseResults)
 
         try subCommand.execute()
     }

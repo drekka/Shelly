@@ -17,8 +17,8 @@ public class GitChangesArgument: CommandArgument, FileSourceFactory {
                                             usage: "Scans Git changed area for files to process.")
     }
 
-    public func parse(arguments: ArgumentParser.Result) throws {
-        if arguments.get(scanGitChanges) ?? false {
+    public func map(_ parseResults: ArgumentParser.Result) throws {
+        if parseResults.get(scanGitChanges) ?? false {
             self.fileSources = [GitChangesFileSource()]
         }
     }

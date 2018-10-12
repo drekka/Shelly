@@ -6,48 +6,17 @@ import Utility
 
 public protocol FileSourceFactory {
     var fileSources: [FileSource]? { get }
+    func getFileSources(fromArgument argument: PositionalArgument<[RelativePathArgument]>, in parseResults: ArgumentParser.Result) -> [FileSource]?
+    func getFileSources(fromArgument argument: OptionArgument<[RelativePathArgument]>, in parseResults: ArgumentParser.Result) -> [FileSource]?
 }
 
 public extension FileSourceFactory {
 
-    func set(fileSources: inout [FileSource]?,
-             fromArgument argument: PositionalArgument<RelativePathArgument>,
-             in arguments: ArgumentParser.Result,
-             using: (RelativePathArgument) throws -> FileSource = { DirectoryFileSource(directory: $0.path) }) throws {
-        fileSources = try createFileSources(fromDir: arguments.get(argument), using: using)
+    func getFileSources(fromArgument argument: PositionalArgument<[RelativePathArgument]>, in parseResults: ArgumentParser.Result) -> [FileSource]? {
+        return parseResults.get(argument)?.map { return DirectoryFileSource(directory: $0.path) }
     }
 
-    func set(fileSources: inout [FileSource]?,
-             fromArgument argument: OptionArgument<RelativePathArgument>,
-             in arguments: ArgumentParser.Result,
-             using: (RelativePathArgument) throws -> FileSource = { DirectoryFileSource(directory: $0.path) }) throws {
-        fileSources = try createFileSources(fromDir: arguments.get(argument), using: using)
-    }
-
-    func set(fileSources: inout [FileSource]?,
-             fromArgument argument: PositionalArgument<[RelativePathArgument]>,
-             in arguments: ArgumentParser.Result,
-             using: (RelativePathArgument) throws -> FileSource = { DirectoryFileSource(directory: $0.path) }) throws {
-        fileSources = try createFileSources(fromDirs: arguments.get(argument), using: using)
-    }
-
-    func set(fileSources: inout [FileSource]?,
-             fromArgument argument: OptionArgument<[RelativePathArgument]>,
-             in arguments: ArgumentParser.Result,
-             using: (RelativePathArgument) throws -> FileSource = { DirectoryFileSource(directory: $0.path) }) throws {
-        fileSources = try createFileSources(fromDirs: arguments.get(argument), using: using)
-    }
-
-    private func createFileSources(fromDir: RelativePathArgument?, using: (RelativePathArgument) throws -> FileSource) throws -> [FileSource]? {
-        guard let fromDir = fromDir else {
-            return nil
-        }
-        return [try using(fromDir)]
-    }
-
-    private func createFileSources(fromDirs: [RelativePathArgument]?, using: (RelativePathArgument) throws -> FileSource) throws -> [FileSource]? {
-        return try fromDirs?.map(using)
+    func getFileSources(fromArgument argument: OptionArgument<[RelativePathArgument]>, in parseResults: ArgumentParser.Result) -> [FileSource]? {
+        return parseResults.get(argument)?.map { return DirectoryFileSource(directory: $0.path) }
     }
 }
-
-

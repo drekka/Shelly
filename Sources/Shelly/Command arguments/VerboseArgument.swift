@@ -15,8 +15,8 @@ public class VerboseArgument: CommandArgument {
                                              usage: "Turns on verbose output for debugging purposes.")
     }
     
-    public func parse(arguments: ArgumentParser.Result) throws {
-        if arguments.get(verboseArgument) ?? false {
+    public func map(_ parseResults: ArgumentParser.Result) throws {
+        if parseResults.get(verboseArgument) ?? false {
             ShellCommand.log("Enabling verbose output")
             ShellCommand.verbose = true
         }

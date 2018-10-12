@@ -8,9 +8,9 @@
 import Basic
 import Foundation
 
-private extension Set where Element == RelativePath {
+public extension Set where Element == RelativePath {
 
-    mutating func subtract(filesMatchingExpressions expressions: [NSRegularExpression]) {
+    public mutating func subtract(filesMatchingExpressions expressions: [NSRegularExpression]) {
         let filesToRemove = self.filter { file in
             return expressions.first { expression in
                 let filename = file.asString

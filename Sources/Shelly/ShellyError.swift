@@ -3,7 +3,7 @@
 
 import Basic
 
-enum ShellyError: Error, CustomStringConvertible {
+public enum ShellyError: Error, CustomStringConvertible {
 
     case invalidCurrentDirectory
 
@@ -24,7 +24,7 @@ enum ShellyError: Error, CustomStringConvertible {
     case notAFolder(AbsolutePath)
 
 
-    var description: String {
+    public var description: String {
         switch self {
 
         case let .missingArgument(argument):
@@ -37,7 +37,7 @@ enum ShellyError: Error, CustomStringConvertible {
             return "Argument handler not found."
 
         case .noSubcommandPassed:
-            return "No sub-command found. Please use '\(ShellCommand.commandName) --help' to see a list of all valid subcommands."
+            return "No sub-command found. Please use '--help' to see a list of all valid subcommands."
 
         case let .incorrectFile(message):
             return "Incorrect file passed: \(message)"

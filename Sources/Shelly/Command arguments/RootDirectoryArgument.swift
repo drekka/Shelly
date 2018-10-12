@@ -18,8 +18,8 @@ public class RootDirectoryArgument: CommandArgument {
                                      usage: "Base directory of the project. Defaults to the current directory.")
     }
 
-    public func parse(arguments: ArgumentParser.Result) throws {
-        if let rootDir = arguments.get(rootDir) {
+    public func map(_ parseResults: ArgumentParser.Result) throws {
+        if let rootDir = parseResults.get(rootDir) {
             let dir = rootDir.path.asString
             guard Files.changeCurrentDirectoryPath(dir) else {
                 ShellCommand.logError("Changing directory to \(dir) failed, does the directory exist?")
