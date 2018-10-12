@@ -73,55 +73,64 @@
       };
       "OBJ_100" = {
          isa = "PBXFileReference";
-         path = "SHA256.swift";
+         path = "SynchronizedQueue.swift";
          sourceTree = "<group>";
       };
       "OBJ_101" = {
          isa = "PBXFileReference";
-         path = "SortedArray.swift";
+         path = "TemporaryFile.swift";
          sourceTree = "<group>";
       };
       "OBJ_102" = {
          isa = "PBXFileReference";
-         path = "StringConversions.swift";
+         path = "TerminalController.swift";
          sourceTree = "<group>";
       };
       "OBJ_103" = {
          isa = "PBXFileReference";
-         path = "SynchronizedQueue.swift";
+         path = "Thread.swift";
          sourceTree = "<group>";
       };
       "OBJ_104" = {
          isa = "PBXFileReference";
-         path = "TemporaryFile.swift";
+         path = "Tuple.swift";
          sourceTree = "<group>";
       };
       "OBJ_105" = {
          isa = "PBXFileReference";
-         path = "TerminalController.swift";
+         path = "misc.swift";
          sourceTree = "<group>";
       };
       "OBJ_106" = {
-         isa = "PBXFileReference";
-         path = "Thread.swift";
-         sourceTree = "<group>";
+         isa = "PBXGroup";
+         children = (
+         );
+         name = "PackageModel";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/PackageModel";
+         sourceTree = "SOURCE_ROOT";
       };
       "OBJ_107" = {
-         isa = "PBXFileReference";
-         path = "Tuple.swift";
-         sourceTree = "<group>";
+         isa = "PBXGroup";
+         children = (
+         );
+         name = "PackageDescription4";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/PackageDescription4";
+         sourceTree = "SOURCE_ROOT";
       };
       "OBJ_108" = {
-         isa = "PBXFileReference";
-         path = "misc.swift";
-         sourceTree = "<group>";
+         isa = "PBXGroup";
+         children = (
+         );
+         name = "swift-run";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/swift-run";
+         sourceTree = "SOURCE_ROOT";
       };
       "OBJ_109" = {
          isa = "PBXGroup";
          children = (
          );
-         name = "PackageDescription4";
-         path = "Packages/SwiftPM/Sources/PackageDescription4";
+         name = "TestSupport";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/TestSupport";
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_11" = {
@@ -142,67 +151,84 @@
          isa = "PBXGroup";
          children = (
          );
-         name = "Workspace";
-         path = "Packages/SwiftPM/Sources/Workspace";
+         name = "SourceControl";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/SourceControl";
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_111" = {
          isa = "PBXGroup";
          children = (
             "OBJ_112",
-            "OBJ_113",
-            "OBJ_114",
-            "OBJ_115",
-            "OBJ_116",
-            "OBJ_117",
-            "OBJ_118",
-            "OBJ_119",
-            "OBJ_120",
-            "OBJ_121",
-            "OBJ_122"
+            "OBJ_113"
          );
-         name = "POSIX";
-         path = "Packages/SwiftPM/Sources/POSIX";
+         name = "clibc";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc";
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_112" = {
          isa = "PBXFileReference";
-         path = "Error.swift";
+         path = "libc.c";
          sourceTree = "<group>";
       };
       "OBJ_113" = {
-         isa = "PBXFileReference";
-         path = "chdir.swift";
+         isa = "PBXGroup";
+         children = (
+            "OBJ_114",
+            "OBJ_115"
+         );
+         name = "include";
+         path = "include";
          sourceTree = "<group>";
       };
       "OBJ_114" = {
          isa = "PBXFileReference";
-         path = "env.swift";
+         path = "clibc.h";
          sourceTree = "<group>";
       };
       "OBJ_115" = {
          isa = "PBXFileReference";
-         path = "exit.swift";
+         name = "module.modulemap";
+         path = "/Users/derekclarkson/Library/Mobile Documents/com~apple~CloudDocs/Projects/Shelly/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include/module.modulemap";
          sourceTree = "<group>";
       };
       "OBJ_116" = {
-         isa = "PBXFileReference";
-         path = "getcwd.swift";
-         sourceTree = "<group>";
+         isa = "PBXGroup";
+         children = (
+         );
+         name = "Workspace";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/Workspace";
+         sourceTree = "SOURCE_ROOT";
       };
       "OBJ_117" = {
-         isa = "PBXFileReference";
-         path = "isatty.swift";
-         sourceTree = "<group>";
+         isa = "PBXGroup";
+         children = (
+         );
+         name = "swift-test";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/swift-test";
+         sourceTree = "SOURCE_ROOT";
       };
       "OBJ_118" = {
-         isa = "PBXFileReference";
-         path = "readdir.swift";
-         sourceTree = "<group>";
+         isa = "PBXGroup";
+         children = (
+            "OBJ_119",
+            "OBJ_120",
+            "OBJ_121",
+            "OBJ_122",
+            "OBJ_123",
+            "OBJ_124",
+            "OBJ_125",
+            "OBJ_126",
+            "OBJ_127",
+            "OBJ_128",
+            "OBJ_129"
+         );
+         name = "POSIX";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/POSIX";
+         sourceTree = "SOURCE_ROOT";
       };
       "OBJ_119" = {
          isa = "PBXFileReference";
-         path = "realpath.swift";
+         path = "Error.swift";
          sourceTree = "<group>";
       };
       "OBJ_12" = {
@@ -212,74 +238,53 @@
       };
       "OBJ_120" = {
          isa = "PBXFileReference";
-         path = "rename.swift";
+         path = "chdir.swift";
          sourceTree = "<group>";
       };
       "OBJ_121" = {
          isa = "PBXFileReference";
-         path = "stat.swift";
+         path = "env.swift";
          sourceTree = "<group>";
       };
       "OBJ_122" = {
          isa = "PBXFileReference";
-         path = "usleep.swift";
+         path = "exit.swift";
          sourceTree = "<group>";
       };
       "OBJ_123" = {
-         isa = "PBXGroup";
-         children = (
-         );
-         name = "Build";
-         path = "Packages/SwiftPM/Sources/Build";
-         sourceTree = "SOURCE_ROOT";
+         isa = "PBXFileReference";
+         path = "getcwd.swift";
+         sourceTree = "<group>";
       };
       "OBJ_124" = {
-         isa = "PBXGroup";
-         children = (
-         );
-         name = "SPMLLBuild";
-         path = "Packages/SwiftPM/Sources/SPMLLBuild";
-         sourceTree = "SOURCE_ROOT";
+         isa = "PBXFileReference";
+         path = "isatty.swift";
+         sourceTree = "<group>";
       };
       "OBJ_125" = {
-         isa = "PBXGroup";
-         children = (
-         );
-         name = "swift-package";
-         path = "Packages/SwiftPM/Sources/swift-package";
-         sourceTree = "SOURCE_ROOT";
+         isa = "PBXFileReference";
+         path = "readdir.swift";
+         sourceTree = "<group>";
       };
       "OBJ_126" = {
-         isa = "PBXGroup";
-         children = (
-         );
-         name = "swift-run";
-         path = "Packages/SwiftPM/Sources/swift-run";
-         sourceTree = "SOURCE_ROOT";
+         isa = "PBXFileReference";
+         path = "realpath.swift";
+         sourceTree = "<group>";
       };
       "OBJ_127" = {
-         isa = "PBXGroup";
-         children = (
-         );
-         name = "Xcodeproj";
-         path = "Packages/SwiftPM/Sources/Xcodeproj";
-         sourceTree = "SOURCE_ROOT";
+         isa = "PBXFileReference";
+         path = "rename.swift";
+         sourceTree = "<group>";
       };
       "OBJ_128" = {
-         isa = "PBXGroup";
-         children = (
-         );
-         name = "PackageGraph";
-         path = "Packages/SwiftPM/Sources/PackageGraph";
-         sourceTree = "SOURCE_ROOT";
+         isa = "PBXFileReference";
+         path = "stat.swift";
+         sourceTree = "<group>";
       };
       "OBJ_129" = {
-         isa = "PBXGroup";
-         children = (
-         );
-         name = "swift-build";
-         path = "Packages/SwiftPM/Sources/swift-build";
-         sourceTree = "SOURCE_ROOT";
+         isa = "PBXFileReference";
+         path = "usleep.swift";
+         sourceTree = "<group>";
       };
       "OBJ_13" = {
          isa = "PBXFileReference";
@@ -290,8 +295,8 @@
          isa = "PBXGroup";
          children = (
          );
-         name = "PackageLoading";
-         path = "Packages/SwiftPM/Sources/PackageLoading";
+         name = "PackageGraph";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/PackageGraph";
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_131" = {
@@ -300,7 +305,7 @@
             "OBJ_132"
          );
          name = "SPMLibc";
-         path = "Packages/SwiftPM/Sources/SPMLibc";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/SPMLibc";
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_132" = {
@@ -312,31 +317,31 @@
          isa = "PBXGroup";
          children = (
          );
-         name = "TestSupport";
-         path = "Packages/SwiftPM/Sources/TestSupport";
+         name = "Build";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/Build";
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_134" = {
          isa = "PBXGroup";
          children = (
          );
-         name = "swiftpm-xctest-helper";
-         path = "Packages/SwiftPM/Sources/swiftpm-xctest-helper";
+         name = "swift-package";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/swift-package";
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_135" = {
          isa = "PBXGroup";
          children = (
          );
-         name = "swift-test";
-         path = "Packages/SwiftPM/Sources/swift-test";
+         name = "Xcodeproj";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/Xcodeproj";
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_136" = {
          isa = "PBXFileReference";
          explicitFileType = "sourcecode.swift";
          name = "Package.swift";
-         path = "/Users/derekclarkson/Library/Mobile Documents/com~apple~CloudDocs/Projects/Shelly/Packages/SwiftPM/Package.swift";
+         path = "/Users/derekclarkson/Library/Mobile Documents/com~apple~CloudDocs/Projects/Shelly/.build/checkouts/swift-package-manager--5581166309458329409/Package.swift";
          sourceTree = "<group>";
       };
       "OBJ_137" = {
@@ -868,14 +873,14 @@
          isa = "PBXGroup";
          children = (
             "SwiftPM::POSIX::Product",
-            "SwiftPM::Basic::Product",
-            "SwiftPM::Utility::Product",
-            "Shelly::Shelly::Product",
             "SwiftPM::SPMLibc::Product",
-            "Nimble::Nimble::Product",
             "SwiftPM::clibc::Product",
+            "Nimble::Nimble::Product",
+            "SwiftPM::Basic::Product",
+            "Shelly::Shelly::Product",
+            "SwiftShell::SwiftShell::Product",
             "Shelly::ShellyTests::Product",
-            "SwiftShell::SwiftShell::Product"
+            "SwiftPM::Utility::Product"
          );
          name = "Products";
          path = "";
@@ -905,7 +910,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/Basic_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -921,7 +926,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include/module.modulemap"
             );
             PRODUCT_BUNDLE_IDENTIFIER = "Basic";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -945,7 +950,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/Basic_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -961,7 +966,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include/module.modulemap"
             );
             PRODUCT_BUNDLE_IDENTIFIER = "Basic";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1020,23 +1025,23 @@
       };
       "OBJ_225" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_71";
+         fileRef = "OBJ_68";
       };
       "OBJ_226" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_72";
+         fileRef = "OBJ_69";
       };
       "OBJ_227" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_73";
+         fileRef = "OBJ_70";
       };
       "OBJ_228" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_74";
+         fileRef = "OBJ_71";
       };
       "OBJ_229" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_75";
+         fileRef = "OBJ_72";
       };
       "OBJ_23" = {
          isa = "PBXFileReference";
@@ -1045,43 +1050,43 @@
       };
       "OBJ_230" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_76";
+         fileRef = "OBJ_73";
       };
       "OBJ_231" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_77";
+         fileRef = "OBJ_74";
       };
       "OBJ_232" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_78";
+         fileRef = "OBJ_75";
       };
       "OBJ_233" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_79";
+         fileRef = "OBJ_76";
       };
       "OBJ_234" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_80";
+         fileRef = "OBJ_77";
       };
       "OBJ_235" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_81";
+         fileRef = "OBJ_78";
       };
       "OBJ_236" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_82";
+         fileRef = "OBJ_79";
       };
       "OBJ_237" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_83";
+         fileRef = "OBJ_80";
       };
       "OBJ_238" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_84";
+         fileRef = "OBJ_81";
       };
       "OBJ_239" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_85";
+         fileRef = "OBJ_82";
       };
       "OBJ_24" = {
          isa = "PBXFileReference";
@@ -1090,43 +1095,43 @@
       };
       "OBJ_240" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_86";
+         fileRef = "OBJ_83";
       };
       "OBJ_241" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_87";
+         fileRef = "OBJ_84";
       };
       "OBJ_242" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_88";
+         fileRef = "OBJ_85";
       };
       "OBJ_243" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_89";
+         fileRef = "OBJ_86";
       };
       "OBJ_244" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_90";
+         fileRef = "OBJ_87";
       };
       "OBJ_245" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_91";
+         fileRef = "OBJ_88";
       };
       "OBJ_246" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_92";
+         fileRef = "OBJ_89";
       };
       "OBJ_247" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_93";
+         fileRef = "OBJ_90";
       };
       "OBJ_248" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_94";
+         fileRef = "OBJ_91";
       };
       "OBJ_249" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_95";
+         fileRef = "OBJ_92";
       };
       "OBJ_25" = {
          isa = "PBXGroup";
@@ -1143,43 +1148,43 @@
       };
       "OBJ_250" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_96";
+         fileRef = "OBJ_93";
       };
       "OBJ_251" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_97";
+         fileRef = "OBJ_94";
       };
       "OBJ_252" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_98";
+         fileRef = "OBJ_95";
       };
       "OBJ_253" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_99";
+         fileRef = "OBJ_96";
       };
       "OBJ_254" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_100";
+         fileRef = "OBJ_97";
       };
       "OBJ_255" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_101";
+         fileRef = "OBJ_98";
       };
       "OBJ_256" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_102";
+         fileRef = "OBJ_99";
       };
       "OBJ_257" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_103";
+         fileRef = "OBJ_100";
       };
       "OBJ_258" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_104";
+         fileRef = "OBJ_101";
       };
       "OBJ_259" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_105";
+         fileRef = "OBJ_102";
       };
       "OBJ_26" = {
          isa = "PBXFileReference";
@@ -1188,15 +1193,15 @@
       };
       "OBJ_260" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_106";
+         fileRef = "OBJ_103";
       };
       "OBJ_261" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_107";
+         fileRef = "OBJ_104";
       };
       "OBJ_262" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_108";
+         fileRef = "OBJ_105";
       };
       "OBJ_263" = {
          isa = "PBXFrameworksBuildPhase";
@@ -1726,7 +1731,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/POSIX_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -1742,7 +1747,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include/module.modulemap"
             );
             PRODUCT_BUNDLE_IDENTIFIER = "POSIX";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1766,7 +1771,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/POSIX_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -1782,7 +1787,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include/module.modulemap"
             );
             PRODUCT_BUNDLE_IDENTIFIER = "POSIX";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1819,43 +1824,43 @@
       };
       "OBJ_340" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_112";
+         fileRef = "OBJ_119";
       };
       "OBJ_341" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_113";
+         fileRef = "OBJ_120";
       };
       "OBJ_342" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_114";
+         fileRef = "OBJ_121";
       };
       "OBJ_343" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_115";
+         fileRef = "OBJ_122";
       };
       "OBJ_344" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_116";
+         fileRef = "OBJ_123";
       };
       "OBJ_345" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_117";
+         fileRef = "OBJ_124";
       };
       "OBJ_346" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_118";
+         fileRef = "OBJ_125";
       };
       "OBJ_347" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_119";
+         fileRef = "OBJ_126";
       };
       "OBJ_348" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_120";
+         fileRef = "OBJ_127";
       };
       "OBJ_349" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_121";
+         fileRef = "OBJ_128";
       };
       "OBJ_35" = {
          isa = "PBXFileReference";
@@ -1864,7 +1869,7 @@
       };
       "OBJ_350" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_122";
+         fileRef = "OBJ_129";
       };
       "OBJ_351" = {
          isa = "PBXFrameworksBuildPhase";
@@ -1908,7 +1913,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/SPMLibc_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -1924,7 +1929,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include/module.modulemap"
             );
             PRODUCT_BUNDLE_IDENTIFIER = "SPMLibc";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1948,7 +1953,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/SPMLibc_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -1964,7 +1969,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include/module.modulemap"
             );
             PRODUCT_BUNDLE_IDENTIFIER = "SPMLibc";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -2030,7 +2035,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/Shelly_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -2046,7 +2051,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include/module.modulemap"
             );
             PRODUCT_BUNDLE_IDENTIFIER = "Shelly";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -2070,7 +2075,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/Shelly_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -2086,7 +2091,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include/module.modulemap"
             );
             PRODUCT_BUNDLE_IDENTIFIER = "Shelly";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -2320,22 +2325,22 @@
          isa = "PBXGroup";
          children = (
             "OBJ_41",
-            "OBJ_42",
-            "OBJ_43",
+            "OBJ_61",
+            "OBJ_62",
             "OBJ_63",
             "OBJ_64",
-            "OBJ_69",
-            "OBJ_70",
+            "OBJ_65",
+            "OBJ_66",
+            "OBJ_67",
+            "OBJ_106",
+            "OBJ_107",
+            "OBJ_108",
             "OBJ_109",
             "OBJ_110",
             "OBJ_111",
-            "OBJ_123",
-            "OBJ_124",
-            "OBJ_125",
-            "OBJ_126",
-            "OBJ_127",
-            "OBJ_128",
-            "OBJ_129",
+            "OBJ_116",
+            "OBJ_117",
+            "OBJ_118",
             "OBJ_130",
             "OBJ_131",
             "OBJ_133",
@@ -2397,9 +2402,28 @@
       "OBJ_41" = {
          isa = "PBXGroup";
          children = (
+            "OBJ_42",
+            "OBJ_43",
+            "OBJ_44",
+            "OBJ_45",
+            "OBJ_46",
+            "OBJ_47",
+            "OBJ_48",
+            "OBJ_49",
+            "OBJ_50",
+            "OBJ_51",
+            "OBJ_52",
+            "OBJ_53",
+            "OBJ_54",
+            "OBJ_55",
+            "OBJ_56",
+            "OBJ_57",
+            "OBJ_58",
+            "OBJ_59",
+            "OBJ_60"
          );
-         name = "PackageModel";
-         path = "Packages/SwiftPM/Sources/PackageModel";
+         name = "Utility";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/Utility";
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_410" = {
@@ -2465,12 +2489,9 @@
          defaultConfigurationName = "Release";
       };
       "OBJ_42" = {
-         isa = "PBXGroup";
-         children = (
-         );
-         name = "TestSupportExecutable";
-         path = "Packages/SwiftPM/Sources/TestSupportExecutable";
-         sourceTree = "SOURCE_ROOT";
+         isa = "PBXFileReference";
+         path = "ArgumentParser.swift";
+         sourceTree = "<group>";
       };
       "OBJ_420" = {
          isa = "XCBuildConfiguration";
@@ -2483,7 +2504,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/ShellyTests_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -2500,7 +2521,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include/module.modulemap"
             );
             SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
                "$(inherited)"
@@ -2521,7 +2542,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/ShellyTests_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -2538,7 +2559,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include/module.modulemap"
             );
             SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
                "$(inherited)"
@@ -2592,31 +2613,9 @@
          fileRef = "SwiftPM::POSIX::Product";
       };
       "OBJ_43" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_44",
-            "OBJ_45",
-            "OBJ_46",
-            "OBJ_47",
-            "OBJ_48",
-            "OBJ_49",
-            "OBJ_50",
-            "OBJ_51",
-            "OBJ_52",
-            "OBJ_53",
-            "OBJ_54",
-            "OBJ_55",
-            "OBJ_56",
-            "OBJ_57",
-            "OBJ_58",
-            "OBJ_59",
-            "OBJ_60",
-            "OBJ_61",
-            "OBJ_62"
-         );
-         name = "Utility";
-         path = "Packages/SwiftPM/Sources/Utility";
-         sourceTree = "SOURCE_ROOT";
+         isa = "PBXFileReference";
+         path = "ArgumentParserShellCompletion.swift";
+         sourceTree = "<group>";
       };
       "OBJ_430" = {
          isa = "PBXBuildFile";
@@ -2660,7 +2659,7 @@
       };
       "OBJ_44" = {
          isa = "PBXFileReference";
-         path = "ArgumentParser.swift";
+         path = "BuildFlags.swift";
          sourceTree = "<group>";
       };
       "OBJ_440" = {
@@ -2807,7 +2806,7 @@
       };
       "OBJ_45" = {
          isa = "PBXFileReference";
-         path = "ArgumentParserShellCompletion.swift";
+         path = "CollectionExtensions.swift";
          sourceTree = "<group>";
       };
       "OBJ_450" = {
@@ -2863,7 +2862,7 @@
       };
       "OBJ_46" = {
          isa = "PBXFileReference";
-         path = "BuildFlags.swift";
+         path = "Diagnostics.swift";
          sourceTree = "<group>";
       };
       "OBJ_460" = {
@@ -2949,7 +2948,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/Utility_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -2965,7 +2964,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include/module.modulemap"
             );
             PRODUCT_BUNDLE_IDENTIFIER = "Utility";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -2981,7 +2980,7 @@
       };
       "OBJ_47" = {
          isa = "PBXFileReference";
-         path = "CollectionExtensions.swift";
+         path = "Git.swift";
          sourceTree = "<group>";
       };
       "OBJ_470" = {
@@ -2994,7 +2993,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/Utility_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -3010,7 +3009,7 @@
             OTHER_SWIFT_FLAGS = (
                "$(inherited)",
                "-Xcc",
-               "-fmodule-map-file=$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include/module.modulemap"
+               "-fmodule-map-file=$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include/module.modulemap"
             );
             PRODUCT_BUNDLE_IDENTIFIER = "Utility";
             PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -3050,89 +3049,89 @@
       };
       "OBJ_472" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_44";
+         fileRef = "OBJ_42";
       };
       "OBJ_473" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_45";
+         fileRef = "OBJ_43";
       };
       "OBJ_474" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_46";
+         fileRef = "OBJ_44";
       };
       "OBJ_475" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_47";
+         fileRef = "OBJ_45";
       };
       "OBJ_476" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_48";
+         fileRef = "OBJ_46";
       };
       "OBJ_477" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_49";
+         fileRef = "OBJ_47";
       };
       "OBJ_478" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_50";
+         fileRef = "OBJ_48";
       };
       "OBJ_479" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_51";
+         fileRef = "OBJ_49";
       };
       "OBJ_48" = {
          isa = "PBXFileReference";
-         path = "Diagnostics.swift";
+         path = "InterruptHandler.swift";
          sourceTree = "<group>";
       };
       "OBJ_480" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_52";
+         fileRef = "OBJ_50";
       };
       "OBJ_481" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_53";
+         fileRef = "OBJ_51";
       };
       "OBJ_482" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_54";
+         fileRef = "OBJ_52";
       };
       "OBJ_483" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_55";
+         fileRef = "OBJ_53";
       };
       "OBJ_484" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_56";
+         fileRef = "OBJ_54";
       };
       "OBJ_485" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_57";
+         fileRef = "OBJ_55";
       };
       "OBJ_486" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_58";
+         fileRef = "OBJ_56";
       };
       "OBJ_487" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_59";
+         fileRef = "OBJ_57";
       };
       "OBJ_488" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_60";
+         fileRef = "OBJ_58";
       };
       "OBJ_489" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_61";
+         fileRef = "OBJ_59";
       };
       "OBJ_49" = {
          isa = "PBXFileReference";
-         path = "Git.swift";
+         path = "PkgConfig.swift";
          sourceTree = "<group>";
       };
       "OBJ_490" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_62";
+         fileRef = "OBJ_60";
       };
       "OBJ_491" = {
          isa = "PBXFrameworksBuildPhase";
@@ -3189,7 +3188,7 @@
       };
       "OBJ_50" = {
          isa = "PBXFileReference";
-         path = "InterruptHandler.swift";
+         path = "Platform.swift";
          sourceTree = "<group>";
       };
       "OBJ_500" = {
@@ -3212,7 +3211,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/clibc_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -3250,7 +3249,7 @@
             );
             HEADER_SEARCH_PATHS = (
                "$(inherited)",
-               "$(SRCROOT)/Packages/SwiftPM/Sources/clibc/include"
+               "$(SRCROOT)/.build/checkouts/swift-package-manager--5581166309458329409/Sources/clibc/include"
             );
             INFOPLIST_FILE = "Shelly.xcodeproj/clibc_Info.plist";
             LD_RUNPATH_SEARCH_PATHS = (
@@ -3285,7 +3284,7 @@
       };
       "OBJ_504" = {
          isa = "PBXBuildFile";
-         fileRef = "OBJ_65";
+         fileRef = "OBJ_112";
       };
       "OBJ_505" = {
          isa = "PBXFrameworksBuildPhase";
@@ -3294,47 +3293,47 @@
       };
       "OBJ_51" = {
          isa = "PBXFileReference";
-         path = "PkgConfig.swift";
+         path = "Process.swift";
          sourceTree = "<group>";
       };
       "OBJ_52" = {
          isa = "PBXFileReference";
-         path = "Platform.swift";
+         path = "ProgressBar.swift";
          sourceTree = "<group>";
       };
       "OBJ_53" = {
          isa = "PBXFileReference";
-         path = "Process.swift";
+         path = "SimplePersistence.swift";
          sourceTree = "<group>";
       };
       "OBJ_54" = {
          isa = "PBXFileReference";
-         path = "ProgressBar.swift";
+         path = "StringExtensions.swift";
          sourceTree = "<group>";
       };
       "OBJ_55" = {
          isa = "PBXFileReference";
-         path = "SimplePersistence.swift";
+         path = "StringMangling.swift";
          sourceTree = "<group>";
       };
       "OBJ_56" = {
          isa = "PBXFileReference";
-         path = "StringExtensions.swift";
+         path = "URL.swift";
          sourceTree = "<group>";
       };
       "OBJ_57" = {
          isa = "PBXFileReference";
-         path = "StringMangling.swift";
+         path = "Verbosity.swift";
          sourceTree = "<group>";
       };
       "OBJ_58" = {
          isa = "PBXFileReference";
-         path = "URL.swift";
+         path = "Version.swift";
          sourceTree = "<group>";
       };
       "OBJ_59" = {
          isa = "PBXFileReference";
-         path = "Verbosity.swift";
+         path = "Versioning.swift";
          sourceTree = "<group>";
       };
       "OBJ_6" = {
@@ -3345,83 +3344,63 @@
       };
       "OBJ_60" = {
          isa = "PBXFileReference";
-         path = "Version.swift";
+         path = "misc.swift";
          sourceTree = "<group>";
       };
       "OBJ_61" = {
-         isa = "PBXFileReference";
-         path = "Versioning.swift";
-         sourceTree = "<group>";
+         isa = "PBXGroup";
+         children = (
+         );
+         name = "TestSupportExecutable";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/TestSupportExecutable";
+         sourceTree = "SOURCE_ROOT";
       };
       "OBJ_62" = {
-         isa = "PBXFileReference";
-         path = "misc.swift";
-         sourceTree = "<group>";
+         isa = "PBXGroup";
+         children = (
+         );
+         name = "swift-build";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/swift-build";
+         sourceTree = "SOURCE_ROOT";
       };
       "OBJ_63" = {
          isa = "PBXGroup";
          children = (
          );
-         name = "SourceControl";
-         path = "Packages/SwiftPM/Sources/SourceControl";
+         name = "Commands";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/Commands";
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_64" = {
          isa = "PBXGroup";
          children = (
-            "OBJ_65",
-            "OBJ_66"
          );
-         name = "clibc";
-         path = "Packages/SwiftPM/Sources/clibc";
+         name = "SPMLLBuild";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/SPMLLBuild";
          sourceTree = "SOURCE_ROOT";
       };
       "OBJ_65" = {
-         isa = "PBXFileReference";
-         path = "libc.c";
-         sourceTree = "<group>";
+         isa = "PBXGroup";
+         children = (
+         );
+         name = "PackageLoading";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/PackageLoading";
+         sourceTree = "SOURCE_ROOT";
       };
       "OBJ_66" = {
          isa = "PBXGroup";
          children = (
-            "OBJ_67",
-            "OBJ_68"
          );
-         name = "include";
-         path = "include";
-         sourceTree = "<group>";
+         name = "swiftpm-xctest-helper";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/swiftpm-xctest-helper";
+         sourceTree = "SOURCE_ROOT";
       };
       "OBJ_67" = {
-         isa = "PBXFileReference";
-         path = "clibc.h";
-         sourceTree = "<group>";
-      };
-      "OBJ_68" = {
-         isa = "PBXFileReference";
-         name = "module.modulemap";
-         path = "/Users/derekclarkson/Library/Mobile Documents/com~apple~CloudDocs/Projects/Shelly/Packages/SwiftPM/Sources/clibc/include/module.modulemap";
-         sourceTree = "<group>";
-      };
-      "OBJ_69" = {
          isa = "PBXGroup";
          children = (
-         );
-         name = "Commands";
-         path = "Packages/SwiftPM/Sources/Commands";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_7" = {
-         isa = "PBXGroup";
-         children = (
-            "OBJ_8"
-         );
-         name = "Sources";
-         path = "";
-         sourceTree = "SOURCE_ROOT";
-      };
-      "OBJ_70" = {
-         isa = "PBXGroup";
-         children = (
+            "OBJ_68",
+            "OBJ_69",
+            "OBJ_70",
             "OBJ_71",
             "OBJ_72",
             "OBJ_73",
@@ -3456,58 +3435,79 @@
             "OBJ_102",
             "OBJ_103",
             "OBJ_104",
-            "OBJ_105",
-            "OBJ_106",
-            "OBJ_107",
-            "OBJ_108"
+            "OBJ_105"
          );
          name = "Basic";
-         path = "Packages/SwiftPM/Sources/Basic";
+         path = ".build/checkouts/swift-package-manager--5581166309458329409/Sources/Basic";
          sourceTree = "SOURCE_ROOT";
       };
-      "OBJ_71" = {
+      "OBJ_68" = {
          isa = "PBXFileReference";
          path = "Await.swift";
          sourceTree = "<group>";
       };
-      "OBJ_72" = {
+      "OBJ_69" = {
          isa = "PBXFileReference";
          path = "ByteString.swift";
          sourceTree = "<group>";
       };
-      "OBJ_73" = {
+      "OBJ_7" = {
+         isa = "PBXGroup";
+         children = (
+            "OBJ_8"
+         );
+         name = "Sources";
+         path = "";
+         sourceTree = "SOURCE_ROOT";
+      };
+      "OBJ_70" = {
          isa = "PBXFileReference";
          path = "CStringArray.swift";
          sourceTree = "<group>";
       };
-      "OBJ_74" = {
+      "OBJ_71" = {
          isa = "PBXFileReference";
          path = "CacheableSequence.swift";
          sourceTree = "<group>";
       };
-      "OBJ_75" = {
+      "OBJ_72" = {
          isa = "PBXFileReference";
          path = "CollectionAlgorithms.swift";
          sourceTree = "<group>";
       };
-      "OBJ_76" = {
+      "OBJ_73" = {
          isa = "PBXFileReference";
          path = "CollectionExtensions.swift";
          sourceTree = "<group>";
       };
-      "OBJ_77" = {
+      "OBJ_74" = {
          isa = "PBXFileReference";
          path = "Condition.swift";
          sourceTree = "<group>";
       };
-      "OBJ_78" = {
+      "OBJ_75" = {
          isa = "PBXFileReference";
          path = "DeltaAlgorithm.swift";
          sourceTree = "<group>";
       };
-      "OBJ_79" = {
+      "OBJ_76" = {
          isa = "PBXFileReference";
          path = "DiagnosticsEngine.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_77" = {
+         isa = "PBXFileReference";
+         path = "DictionaryExtensions.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_78" = {
+         isa = "PBXFileReference";
+         path = "DictionaryLiteralExtensions.swift";
+         sourceTree = "<group>";
+      };
+      "OBJ_79" = {
+         isa = "PBXFileReference";
+         path = "EditDistance.swift";
          sourceTree = "<group>";
       };
       "OBJ_8" = {
@@ -3532,52 +3532,52 @@
       };
       "OBJ_80" = {
          isa = "PBXFileReference";
-         path = "DictionaryExtensions.swift";
+         path = "FileSystem.swift";
          sourceTree = "<group>";
       };
       "OBJ_81" = {
          isa = "PBXFileReference";
-         path = "DictionaryLiteralExtensions.swift";
+         path = "GraphAlgorithms.swift";
          sourceTree = "<group>";
       };
       "OBJ_82" = {
          isa = "PBXFileReference";
-         path = "EditDistance.swift";
+         path = "JSON.swift";
          sourceTree = "<group>";
       };
       "OBJ_83" = {
          isa = "PBXFileReference";
-         path = "FileSystem.swift";
+         path = "JSONMapper.swift";
          sourceTree = "<group>";
       };
       "OBJ_84" = {
          isa = "PBXFileReference";
-         path = "GraphAlgorithms.swift";
+         path = "KeyedPair.swift";
          sourceTree = "<group>";
       };
       "OBJ_85" = {
          isa = "PBXFileReference";
-         path = "JSON.swift";
+         path = "LazyCache.swift";
          sourceTree = "<group>";
       };
       "OBJ_86" = {
          isa = "PBXFileReference";
-         path = "JSONMapper.swift";
+         path = "Lock.swift";
          sourceTree = "<group>";
       };
       "OBJ_87" = {
          isa = "PBXFileReference";
-         path = "KeyedPair.swift";
+         path = "ObjectIdentifierProtocol.swift";
          sourceTree = "<group>";
       };
       "OBJ_88" = {
          isa = "PBXFileReference";
-         path = "LazyCache.swift";
+         path = "OrderedDictionary.swift";
          sourceTree = "<group>";
       };
       "OBJ_89" = {
          isa = "PBXFileReference";
-         path = "Lock.swift";
+         path = "OrderedSet.swift";
          sourceTree = "<group>";
       };
       "OBJ_9" = {
@@ -3591,52 +3591,52 @@
       };
       "OBJ_90" = {
          isa = "PBXFileReference";
-         path = "ObjectIdentifierProtocol.swift";
+         path = "OutputByteStream.swift";
          sourceTree = "<group>";
       };
       "OBJ_91" = {
          isa = "PBXFileReference";
-         path = "OrderedDictionary.swift";
+         path = "Path.swift";
          sourceTree = "<group>";
       };
       "OBJ_92" = {
          isa = "PBXFileReference";
-         path = "OrderedSet.swift";
+         path = "PathShims.swift";
          sourceTree = "<group>";
       };
       "OBJ_93" = {
          isa = "PBXFileReference";
-         path = "OutputByteStream.swift";
+         path = "Process.swift";
          sourceTree = "<group>";
       };
       "OBJ_94" = {
          isa = "PBXFileReference";
-         path = "Path.swift";
+         path = "ProcessSet.swift";
          sourceTree = "<group>";
       };
       "OBJ_95" = {
          isa = "PBXFileReference";
-         path = "PathShims.swift";
+         path = "RegEx.swift";
          sourceTree = "<group>";
       };
       "OBJ_96" = {
          isa = "PBXFileReference";
-         path = "Process.swift";
+         path = "Result.swift";
          sourceTree = "<group>";
       };
       "OBJ_97" = {
          isa = "PBXFileReference";
-         path = "ProcessSet.swift";
+         path = "SHA256.swift";
          sourceTree = "<group>";
       };
       "OBJ_98" = {
          isa = "PBXFileReference";
-         path = "RegEx.swift";
+         path = "SortedArray.swift";
          sourceTree = "<group>";
       };
       "OBJ_99" = {
          isa = "PBXFileReference";
-         path = "Result.swift";
+         path = "StringConversions.swift";
          sourceTree = "<group>";
       };
       "Shelly::Shelly" = {
