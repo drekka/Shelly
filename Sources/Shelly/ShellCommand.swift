@@ -6,7 +6,7 @@ import SwiftShell
 import Utility
 import Basic
 
-open class ShellCommand: CommandArgumentParserInitialiser, CommandArgumentMapper {
+open class ShellCommand: ArgumentParserInitialiser, ArgumentMapper {
 
     static var verbose: Bool = false
 
@@ -26,13 +26,13 @@ open class ShellCommand: CommandArgumentParserInitialiser, CommandArgumentMapper
         main.stdout.print("🔦 " + String(format: message, args))
     }
 
-    private let process: ((ArgumentParser.Result) -> Void)?
+    private let process: ((ArgumentParser.Result) throws -> Void)?
 
     public init(command: String,
                 overview: String,
-                process: ((ArgumentParser.Result) -> Void)? = nil,
+                process: ((ArgumentParser.Result) throws -> Void)? = nil,
                 subCommandClasses: [SubCommand.Type]? = nil,
-                argumentClasses: [CommandArgument.Type]? = nil) throws {
+                argumentClasses: [Argument.Type]? = nil) throws {
 
         self.process = process
 
@@ -66,7 +66,7 @@ open class ShellCommand: CommandArgumentParserInitialiser, CommandArgumentMapper
         })
     }
 
-    func run(usingParser parser: ArgumentParser, subCommands: [String: SubCommand], arguments: [String: CommandArgument]) throws {
+    func run(usingParser parser: ArgumentParser, subCommands: [String: SubCommand], arguments: [String: Argument]) throws {
 
         let parseResults = try parser.parse(Array(CommandLine.arguments.dropFirst()))
 
@@ -85,7 +85,7 @@ open class ShellCommand: CommandArgumentParserInitialiser, CommandArgumentMapper
 
         // No subcommand
         if let process = process {
-            process(parseResults)
+            try process(parseResults)
         }
     }
 }

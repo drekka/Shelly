@@ -15,13 +15,18 @@ Table of Contents
 =================
 
    * [Shelly](#shelly)
+   * [Table of Contents](#table-of-contents)
    * [Adding to your project](#adding-to-your-project)
       * [Swift Package Manager](#swift-package-manager)
       * [Carthage](#carthage)
-   * [Guide - Creating a command line program](#guide---creating-a-command-line-program)
-      * [1. Setup](#1-setup)
-      * [2. main.swift](#2-mainswift)
-      * [3. Lister.swift](#3-listerswift)
+   * [Quick start - Creating a command line program](#quick-start---creating-a-command-line-program)
+      * [Initial setup](#initial-setup)
+      * [Main](#main)
+      * [Main class](#main-class)
+      * [Adding functionality](#adding-functionality)
+         * [Single process implementation](#single-process-implementation)
+         * [Sub-command implementation](#sub-command-implementation)
+
 
 
 # Adding to your project
@@ -56,13 +61,13 @@ Simply add this to your `Cartfile`:
 github "drekka/Shelly" "master"
 ```
 
-# Guide - Creating a command line program
+# Quick start - Creating a command line program
 
 Creating a command line program using Shelly isn't especially hard and the simplest way to do it is to use [Swift's Package Manager](https://swift.org/package-manager/). You can start by building your project manually using [Xcode](https://developer.apple.com/xcode/) and [Carthage 😃](https://github.com/Carthage/Carthage) or [CocoaPods](https://github.com/CocoaPods/CocoaPods), but SPM has the advantage in that it makes it easy to compile all the 3rd party dependencies and Swift libraries into a single executable which you then distribute.
 
 So in this guide I'll build a simple command line program called `lister` using SPM as the core tooling.
 
-## Setup
+## Initial setup
 
 first we need to do some initial setup by creating a directory and running the SPM initialiser command in it:
 
@@ -116,7 +121,7 @@ lister $ swift package generate-xcodeproj --enable-code-coverage
 
 And we're done. Opening the `Lister.xcodeproj` file will show you the project ready for adding your functionality.
 
-## 2. main.swift
+## Main
 
 The next thing to do is update the access point to your program. It's fairly simple as we're going to get another Swift class (`Lister`) to do the real work. Edit `main.swift` and add this code:
 
@@ -131,7 +136,7 @@ do {
 }
 ```
 
-## 3. Lister.swift
+## Main class
 
 Now we need to create the main class of the program. Create a swift file called `Lister.swift` assigned to the 'Lister' program target and add this content:
 
@@ -180,4 +185,94 @@ OPTIONS:
 
 Yey it works. As you can see Shelly has fleshed out the program, adding arguments for verbose and setting a directory. If you look back at the `Lister.swift` file you can see exactly where these arguments where defined through passing a list of argument classes to super. Argument classes defined here are added as arguments to the main program.
 
+## Adding functionality
 
+Generally speaking there are two forms of command line programs. ***Single process*** and ***Sub-command*** based.
+
+### Single process implementation
+
+Single process programs have a single function. For example `ls` lists files, `rm` removes files, etc.
+
+Here's our `lister` class with a single process implemetation:
+
+```swift
+import Shelly
+import Basic
+
+public class Lister: ShellCommand {
+
+    @discardableResult init() throws {
+        try super.init(command: "lister",
+                       overview: "Listing files super easily.",
+                       process: { _ in
+                        let files = try DirectoryFileSource(directory: RelativePath(".")).getFiles()
+                        files.sorted { $0.asString < $1.asString }.forEach { file in
+                            ShellCommand.log("File: \(file.asString)")
+                        }
+        },
+            argumentClasses: [
+                VerboseArgument.self,
+                RootDirectoryArgument.self,
+                ]
+        )
+    }
+}
+```
+
+We've added a `process` argument to the setup which defines a closure that is executed. Pretty simple. The closure takes an argument which contains all the processed arguments passed to the program. We'll look at reading those shortly. Now building and running will produce something like this:
+
+```bash
+lister $ swift build -c release -Xswiftc -static-stdlib
+Compile Swift Module 'Shelly' (23 sources)
+Compile Swift Module 'Lister' (2 sources)
+Linking ./.build/x86_64-apple-macosx10.10/release/lister
+lister $ .build/x86_64-apple-macosx10.10/release/lister
+File: .build
+File: .build/build.db
+File: .build/checkouts
+File: .build/checkouts/Nimble-6408981098330508121
+...
+```
+
+Not particularly helpful because it's list all the files in the current directory and there's a lot. Something like this is more interesting:
+
+```bash
+lister $ .build/x86_64-apple-macosx10.10/release/lister --project-dir ~/Documents
+```
+
+### Sub-command implementation
+
+Sub-command based programs require you to specify a sub-command to tell them what you want to do. For example `swift package` or `git pull`. 
+
+To add a sub-command we first need a sub-command class. Add a file to the project called `List.swift` and add this content to it (remember to assign it to the `lister` target):
+
+```swift
+import Basic
+import Utility
+import Shelly
+
+class List: SubCommand {
+
+    private var arguments: [String: CommandArgument] = [:]
+
+    required init() {}
+
+    func configure(_ commandParser: ArgumentParser) throws -> String {
+        let cmd = "list"
+        arguments = try configure(commandParser, subCommand: cmd, overview: "Lists files")
+        return cmd
+    }
+
+    func map(_ parseResults: ArgumentParser.Result) throws {
+        try map(parseResults, intoArguments: arguments)
+    }
+
+    func execute() throws {
+        let files = try DirectoryFileSource(directory: RelativePath(".")).getFiles()
+        files.sorted { $0.asString < $1.asString }.forEach { file in
+            ShellCommand.log("File: \(file.asString)")
+        }
+    }
+}
+```
+ 

@@ -3,9 +3,9 @@
 
 import Utility
 
-public protocol CommandArgumentMapper {
+public protocol ArgumentMapper {
 
-    func map(_ parseResults: ArgumentParser.Result, intoArguments arguments: [String: CommandArgument]) throws
+    func map(_ parseResults: ArgumentParser.Result, intoArguments arguments: [String: Argument]) throws
 
     /**
      Retrieves a specific argument from the arguments map using the expected
@@ -17,18 +17,18 @@ public protocol CommandArgumentMapper {
      - Returns: The expected argument.
      - Throws: An error if there is not such type in the map.
      */
-    func getArgument<T>(fromArguments arguments: [String: CommandArgument]) throws -> T where T: CommandArgument
+    func getArgument<T>(fromArguments arguments: [String: Argument]) throws -> T where T: Argument
 }
 
-extension CommandArgumentMapper {
+extension ArgumentMapper {
 
-    public func map(_ parseResults: ArgumentParser.Result, intoArguments arguments: [String: CommandArgument]) throws {
+    public func map(_ parseResults: ArgumentParser.Result, intoArguments arguments: [String: Argument]) throws {
         try arguments.values.forEach { argument in
             try argument.map(parseResults)
         }
     }
 
-    public func getArgument<T>(fromArguments arguments: [String: CommandArgument]) throws -> T where T: CommandArgument {
+    public func getArgument<T>(fromArguments arguments: [String: Argument]) throws -> T where T: Argument {
         if let handler = arguments[T.key] as? T {
             return handler
         }

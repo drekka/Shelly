@@ -6,7 +6,7 @@ import Utility
 /**
  ProcessArgumentConfigurers are responsible for setting up command line arguments.
  */
-public protocol CommandArgumentParserInitialiser: class {
+public protocol ArgumentParserInitialiser: class {
 
     /**
      Sets up the passed ArgumentParser.
@@ -17,14 +17,14 @@ public protocol CommandArgumentParserInitialiser: class {
      - Parameter argumentClasses: An array of classes that defines the valid arguments.
      - Returns: A map of keys to arguments.
      */
-    func configure(_ parser: ArgumentParser, withArgumentClasses argumentClasses: [CommandArgument.Type]?) -> [String: CommandArgument]
+    func configure(_ parser: ArgumentParser, withArgumentClasses argumentClasses: [Argument.Type]?) -> [String: Argument]
 
 }
 
 /// Default implementations for the methods.
-public extension CommandArgumentParserInitialiser {
+public extension ArgumentParserInitialiser {
 
-    public func configure(_ parser: ArgumentParser, withArgumentClasses argumentClasses: [CommandArgument.Type]?) -> [String: CommandArgument] {
+    public func configure(_ parser: ArgumentParser, withArgumentClasses argumentClasses: [Argument.Type]?) -> [String: Argument] {
 
         guard let classes = argumentClasses else {
             return [:]

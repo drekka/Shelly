@@ -3,6 +3,10 @@
 
 import Basic
 
+public protocol FileSourceFactory {
+    var fileSources: [FileSource]? { get }
+}
+
 public protocol FileSource {
     func getFiles() throws -> Set<RelativePath>
 }

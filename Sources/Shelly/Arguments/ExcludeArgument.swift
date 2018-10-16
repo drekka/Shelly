@@ -6,7 +6,7 @@ import Basic
 import SwiftShell
 import Foundation
 
-public class ExcludeArgument: CommandArgument {
+public class ExcludeArgument: Argument {
 
     public static let argumentSyntax = "[--exclude mask ...]"
 

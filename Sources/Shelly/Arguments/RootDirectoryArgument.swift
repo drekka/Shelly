@@ -6,7 +6,7 @@ import Basic
 import SwiftShell
 import Foundation
 
-public class RootDirectoryArgument: CommandArgument {
+public class RootDirectoryArgument: Argument {
 
     public static let argumentSyntax = "[--project-dir <dir>]"
 

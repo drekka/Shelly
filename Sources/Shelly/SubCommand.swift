@@ -4,11 +4,7 @@
 import Basic
 import Utility
 
-public protocol ParsedResultMapper: class {
-    func map(_ parseResults: ArgumentParser.Result) throws
-}
-
-public protocol SubCommand: CommandArgumentParserInitialiser, ParsedResultMapper, CommandArgumentMapper {
+public protocol SubCommand: ArgumentParserInitialiser, ResultMapper, ArgumentMapper {
 
     init()
 
@@ -17,7 +13,7 @@ public protocol SubCommand: CommandArgumentParserInitialiser, ParsedResultMapper
     func configure(_ commandParser: ArgumentParser,
          subCommand: String,
          overview: String,
-         argumentClasses: [CommandArgument.Type]) throws -> [String: CommandArgument]
+         argumentClasses: [Argument.Type]?) throws -> [String: Argument]
 
     func execute() throws
 }
@@ -27,11 +23,11 @@ public extension SubCommand {
     public func configure(_ commandParser: ArgumentParser,
                    subCommand: String,
                    overview: String,
-                   argumentClasses: [CommandArgument.Type]) throws -> [String: CommandArgument] {
+                   argumentClasses: [Argument.Type]? = nil) throws -> [String: Argument] {
 
         let subcommandParser = commandParser.add(subparser: subCommand,
                                                  overview: overview,
-                                                 usage: argumentClasses.syntax)
+                                                 usage: argumentClasses?.syntax ?? "")
 
         return configure(subcommandParser, withArgumentClasses: argumentClasses)
     }

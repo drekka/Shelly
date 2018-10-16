@@ -3,7 +3,7 @@
 
 import Utility
 
-public class GitChangesArgument: CommandArgument, FileSourceFactory {
+public class GitChangesArgument: Argument, FileSourceFactory {
 
     public static let argumentSyntax = "[--scan-git-changes]"
 

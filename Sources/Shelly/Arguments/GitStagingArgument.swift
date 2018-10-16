@@ -3,7 +3,7 @@
 
 import Utility
 
-public class GitStagingArgument: CommandArgument, FileSourceFactory {
+public class GitStagingArgument: Argument, FileSourceFactory {
 
     public static let argumentSyntax = "[--scan-git-staging]"
 

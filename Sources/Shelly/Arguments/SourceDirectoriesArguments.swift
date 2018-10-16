@@ -3,7 +3,7 @@
 
 import Utility
 
-public class SourceDirectoriesArgument: CommandArgument, FileSourceFactory {
+public class SourceDirectoriesArgument: Argument, FileSourceFactory {
 
     public static let argumentSyntax = "--source-dirs <source-dir> ..."
 
@@ -19,11 +19,11 @@ public class SourceDirectoriesArgument: CommandArgument, FileSourceFactory {
     }
 
     public func  map(_ parseResults: ArgumentParser.Result) throws {
-        fileSources = getFileSources(fromArgument: sourceDirectories, in: parseResults)
+        fileSources = parseResults.get(sourceDirectories)?.map { return DirectoryFileSource(directory: $0.path) }
     }
 }
 
-public class TrailingSourceDirectoriesArgument: CommandArgument, FileSourceFactory {
+public class TrailingSourceDirectoriesArgument: Argument, FileSourceFactory {
 
     public static let argumentSyntax = "<source-dir> ..."
 
@@ -40,6 +40,6 @@ public class TrailingSourceDirectoriesArgument: CommandArgument, FileSourceFacto
     }
 
     public func  map(_ parseResults: ArgumentParser.Result) throws {
-        fileSources = getFileSources(fromArgument: sourceDirectories, in: parseResults)
+        fileSources = parseResults.get(sourceDirectories)?.map { return DirectoryFileSource(directory: $0.path) }
     }
 }

@@ -3,14 +3,13 @@
 
 import Basic
 
-public protocol FileProcessor {
-    var fileFilter: ((RelativePath) -> Bool)? { get }
-    func files(fromArguments argumentMap: [String: CommandArgument]) throws -> Set<RelativePath>
+public protocol FileSourceReader {
+    func files(fromArguments argumentMap: [String: Argument], filter: ((RelativePath) -> Bool)?) throws -> Set<RelativePath>
 }
 
-public extension FileProcessor where Self: SubCommand {
+public extension FileSourceReader where Self: SubCommand {
 
-    func files(fromArguments argumentMap: [String: CommandArgument]) throws -> Set<RelativePath> {
+    public func files(fromArguments argumentMap: [String: Argument], filter: ((RelativePath) -> Bool)? = nil) throws -> Set<RelativePath> {
 
         var sourceFiles = Set<RelativePath>()
         try argumentMap.values.forEach { argument in
@@ -19,7 +18,7 @@ public extension FileProcessor where Self: SubCommand {
             }
         }
 
-        if let filter = fileFilter {
+        if let filter = filter {
             return sourceFiles.filter(filter)
         }
 

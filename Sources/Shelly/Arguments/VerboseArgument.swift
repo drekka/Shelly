@@ -3,7 +3,7 @@
 
 import Utility
 
-public class VerboseArgument: CommandArgument {
+public class VerboseArgument: Argument {
     
     public static let argumentSyntax = "[--verbose]"
     
