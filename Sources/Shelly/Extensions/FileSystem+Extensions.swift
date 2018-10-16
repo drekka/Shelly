@@ -4,20 +4,15 @@
 import Basic
 import Foundation
 
-public var projectRoot: AbsolutePath = localFileSystem.currentWorkingDirectory!
-
 public extension FileSystem {
 
-    public func currentDirectory() throws -> AbsolutePath {
-        if let currentDir = currentWorkingDirectory {
-            return currentDir
+    public var projectRoot: AbsolutePath {
+        get {
+            return localFileSystem.currentWorkingDirectory!
         }
-        throw ShellyError.invalidCurrentDirectory
-    }
-
-    static func set(projectDirectory: AbsolutePath) throws {
-        FileManager.default.changeCurrentDirectoryPath(projectDirectory.asString)
-        projectRoot = try localFileSystem.currentDirectory()
+        set {
+            FileManager.default.changeCurrentDirectoryPath(newValue.asString)
+        }
     }
 }
 

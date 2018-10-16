@@ -17,15 +17,20 @@ public protocol CommandArgumentParserInitialiser: class {
      - Parameter argumentClasses: An array of classes that defines the valid arguments.
      - Returns: A map of keys to arguments.
      */
-    func configure(_ parser: ArgumentParser, withArgumentClasses argumentClasses: [CommandArgument.Type]) -> [String: CommandArgument]
+    func configure(_ parser: ArgumentParser, withArgumentClasses argumentClasses: [CommandArgument.Type]?) -> [String: CommandArgument]
 
 }
 
 /// Default implementations for the methods.
 public extension CommandArgumentParserInitialiser {
 
-    public func configure(_ parser: ArgumentParser, withArgumentClasses argumentClasses: [CommandArgument.Type]) -> [String: CommandArgument] {
-        return Dictionary(uniqueKeysWithValues: argumentClasses.map { ($0.key, $0.init(argumentParser: parser)) })
+    public func configure(_ parser: ArgumentParser, withArgumentClasses argumentClasses: [CommandArgument.Type]?) -> [String: CommandArgument] {
+
+        guard let classes = argumentClasses else {
+            return [:]
+        }
+
+        return Dictionary(uniqueKeysWithValues: classes.map { ($0.key, $0.init(argumentParser: parser)) })
     }
 
 }

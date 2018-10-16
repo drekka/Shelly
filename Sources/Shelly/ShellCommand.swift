@@ -26,12 +26,27 @@ open class ShellCommand: CommandArgumentParserInitialiser, CommandArgumentMapper
         main.stdout.print("🔦 " + String(format: message, args))
     }
 
+    private let process: ((ArgumentParser.Result) -> Void)?
+
     public init(command: String,
                 overview: String,
-                subCommandClasses: [SubCommand.Type],
-                argumentClasses: [CommandArgument.Type]) throws {
+                process: ((ArgumentParser.Result) -> Void)? = nil,
+                subCommandClasses: [SubCommand.Type]? = nil,
+                argumentClasses: [CommandArgument.Type]? = nil) throws {
+
+        self.process = process
+
+        var usage: [String] = []
+        if let argumentClasses = argumentClasses {
+            usage.append(argumentClasses.syntax)
+        }
+        if subCommandClasses != nil {
+            usage.append("sub-command")
+        }
+        usage.append("...")
+
         let parser = ArgumentParser(commandName: command + " [--help]",
-                                      usage: argumentClasses.syntax + " sub-command ...",
+                                    usage: usage.joined(separator: " "),
                                       overview: overview)
 
         let arguments = self.configure(parser, withArgumentClasses: argumentClasses)
@@ -39,8 +54,13 @@ open class ShellCommand: CommandArgumentParserInitialiser, CommandArgumentMapper
         try run(usingParser: parser, subCommands: subCommands, arguments: arguments)
     }
 
-    public func configure(_ parser: ArgumentParser, subCommandClasses: [SubCommand.Type]) throws -> [String: SubCommand] {
-        return Dictionary(uniqueKeysWithValues: try subCommandClasses.map { subCommandDef in
+    public func configure(_ parser: ArgumentParser, subCommandClasses: [SubCommand.Type]?) throws -> [String: SubCommand] {
+
+        guard let classes = subCommandClasses else {
+            return [:]
+        }
+
+        return Dictionary(uniqueKeysWithValues: try classes.map { subCommandDef in
             let subCommand = subCommandDef.init()
             return (try subCommand.configure(parser), subCommand)
         })
@@ -54,11 +74,18 @@ open class ShellCommand: CommandArgumentParserInitialiser, CommandArgumentMapper
         try map(parseResults, intoArguments: arguments)
 
         // Get the subpublic command and pass it the arguments.
-        guard let subCommandName = parseResults.subparser(parser), let subCommand = subCommands[subCommandName] else {
+        if let subCommandName = parseResults.subparser(parser) {
+            guard let subCommand = subCommands[subCommandName] else {
                 throw ShellyError.noSubcommandPassed
+            }
+            try subCommand.map(parseResults)
+            try subCommand.execute()
+            return
         }
-        try subCommand.map(parseResults)
 
-        try subCommand.execute()
+        // No subcommand
+        if let process = process {
+            process(parseResults)
+        }
     }
 }
