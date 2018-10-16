@@ -11,6 +11,19 @@ Shelly is a framework which makes writing command line applications simpler. It 
 * Minimal code requirements to write commands.
 * Argument validation and processing.
 
+Table of Contents
+=================
+
+   * [Shelly](#shelly)
+   * [Adding to your project](#adding-to-your-project)
+      * [Swift Package Manager](#swift-package-manager)
+      * [Carthage](#carthage)
+   * [Guide - Creating a command line program](#guide---creating-a-command-line-program)
+      * [1. Setup](#1-setup)
+      * [2. main.swift](#2-mainswift)
+      * [3. Lister.swift](#3-listerswift)
+
+
 # Adding to your project
 
 ## Swift Package Manager
