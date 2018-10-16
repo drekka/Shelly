@@ -49,7 +49,7 @@ Creating a command line program using Shelly isn't especially hard and the simpl
 
 So in this guide I'll build a simple command line program called `lister` using SPM as the core tooling.
 
-## 1. Setup
+## Setup
 
 first we need to do some initial setup by creating a directory and running the SPM initialiser command in it:
 
@@ -129,10 +129,7 @@ public class Lister: ShellCommand {
 
     @discardableResult init() throws {
         try super.init(command: "lister",
-                   overview: "Listing files super easily. Use 'lister subcommand --help' for details on each subcommand.",
-                   subCommandClasses: [
-                       // ListDirectoryFiles.self,
-                       ],
+                   overview: "Listing files super easily.",
                    argumentClasses: [
                        VerboseArgument.self,
                        RootDirectoryArgument.self,
@@ -158,9 +155,9 @@ Now try executing it like this:
 
 ```bash
 lister $ .build/x86_64-apple-macosx10.10/release/lister --help
-OVERVIEW: Listing files super easily. Use 'lister subcommand --help' for details on each subcommand.
+OVERVIEW: Listing files super easily.
 
-USAGE: lister [--help] [--verbose] [--project-dir <dir>] sub-command ...
+USAGE: lister [--help] [--verbose] [--project-dir <dir>] ...
 
 OPTIONS:
   --project-dir   Base directory of the project. Defaults to the current directory.
@@ -168,6 +165,6 @@ OPTIONS:
   --help          Display available options
 ```
 
-Yey it works. As you can see Shelly has fleshed out the program, adding arguments for verbose and setting a directory. If you look back at the `Lister.swift` file you can see exactly where these arguments where defined through passing a list of argument classes to super. Argument classes defined here are added as arguments to the main program. Shelly also supports specifying arguments for sub commands and we'll look at that shortly.
+Yey it works. As you can see Shelly has fleshed out the program, adding arguments for verbose and setting a directory. If you look back at the `Lister.swift` file you can see exactly where these arguments where defined through passing a list of argument classes to super. Argument classes defined here are added as arguments to the main program.
 
 
