@@ -3,7 +3,7 @@
 
 import Utility
 
-public protocol Argument: ResultMapper {
+public protocol Argument: ArgumentMapable {
     static var argumentSyntax: String { get }
     init(argumentParser: ArgumentParser)
 }

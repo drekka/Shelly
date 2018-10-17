@@ -1,11 +1,11 @@
 
-//  Created by Derek Clarkson on 3/10/18.
+//  Created by Derek Clarkson on 17/10/18.
 
 import Utility
 
-public protocol ArgumentMapper {
+public protocol ArgumentCollection: ArgumentMapable {
 
-    func map(_ parseResults: ArgumentParser.Result, intoArguments arguments: [String: Argument]) throws
+    var arguments: [String: Argument] { get }
 
     /**
      Retrieves a specific argument from the arguments map using the expected
@@ -17,22 +17,21 @@ public protocol ArgumentMapper {
      - Returns: The expected argument.
      - Throws: An error if there is not such type in the map.
      */
-    func getArgument<T>(fromArguments arguments: [String: Argument]) throws -> T where T: Argument
+    func getArgument<T>() throws -> T where T: Argument
 }
 
-extension ArgumentMapper {
+public extension ArgumentCollection {
 
-    public func map(_ parseResults: ArgumentParser.Result, intoArguments arguments: [String: Argument]) throws {
+    public func map(_ parseResults: ArgumentParser.Result) throws {
         try arguments.values.forEach { argument in
             try argument.map(parseResults)
         }
     }
 
-    public func getArgument<T>(fromArguments arguments: [String: Argument]) throws -> T where T: Argument {
+    public func getArgument<T>() throws -> T where T: Argument {
         if let handler = arguments[T.key] as? T {
             return handler
         }
         throw ShellyError.argumentNotFound
     }
 }
-

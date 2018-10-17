@@ -26,7 +26,7 @@ public struct DirectoryFileSource: FileSource {
             throw ShellyError.notAFolder(directoryPath)
         }
 
-        let files = try walk(directoryPath).map { $0.relative(to: localFileSystem.projectRoot) }
+        let files = try walk(directoryPath).map { $0.relative(to: localFileSystem.currentDirectory) }
         if let filter = filter {
             return Set(files.filter(filter))
         }

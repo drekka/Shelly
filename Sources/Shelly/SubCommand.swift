@@ -4,7 +4,7 @@
 import Basic
 import Utility
 
-public protocol SubCommand: ArgumentParserInitialiser, ResultMapper, ArgumentMapper {
+public protocol SubCommand: ArgumentParserInitialiser, ArgumentCollection {
 
     init()
 
@@ -25,9 +25,7 @@ public extension SubCommand {
                    overview: String,
                    argumentClasses: [Argument.Type]? = nil) throws -> [String: Argument] {
 
-        let subcommandParser = commandParser.add(subparser: subCommand,
-                                                 overview: overview,
-                                                 usage: argumentClasses?.syntax ?? "")
+        let subcommandParser = commandParser.add(subparser: subCommand, overview: overview, usage: argumentClasses?.syntax ?? "")
 
         return configure(subcommandParser, withArgumentClasses: argumentClasses)
     }

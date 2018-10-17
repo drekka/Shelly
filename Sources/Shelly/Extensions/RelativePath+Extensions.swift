@@ -5,6 +5,6 @@ import Basic
 
 public extension RelativePath {
     var absolutePath: AbsolutePath {
-        return AbsolutePath(localFileSystem.projectRoot, self)
+        return AbsolutePath(localFileSystem.currentDirectory, self)
     }
 }

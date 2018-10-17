@@ -6,12 +6,13 @@ import Foundation
 
 public extension FileSystem {
 
-    public var projectRoot: AbsolutePath {
-        get {
-            return localFileSystem.currentWorkingDirectory!
-        }
-        set {
-            FileManager.default.changeCurrentDirectoryPath(newValue.asString)
+    public var currentDirectory: AbsolutePath {
+        return localFileSystem.currentWorkingDirectory!
+    }
+
+    func setCurrentWorkingDirectory(_ workingDirectory: AbsolutePath) throws {
+        guard FileManager.default.changeCurrentDirectoryPath(workingDirectory.asString) else {
+            throw ShellyError.invalidCurrentDirectory
         }
     }
 }

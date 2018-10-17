@@ -7,7 +7,7 @@ public protocol FileSourceReader {
     func files(fromArguments argumentMap: [String: Argument], filter: ((RelativePath) -> Bool)?) throws -> Set<RelativePath>
 }
 
-public extension FileSourceReader where Self: SubCommand {
+public extension FileSourceReader {
 
     public func files(fromArguments argumentMap: [String: Argument], filter: ((RelativePath) -> Bool)? = nil) throws -> Set<RelativePath> {
 

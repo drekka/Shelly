@@ -6,7 +6,7 @@ import SwiftShell
 import Utility
 import Basic
 
-open class ShellCommand: ArgumentParserInitialiser, ArgumentMapper {
+open class ShellCommand: ArgumentParserInitialiser, ArgumentCollection {
 
     static var verbose: Bool = false
 
@@ -26,11 +26,12 @@ open class ShellCommand: ArgumentParserInitialiser, ArgumentMapper {
         main.stdout.print("🔦 " + String(format: message, args))
     }
 
-    private let process: ((ArgumentParser.Result) throws -> Void)?
+    private let process: ((ArgumentCollection) throws -> Void)?
+    private(set) public var arguments: [String : Argument] = [:]
 
     public init(command: String,
                 overview: String,
-                process: ((ArgumentParser.Result) throws -> Void)? = nil,
+                process: ((ArgumentCollection) throws -> Void)? = nil,
                 subCommandClasses: [SubCommand.Type]? = nil,
                 argumentClasses: [Argument.Type]? = nil) throws {
 
@@ -49,9 +50,9 @@ open class ShellCommand: ArgumentParserInitialiser, ArgumentMapper {
                                     usage: usage.joined(separator: " "),
                                       overview: overview)
 
-        let arguments = self.configure(parser, withArgumentClasses: argumentClasses)
+        arguments = configure(parser, withArgumentClasses: argumentClasses)
         let subCommands = try configure(parser, subCommandClasses: subCommandClasses)
-        try run(usingParser: parser, subCommands: subCommands, arguments: arguments)
+        try run(usingParser: parser, subCommands: subCommands)
     }
 
     public func configure(_ parser: ArgumentParser, subCommandClasses: [SubCommand.Type]?) throws -> [String: SubCommand] {
@@ -66,12 +67,12 @@ open class ShellCommand: ArgumentParserInitialiser, ArgumentMapper {
         })
     }
 
-    func run(usingParser parser: ArgumentParser, subCommands: [String: SubCommand], arguments: [String: Argument]) throws {
+    func run(usingParser parser: ArgumentParser, subCommands: [String: SubCommand]) throws {
 
         let parseResults = try parser.parse(Array(CommandLine.arguments.dropFirst()))
 
         // Parse the arguments.
-        try map(parseResults, intoArguments: arguments)
+        try map(parseResults)
 
         // Get the subpublic command and pass it the arguments.
         if let subCommandName = parseResults.subparser(parser) {
@@ -83,9 +84,7 @@ open class ShellCommand: ArgumentParserInitialiser, ArgumentMapper {
             return
         }
 
-        // No subcommand
-        if let process = process {
-            try process(parseResults)
-        }
+        // No subcommand so run the passed process.
+        try process?(self)
     }
 }
