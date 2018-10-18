@@ -21,7 +21,7 @@ public class ProjectDirectoryArgument: Argument {
     public func map(_ parseResults: ArgumentParser.Result) throws {
         if let rootDir = parseResults.get(projectDir) {
             try localFileSystem.setCurrentWorkingDirectory(rootDir.absolutePath)
-            ShellCommand.log("Switched to directory \(String(describing: localFileSystem.currentWorkingDirectory?.asString))")
+            ShellCommand.log("Switched to directory \(localFileSystem.currentDirectory.asString)")
         }
     }
 }

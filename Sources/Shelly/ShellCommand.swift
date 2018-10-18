@@ -6,7 +6,7 @@ import SwiftShell
 import Utility
 import Basic
 
-open class ShellCommand: ArgumentParserInitialiser, ArgumentCollection {
+open class ShellCommand: ArgumentCollection, Executor {
 
     static var verbose: Bool = false
 
@@ -26,16 +26,12 @@ open class ShellCommand: ArgumentParserInitialiser, ArgumentCollection {
         main.stdout.print("🔦 " + String(format: message, args))
     }
 
-    private let process: ((ArgumentCollection) throws -> Void)?
-    private(set) public var arguments: [String : Argument] = [:]
+    private(set) public var arguments: [String : Argument]
 
     public init(command: String,
                 overview: String,
-                process: ((ArgumentCollection) throws -> Void)? = nil,
                 subCommandClasses: [SubCommand.Type]? = nil,
                 argumentClasses: [Argument.Type]? = nil) throws {
-
-        self.process = process
 
         var usage: [String] = []
         if let argumentClasses = argumentClasses {
@@ -50,21 +46,9 @@ open class ShellCommand: ArgumentParserInitialiser, ArgumentCollection {
                                     usage: usage.joined(separator: " "),
                                       overview: overview)
 
-        arguments = configure(parser, withArgumentClasses: argumentClasses)
-        let subCommands = try configure(parser, subCommandClasses: subCommandClasses)
+        arguments = parser.configure(withArgumentClasses: argumentClasses)
+        let subCommands = try parser.configure(withSubCommandClasses: subCommandClasses)
         try run(usingParser: parser, subCommands: subCommands)
-    }
-
-    public func configure(_ parser: ArgumentParser, subCommandClasses: [SubCommand.Type]?) throws -> [String: SubCommand] {
-
-        guard let classes = subCommandClasses else {
-            return [:]
-        }
-
-        return Dictionary(uniqueKeysWithValues: try classes.map { subCommandDef in
-            let subCommand = subCommandDef.init()
-            return (try subCommand.configure(parser), subCommand)
-        })
     }
 
     func run(usingParser parser: ArgumentParser, subCommands: [String: SubCommand]) throws {
@@ -84,7 +68,9 @@ open class ShellCommand: ArgumentParserInitialiser, ArgumentCollection {
             return
         }
 
-        // No subcommand so run the passed process.
-        try process?(self)
+        // No subcommand so call the execute function.
+        try self.execute()
     }
+
+    open func execute() throws {}
 }

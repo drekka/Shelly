@@ -14,21 +14,11 @@ public struct LocalPathArgument: ArgumentKind {
     private let rawPath: String
 
     public var absolutePath: AbsolutePath {
-        switch rawPath.first {
-        case "/", "~":
-            return AbsolutePath((rawPath as NSString).expandingTildeInPath)
-        default:
-            return AbsolutePath(localFileSystem.currentDirectory, RelativePath(rawPath))
-        }
+        return rawPath.resolve()
     }
 
     public var relativePath: RelativePath {
-        switch rawPath.first {
-        case "/", "~":
-            return AbsolutePath((rawPath as NSString).expandingTildeInPath).relative(to: localFileSystem.currentDirectory)
-        default:
-            return RelativePath(rawPath)
-        }
+        return rawPath.resolve()
     }
 
     /// Default intializer.

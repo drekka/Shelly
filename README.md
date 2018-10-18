@@ -15,21 +15,21 @@ Table of Contents
 =================
 
    * [Shelly](#shelly)
-   * [Table of Contents](#table-of-contents)
    * [Adding to your project](#adding-to-your-project)
       * [Swift Package Manager](#swift-package-manager)
       * [Carthage](#carthage)
    * [Creating a command line program](#creating-a-command-line-program)
       * [Initial setup](#initial-setup)
-      * [Main](#main)
-      * [Main class](#main-class)
+         * [Main](#main)
+         * [Main class](#main-class)
       * [Adding functionality](#adding-functionality)
          * [Single process implementation](#single-process-implementation)
          * [Sub-command implementation](#sub-command-implementation)
             * [Adding sub-command arguments](#adding-sub-command-arguments)
-      * [Custom arguments](#custom-arguments)
-      * [File sources](#file-sources)
-         * [Custom file sources](#custom-file-sources)
+      * [Input files](#input-files)
+      * [Arguments](#arguments)
+         * [Custom argument](#custom-argument)
+            * [Producing files](#producing-files)
 
 # Adding to your project
 
@@ -124,7 +124,7 @@ lister $ swift package generate-xcodeproj --enable-code-coverage
 
 And we're done. Opening the `Lister.xcodeproj` file will show you the project ready for adding your functionality.
 
-## Main
+### Main
 
 The next thing to do is update the access point to your program. It's fairly simple as we're going to get another Swift class (`Lister`) to do the real work. Edit `main.swift` and add this code:
 
@@ -139,7 +139,7 @@ do {
 }
 ```
 
-## Main class
+### Main class
 
 Now we need to create the main class of the program. Create a swift file called `Lister.swift` assigned to the 'Lister' program target and add this content:
 
@@ -202,7 +202,7 @@ Generally speaking there are two forms of command line programs. ***Single proce
 
 Single process programs have a single function. For example `ls` lists files, `rm` removes files, etc.
 
-Here's our `lister` class with a single process implemetation:
+Here's our `lister` class with a single process implementation:
 
 ```swift
 import Shelly
@@ -213,21 +213,22 @@ public class Lister: ShellCommand {
     @discardableResult init() throws {
         try super.init(command: "lister",
                        overview: "Listing files super easily.",
-                       process: { _ in
-                           let files = try DirectoryFileSource(directory: RelativePath(".")).getFiles()
-                           files.sorted { $0.asString < $1.asString }.forEach { file in
-                               ShellCommand.log("File: \(file.asString)")
-                            }
-                        },
-                        argumentClasses: [
-                            VerboseArgument.self,
-                            RootDirectoryArgument.self,
-                        ])
+                       argumentClasses: [
+                           VerboseArgument.self,
+                           ProjectDirectoryArgument.self,
+                       ])
+    }
+    
+    Override public func execute() {
+        let files = try DirectoryFileSource(directory: ".".resolve()).getFiles()
+        files.sorted { $0.asString < $1.asString }.forEach { file in
+            ShellCommand.log("File: \(file.asString)")
+        }
     }
 }
 ```
 
-We've added a `process` argument to the setup which defines a closure that is executed. Pretty simple. The closure takes an argument which contains all the processed arguments passed to the program. We'll look at reading those shortly. Now building and running will produce something like this:
+Defining the process is simply a matter of overriding the `execute()` function. Building and running will now produce something like this:
 
 ```bash
 lister $ swift build -c release -Xswiftc -static-stdlib
@@ -242,10 +243,14 @@ File: .build/checkouts/Nimble-6408981098330508121
 ...
 ```
 
-Not particularly helpful because it's listing the current directory. But we have a project dir argument which will change to the passed directory. Using that we can list files from another directory like this without requiring any new code from you:
+Not particularly helpful because it's listing Lister's project directory. However there is a project directory argument already in the program which we can use to change the directory we want to list files from like this:
 
 ```bash
 lister $ ./lister --project-dir ~/Documents
+Switched to directory /Users/derekclarkson/Documents
+File: doc1.md
+File: doc2.md
+Program ended with exit code: 0
 ```
 
 ### Sub-command implementation
@@ -272,7 +277,7 @@ class List: SubCommand {
     }
     
     func execute() throws {
-        let files = try DirectoryFileSource(directory: RelativePath(".")).getFiles()
+        let files = try DirectoryFileSource(directory: ".".resolve()).getFiles()
         files.sorted { $0.asString < $1.asString }.forEach { file in
             ShellCommand.log("File: \(file.asString)")
         }
@@ -293,7 +298,7 @@ public class Lister: ShellCommand {
                        subCommandClasses: [List.self],
                        argumentClasses: [
                            VerboseArgument.self,
-                           RootDirectoryArgument.self,
+                           ProjectDirectoryArgument.self,
                        ]
         )
     }
@@ -306,7 +311,7 @@ And now you can call it like this:
 lister $ ./lister --project-dir ~/Documents list
 ```
 
-Note how we are passing `--project-dir ~/Documents` before the `list` sub-command. This is because the argument has been added to the program, not the subcommand and all program arounds must occur before the subcommand.
+Note how we are passing `--project-dir ~/Documents` before the `list` sub-command. This is because the argument has been added to the program, not the subcommand so it must occur before the subcommand.
 
 #### Adding sub-command arguments
 
@@ -329,26 +334,67 @@ Easy. Now you can call it like this:
 lister $ ./lister list --project-dir ~/Documents
 ```
 
-Of course in this example we'd also remove it from the list of arguments in `Lister.swift` because it would make no sense to have this argument at both levels.
+Of course it's not a good idea to have the same argument on the program and one of it's subcommands so I'd suggest removing it from the list of arguments in `Lister.swift`.
 
+## Input files
+
+Arguments can also produce lists files for your program to process. For example, the `SourceDirectoriesArgument` generates a list of files from each of the directories you specify. When Shelly is processing arguments it checks each one to see if it's an instance of `FileSourceFactory`. If so, it then asks it for a list of `FileSource` instances. These `FileSource` instances are then queried for a list of files. Finally Shelly merges these lists and removes any duplicates to create a master list of files for your program.
+
+Here's our example updated to source files from a list of passes directories instead of the current directory:
+
+```swift
+public class Lister: ShellCommand, FileSourceReader {
+    
+    @discardableResult init() throws {
+        try super.init(command: "lister",
+                       overview: "Listing files super easily.",
+                       argumentClasses: [
+                           VerboseArgument.self,
+                           ProjectDirectoryArgument.self,
+                           TrailingSourceDirectoriesArgument.self,
+                       ])
+    }
+    
+    Override public func execute() {
+
+        let files = try self.argumentFiles()
+        files.sorted { $0.asString < $1.asString }.forEach { file in
+            ShellCommand.log("File: \(file.asString)")
+        }
+    }
+}
+
+```
+
+The `FileSourceReader` protocol gives the program access to the code to read the list of files from the arguments. We've also added the `TrailingSourceDirectoriesArgument` and changed the process to pull the list of files using the `self.argumentFiles()` function. Shelly with do all the work of reading the directories and feeding them back to you. Here's how it looks on the command line:
+
+```bash
+Lister $ ./lister —project-dir ~ Documents Pictures
+Switched to directory /Users/derekclarkson
+File: Documents/doc1.md
+File: Documents/doc2.md
+File: Pictures/Pic.jpg
+File: Pictures/Pic2.png
+Program ended with exit code: 0
+```
 
 ## Arguments
 
-Shelly provides the following list of pre-defined arguments:
+In the above examples we used the `ProjectDirectoryArgument` and `VerboseArgument` prebuilt arguments. Shelly has the following pre-defined arguments:
 
 | Argument | Syntax | properties | Description |
 | --- | --- | --- | --- |
 | `ExcludeArgument` | `--exclude <mask> <mask? ...` | `var excludeMasks: [String]?` | List of masks that can be used to filter files. |
-| `GitChangesArgument` | | | `FileSourceFactory` implementation that generates a `FileSource` listing of all files that Git thinks have been changed. |
-| `GitStagingArgument` | | | `FileSourceFactory` implementation that generates a `FileSource` of all files in the Git staging area. |
-| `ProjectDirectoryArgument` | `--project-dir directory` | | Changing the file systems current working directory to the specified one. |
-| `SourceDirectoriesArgument` | `--source-dirs <dir> ....` | | `FileSourceFactory` implementation that generates an array of `FileSource`s, one for each of the passed directories. |
-| `TrailingSourceDirectoriesArgument` | `<dir> ....` | | Only usable as the last argument in the list, this `FileSourceFactory` implementation generates an array of `FileSource`s, one for each of the remaining arguments. |
+| `GitChangesArgument` | | | `FileSourceReader` implementation that generates a `FileSource` listing of all files that Git thinks have been changed. |
+| `GitStagingArgument` | | | `FileSourceReader` implementation that generates a `FileSource` of all files in the Git staging area. |
+| `ProjectDirectoryArgument` | `--project-dir <directory>` | | Changing the file systems current working directory to the specified one. |
+| `SourceDirectoriesArgument` | `--source-dirs <dir> ....` | | `FileSourceReader` implementation that generates an array of `FileSource`s, one for each of the passed directories. |
+| `TrailingSourceDirectoriesArgument` | `<dir> ....` | | Only usable as the last argument in the list, this `FileSourceReader` implementation generates an array of `FileSource`s, one for each of the remaining arguments. |
 | `VerboseArgument` | `--verbose` | | Sets a global static variable called `ShellCommand.verbose` which can be tested when deciding what to output. |
 
 ### Custom argument
 
-Creating your own argument for your command is quite easy. As an example, lets create a simple argument that prints 'hello' when used. Here's the definition of it:
+Creating your own argument for your command is quite easy. As an example, let's create a simple argument that prints 'hello' when used. Create a file called `Hello.swift` in the project and add this code:
 
 ```swift
 import Shelly
@@ -356,7 +402,7 @@ import Utility
 
 class Hello: Argument {
 
-    static var argumentSyntax = "[—hello]"
+    static var argumentSyntax = "[--hello]"
 
     private let helloArgument: OptionArgument<Bool>
 
@@ -374,45 +420,74 @@ class Hello: Argument {
 }
 ```
 
-And lets add it to the main program:
+And add it to the main program:
 
 ```swift
-try super.init(command: "lister",
-               overview: "Listing files super easily.",
-               process: { argumentMapper in
+public class Lister: ShellCommand {
+    
+    @discardableResult init() throws {
+        try super.init(command: "lister",
+                       overview: "Listing files super easily.",
+                       argumentClasses: [
+                           Hello.self,
+                           VerboseArgument.self,
+                           ProjectDirectoryArgument.self,
+                       ])
+    }
+    
+    Override public func execute() {
 
-                   let hello: Hello = try argumentMapper.getArgument()
-                   if hello.sayHello {
-                       ShellCommand.log("Hello!")
-                   }
+        let hello: Hello = try self.getArgument()
+        if hello.sayHello {
+            ShellCommand.log("Hello!")
+        }
 
-                   let files = try DirectoryFileSource(directory: RelativePath(".")).getFiles()
-                   files.sorted { $0.asString < $1.asString }.forEach { file in
-                       ShellCommand.log("File: \(file.asString)")
-                   }
-               },
-               argumentClasses: [
-                   Hello.self,
-                   VerboseArgument.self,
-                   ProjectDirectoryArgument.self,
-               ])
+        let files = try DirectoryFileSource(directory: ".".resolve()).getFiles()
+        files.sorted { $0.asString < $1.asString }.forEach { file in
+            ShellCommand.log("File: \(file.asString)")
+        }
+    }
+}
 ```
 
-As you can see we've added `Hello.self` to the list of arguments and in the process closure, we've retrieved the argument from the `ArgumentMapper` and acted based on its value. Now lets try it out:
+As you can see we've added `Hello.self` to the list of arguments and when executing, retrieved it and printed the text. Now lets try it out:
 
 ```bash
 Lister $ ./lister --project-dir ~/Documents --hello
+Switched to directory /Users/derekclarkson/Documents
 Hello!
-File: .DS_Store
-File: .localized
+File: doc1.md
+File: doc2.md
 Program ended with exit code: 0
 ```
 
-## File sources
+#### Producing files
 
-As you may hav noticed, some of the builtin arguments act as `FileSourceFactory`s. These produce one or more `FileSource` instances which in turn can produce a list of files. For example the files in a directory or in the Git staging area.
+ Making your custom argument produce files for the app to process is quite easy. Implement `FileSourceFactory` and the `fileSources` property and you are done.
 
-As a command may want to obtain a list of files from a number of sources, Shelly has functionality to obtain those lists and merge them into a single (de-duplicated) master list for your program to use.
+```swift
+import Shelly
+import Utility
+Import Basic
 
+class Hello: Argument, FileSourceFactory {
 
-### Custom file sources 
+    static var argumentSyntax = "[--hello]"
+
+    private let helloArgument: OptionArgument<Bool>
+
+    var sayHello: Bool = false
+    private(set) public var fileSources: [FileSource]?
+
+    required init(argumentParser: ArgumentParser) {
+        helloArgument = argumentParser.add(option: "--hello", kind: Bool.self, usage: "Say Hello!")
+    }
+
+    public func map(_ parseResults: ArgumentParser.Result) throws {
+        if parseResults.get(helloArgument) != nil {
+            sayHello = true
+            fileSources = [DirectoryFileSource(directory: "~/Documents".resolve())]
+        }
+    }
+}
+```

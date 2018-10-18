@@ -4,15 +4,15 @@
 import Basic
 
 public protocol FileSourceReader {
-    func files(fromArguments argumentMap: [String: Argument], filter: ((RelativePath) -> Bool)?) throws -> Set<RelativePath>
+    func argumentFiles(usingFilter filter: ((RelativePath) -> Bool)?) throws -> Set<RelativePath>
 }
 
-public extension FileSourceReader {
+public extension FileSourceReader where Self: ArgumentCollection {
 
-    public func files(fromArguments argumentMap: [String: Argument], filter: ((RelativePath) -> Bool)? = nil) throws -> Set<RelativePath> {
+    public func argumentFiles(usingFilter filter: ((RelativePath) -> Bool)? = nil) throws -> Set<RelativePath> {
 
         var sourceFiles = Set<RelativePath>()
-        try argumentMap.values.forEach { argument in
+        try arguments.values.forEach { argument in
             if let fileSourceFactory = argument as? FileSourceFactory, let fileSources = fileSourceFactory.fileSources {
                 sourceFiles = sourceFiles.union(try fileSources.flatMap { try $0.getFiles() })
             }
