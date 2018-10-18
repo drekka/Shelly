@@ -1,6 +1,8 @@
 # Shelly
 Version: 1.0
 
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 Shelly is a framework which makes writing command line applications simpler. It provides common functionality in a manner that lets you concentrate on the functionality of your command and not how it's managed.
 
 **Features**
