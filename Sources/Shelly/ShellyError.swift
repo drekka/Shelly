@@ -9,8 +9,6 @@ public enum ShellyError: Error, CustomStringConvertible {
 
     case missingArgument(String)
 
-    case unknownArgument(String)
-
     case illegalArgument(String, String)
 
     case argumentNotFound
@@ -47,9 +45,6 @@ public enum ShellyError: Error, CustomStringConvertible {
 
         case let .folderNotFound(filePath):
             return "Folder not found: \(filePath.prettyPath())"
-
-        case let .unknownArgument(arg):
-            return "Unknown argument: \(arg)"
 
         case let .illegalArgument(arg, unless):
             return "Illegal argument: \(arg) is not allowed unless \(unless)"

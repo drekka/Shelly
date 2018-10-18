@@ -21,7 +21,7 @@ let package = Package(
         ),
         .testTarget(
             name: "ShellyTests",
-            dependencies: ["Shelly", "Nimble"]
+            dependencies: ["Shelly", "Nimble", "Utility"]
         ),
         ]
 )

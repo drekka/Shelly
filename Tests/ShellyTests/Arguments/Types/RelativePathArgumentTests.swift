@@ -8,7 +8,7 @@ import Shelly
 class RelativePathArgumentTests: XCTestCase {
 
     func testRelativePathArgumentStoresPath() throws {
-        let path = try RelativePathArgument(argument: "abc")
-        expect(path.path.asString) == "abc"
+        let path = try LocalPathArgument(argument: "abc")
+        expect(path.relativePath.asString) == "abc"
     }
 }

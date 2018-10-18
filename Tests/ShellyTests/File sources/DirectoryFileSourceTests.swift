@@ -14,18 +14,9 @@ class DirectoryFileSourceTests: XCTestCase {
 
         super.setUp()
 
-        let volumeURL = URL(fileURLWithPath: "/")
-        tmpDir = try! FileManager.default.url(for:.itemReplacementDirectory, in: .userDomainMask, appropriateFor: volumeURL, create: true)
-
-        localFileSystem.projectRoot = AbsolutePath(tmpDir.path)
-
-        let file1 = RelativePath("testfile1").absolutePath
-        try! localFileSystem.writeFileContents(file1, bytes: "")
-
-        try! localFileSystem.createDirectory(RelativePath("sub").absolutePath)
-
-        let file2 = RelativePath("sub/testfile2").absolutePath
-        try! localFileSystem.writeFileContents(file2, bytes: "")
+        tmpDir = localFileSystem.switchToTmpDirectory()
+        localFileSystem.create(testFile: "testfile1")
+        localFileSystem.create(testFile: "testfile2", inDirectory: "sub")
     }
 
     override func tearDown() {
