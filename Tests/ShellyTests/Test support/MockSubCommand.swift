@@ -4,7 +4,7 @@
 import Shelly
 import Utility
 
-class TestSubCommand: SubCommand {
+class MockSubCommand: SubCommand {
 
     var arguments: [String : Argument] = [:]
 

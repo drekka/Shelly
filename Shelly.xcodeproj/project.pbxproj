@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6C318398217D6B2E0069A61B /* SourceDirectoriesArgumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C318397217D6B2E0069A61B /* SourceDirectoriesArgumentTests.swift */; };
+		6C31839A217D6B4C0069A61B /* TrailingSourceDirectoryArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C318399217D6B4B0069A61B /* TrailingSourceDirectoryArgument.swift */; };
 		6C7F028E21785E8000F63115 /* ExcludeArgumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7F028D21785E8000F63115 /* ExcludeArgumentTests.swift */; };
 		6C7F0290217949B200F63115 /* GitChangesArgumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7F028F217949B200F63115 /* GitChangesArgumentTests.swift */; };
 		6C7F029221794B2600F63115 /* GitStagingArgumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7F029121794B2600F63115 /* GitStagingArgumentTests.swift */; };
@@ -141,7 +143,7 @@
 		OBJ_389 /* GitChangesArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* GitChangesArgument.swift */; };
 		OBJ_390 /* GitStagingArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* GitStagingArgument.swift */; };
 		OBJ_391 /* ProjectDirectoryArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* ProjectDirectoryArgument.swift */; };
-		OBJ_392 /* SourceDirectoriesArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* SourceDirectoriesArguments.swift */; };
+		OBJ_392 /* SourceDirectoriesArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* SourceDirectoriesArgument.swift */; };
 		OBJ_393 /* LocalPathArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* LocalPathArgument.swift */; };
 		OBJ_394 /* VerboseArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* VerboseArgument.swift */; };
 		OBJ_395 /* Executor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* Executor.swift */; };
@@ -172,7 +174,7 @@
 		OBJ_444 /* RelativePathArgumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* RelativePathArgumentTests.swift */; };
 		OBJ_445 /* DirectoryFileSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* DirectoryFileSourceTests.swift */; };
 		OBJ_446 /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_50 /* FileSystem.swift */; };
-		OBJ_447 /* TestSubCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* TestSubCommand.swift */; };
+		OBJ_447 /* MockSubCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* MockSubCommand.swift */; };
 		OBJ_449 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Nimble::Nimble::Product" /* Nimble.framework */; };
 		OBJ_450 /* Shelly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Shelly::Shelly::Product" /* Shelly.framework */; };
 		OBJ_451 /* Utility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftPM::Utility::Product" /* Utility.framework */; };
@@ -398,6 +400,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C318397217D6B2E0069A61B /* SourceDirectoriesArgumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceDirectoriesArgumentTests.swift; sourceTree = "<group>"; };
+		6C318399217D6B4B0069A61B /* TrailingSourceDirectoryArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingSourceDirectoryArgument.swift; sourceTree = "<group>"; };
 		6C7F028D21785E8000F63115 /* ExcludeArgumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcludeArgumentTests.swift; sourceTree = "<group>"; };
 		6C7F028F217949B200F63115 /* GitChangesArgumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitChangesArgumentTests.swift; sourceTree = "<group>"; };
 		6C7F029121794B2600F63115 /* GitStagingArgumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitStagingArgumentTests.swift; sourceTree = "<group>"; };
@@ -469,7 +473,7 @@
 		OBJ_176 /* NimbleXCTestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleXCTestHandler.swift; sourceTree = "<group>"; };
 		OBJ_178 /* ExceptionCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionCapture.swift; sourceTree = "<group>"; };
 		OBJ_179 /* DSL+Wait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DSL+Wait.swift"; sourceTree = "<group>"; };
-		OBJ_18 /* SourceDirectoriesArguments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceDirectoriesArguments.swift; sourceTree = "<group>"; };
+		OBJ_18 /* SourceDirectoriesArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceDirectoriesArgument.swift; sourceTree = "<group>"; };
 		OBJ_180 /* DSL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSL.swift; sourceTree = "<group>"; };
 		OBJ_181 /* Expectation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
 		OBJ_182 /* ExpectationMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpectationMessage.swift; sourceTree = "<group>"; };
@@ -536,7 +540,7 @@
 		OBJ_46 /* RelativePathArgumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelativePathArgumentTests.swift; sourceTree = "<group>"; };
 		OBJ_48 /* DirectoryFileSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryFileSourceTests.swift; sourceTree = "<group>"; };
 		OBJ_50 /* FileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
-		OBJ_51 /* TestSubCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSubCommand.swift; sourceTree = "<group>"; };
+		OBJ_51 /* MockSubCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSubCommand.swift; sourceTree = "<group>"; };
 		OBJ_52 /* Sample dir */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Sample dir"; sourceTree = SOURCE_ROOT; };
 		OBJ_53 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = SOURCE_ROOT; };
 		OBJ_59 /* ArgumentParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentParser.swift; sourceTree = "<group>"; };
@@ -683,7 +687,8 @@
 				OBJ_15 /* GitChangesArgument.swift */,
 				OBJ_16 /* GitStagingArgument.swift */,
 				OBJ_17 /* ProjectDirectoryArgument.swift */,
-				OBJ_18 /* SourceDirectoriesArguments.swift */,
+				OBJ_18 /* SourceDirectoriesArgument.swift */,
+				6C318399217D6B4B0069A61B /* TrailingSourceDirectoryArgument.swift */,
 				OBJ_19 /* Types */,
 				OBJ_21 /* VerboseArgument.swift */,
 			);
@@ -1020,6 +1025,7 @@
 				6C7F028F217949B200F63115 /* GitChangesArgumentTests.swift */,
 				6C7F029121794B2600F63115 /* GitStagingArgumentTests.swift */,
 				6C7F0295217952F800F63115 /* ProjectDirectoryArgumentTests.swift */,
+				6C318397217D6B2E0069A61B /* SourceDirectoriesArgumentTests.swift */,
 			);
 			path = Arguments;
 			sourceTree = "<group>";
@@ -1044,12 +1050,12 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_50 /* FileSystem.swift */,
-				OBJ_51 /* TestSubCommand.swift */,
+				OBJ_51 /* MockSubCommand.swift */,
 			);
 			path = "Test support";
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -1060,7 +1066,6 @@
 				OBJ_54 /* Dependencies */,
 				OBJ_225 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_54 /* Dependencies */ = {
@@ -1520,7 +1525,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_225 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1686,6 +1691,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_384 /* Argument.swift in Sources */,
+				6C31839A217D6B4C0069A61B /* TrailingSourceDirectoryArgument.swift in Sources */,
 				OBJ_385 /* ArgumentCollection.swift in Sources */,
 				OBJ_386 /* ArgumentMapable.swift in Sources */,
 				OBJ_387 /* ArgumentParser+Configure.swift in Sources */,
@@ -1693,7 +1699,7 @@
 				OBJ_389 /* GitChangesArgument.swift in Sources */,
 				OBJ_390 /* GitStagingArgument.swift in Sources */,
 				OBJ_391 /* ProjectDirectoryArgument.swift in Sources */,
-				OBJ_392 /* SourceDirectoriesArguments.swift in Sources */,
+				OBJ_392 /* SourceDirectoriesArgument.swift in Sources */,
 				OBJ_393 /* LocalPathArgument.swift in Sources */,
 				OBJ_394 /* VerboseArgument.swift in Sources */,
 				OBJ_395 /* Executor.swift in Sources */,
@@ -1734,7 +1740,8 @@
 				OBJ_445 /* DirectoryFileSourceTests.swift in Sources */,
 				6C7F028E21785E8000F63115 /* ExcludeArgumentTests.swift in Sources */,
 				OBJ_446 /* FileSystem.swift in Sources */,
-				OBJ_447 /* TestSubCommand.swift in Sources */,
+				OBJ_447 /* MockSubCommand.swift in Sources */,
+				6C318398217D6B2E0069A61B /* SourceDirectoriesArgumentTests.swift in Sources */,
 				6C7F029221794B2600F63115 /* GitStagingArgumentTests.swift in Sources */,
 				6C7F0296217952F800F63115 /* ProjectDirectoryArgumentTests.swift in Sources */,
 			);

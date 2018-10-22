@@ -41,8 +41,12 @@ class ProjectDirectoryArgumentTests: XCTestCase {
     func testMap() throws {
         let results = try parser.parse(["--project-dir", tmpDir.asString])
         try arg.map(results)
-        let result = localFileSystem.currentDirectory
-        expect(result) == tmpDir
+
+        // BY default we get /private/var/... back as the local directory, do we use
+        // resolvingSymlinksInPath() to resolve it back to /var/... for comparing.
+        let result = URL(fileURLWithPath: localFileSystem.currentDirectory.asString).resolvingSymlinksInPath().path
+
+        expect(result) == tmpDir.asString
     }
 
     func testMapWhenArgumentNotSet() throws {

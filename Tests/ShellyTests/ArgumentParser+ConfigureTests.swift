@@ -36,13 +36,13 @@ class ArgumentParser_ConfigureTests: XCTestCase {
 
     func testConfigureWithSubCommandClasses() throws {
 
-        let subCommands = try parser.configure(withSubCommandClasses: [TestSubCommand.self])
+        let subCommands = try parser.configure(withSubCommandClasses: [MockSubCommand.self])
 
         expect(subCommands.count) == 1
 
         let command = subCommands["test"]
         expect(command).toNot(beNil())
-        expect(command).to(beAKindOf(TestSubCommand.self))
+        expect(command).to(beAKindOf(MockSubCommand.self))
 
         expect { try self.parser.parse(["test"]) }.toNot(throwError())
    }

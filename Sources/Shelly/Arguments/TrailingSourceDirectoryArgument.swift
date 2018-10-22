@@ -3,26 +3,6 @@
 
 import Utility
 
-public class SourceDirectoriesArgument: Argument, FileSourceFactory {
-
-    public static let argumentSyntax = "--source-dirs <source-dir> ..."
-
-    private let sourceDirectories: OptionArgument<[LocalPathArgument]>
-
-    private(set) public var fileSources: [FileSource]?
-
-    public required init(argumentParser: ArgumentParser) {
-        sourceDirectories = argumentParser.add(option: "--source-dirs",
-                                               kind: [LocalPathArgument].self,
-                                               usage: "A list of directories where the sources for the project can be found.",
-                                               optional: false)
-    }
-
-    public func  map(_ parseResults: ArgumentParser.Result) throws {
-        fileSources = parseResults.get(sourceDirectories)?.map { return DirectoryFileSource(directory: $0.relativePath) }
-    }
-}
-
 public class TrailingSourceDirectoriesArgument: Argument, FileSourceFactory {
 
     public static let argumentSyntax = "<source-dir> ..."
