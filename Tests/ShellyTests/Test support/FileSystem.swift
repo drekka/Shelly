@@ -7,11 +7,14 @@ import Shelly
 
 extension FileSystem {
 
-    func switchToTmpDirectory() -> URL {
+    func switchToTmpDirectory() -> AbsolutePath {
         let volumeURL = URL(fileURLWithPath: "/")
-        let tmpDir = try! FileManager.default.url(for:.itemReplacementDirectory, in: .userDomainMask, appropriateFor: volumeURL, create: true)
-        try! localFileSystem.setCurrentWorkingDirectory(tmpDir.path.resolve())
-        return tmpDir
+        var tmpDir = try! FileManager.default.url(for:.itemReplacementDirectory, in: .userDomainMask, appropriateFor: volumeURL, create: true)
+        tmpDir.resolveSymlinksInPath()
+        let x = tmpDir.isFileURL
+        let tmpDirPath: AbsolutePath = tmpDir.path.resolve()
+        try! localFileSystem.setCurrentWorkingDirectory(tmpDirPath)
+        return tmpDirPath
     }
 
     func create(testFile: String, inDirectory: String = ".") {

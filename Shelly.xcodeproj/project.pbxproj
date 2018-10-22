@@ -22,6 +22,9 @@
 
 /* Begin PBXBuildFile section */
 		6C7F028E21785E8000F63115 /* ExcludeArgumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7F028D21785E8000F63115 /* ExcludeArgumentTests.swift */; };
+		6C7F0290217949B200F63115 /* GitChangesArgumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7F028F217949B200F63115 /* GitChangesArgumentTests.swift */; };
+		6C7F029221794B2600F63115 /* GitStagingArgumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7F029121794B2600F63115 /* GitStagingArgumentTests.swift */; };
+		6C7F0296217952F800F63115 /* ProjectDirectoryArgumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7F0295217952F800F63115 /* ProjectDirectoryArgumentTests.swift */; };
 		OBJ_240 /* Await.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_96 /* Await.swift */; };
 		OBJ_241 /* ByteString.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_97 /* ByteString.swift */; };
 		OBJ_242 /* CStringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_98 /* CStringArray.swift */; };
@@ -396,6 +399,9 @@
 
 /* Begin PBXFileReference section */
 		6C7F028D21785E8000F63115 /* ExcludeArgumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcludeArgumentTests.swift; sourceTree = "<group>"; };
+		6C7F028F217949B200F63115 /* GitChangesArgumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitChangesArgumentTests.swift; sourceTree = "<group>"; };
+		6C7F029121794B2600F63115 /* GitStagingArgumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitStagingArgumentTests.swift; sourceTree = "<group>"; };
+		6C7F0295217952F800F63115 /* ProjectDirectoryArgumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDirectoryArgumentTests.swift; sourceTree = "<group>"; };
 		"Nimble::Nimble::Product" /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* ArgumentCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentCollection.swift; sourceTree = "<group>"; };
 		OBJ_100 /* CollectionAlgorithms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionAlgorithms.swift; sourceTree = "<group>"; };
@@ -1011,6 +1017,9 @@
 			children = (
 				OBJ_45 /* Types */,
 				6C7F028D21785E8000F63115 /* ExcludeArgumentTests.swift */,
+				6C7F028F217949B200F63115 /* GitChangesArgumentTests.swift */,
+				6C7F029121794B2600F63115 /* GitStagingArgumentTests.swift */,
+				6C7F0295217952F800F63115 /* ProjectDirectoryArgumentTests.swift */,
 			);
 			path = Arguments;
 			sourceTree = "<group>";
@@ -1718,6 +1727,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_441 /* ArgumentCollectionTests.swift in Sources */,
+				6C7F0290217949B200F63115 /* GitChangesArgumentTests.swift in Sources */,
 				OBJ_442 /* ArgumentParser+ConfigureTests.swift in Sources */,
 				OBJ_443 /* ArgumentTests.swift in Sources */,
 				OBJ_444 /* RelativePathArgumentTests.swift in Sources */,
@@ -1725,6 +1735,8 @@
 				6C7F028E21785E8000F63115 /* ExcludeArgumentTests.swift in Sources */,
 				OBJ_446 /* FileSystem.swift in Sources */,
 				OBJ_447 /* TestSubCommand.swift in Sources */,
+				6C7F029221794B2600F63115 /* GitStagingArgumentTests.swift in Sources */,
+				6C7F0296217952F800F63115 /* ProjectDirectoryArgumentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

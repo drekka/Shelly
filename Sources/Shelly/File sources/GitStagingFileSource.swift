@@ -4,9 +4,9 @@
 import Basic
 import SwiftShell
 
-struct GitStagingFileSource: FileSource {
+public struct GitStagingFileSource: FileSource {
 
-    func getFiles() throws -> Set<RelativePath> {
+    public func getFiles() throws -> Set<RelativePath> {
         
         ShellCommand.log("Scanning Git staging area")
 

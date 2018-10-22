@@ -8,7 +8,7 @@ import Basic
 
 class DirectoryFileSourceTests: XCTestCase {
 
-    var tmpDir: URL!
+    var tmpDir: AbsolutePath!
 
     override func setUp() {
 
@@ -20,7 +20,7 @@ class DirectoryFileSourceTests: XCTestCase {
     }
 
     override func tearDown() {
-        try? FileManager.default.removeItem(at: tmpDir)
+        try! localFileSystem.removeFileTree(tmpDir)
         super.tearDown()
     }
 
